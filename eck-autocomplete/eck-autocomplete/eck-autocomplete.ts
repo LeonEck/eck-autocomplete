@@ -1,15 +1,18 @@
-import html from './eck-autocomplete.html'
-import {EckAutocompleteOption} from "../eck-autocomplete-option/eck-autocomplete-option";
+import html from "./eck-autocomplete.html";
+import {
+  EckAutocompleteOption,
+  EckOptionSelected,
+} from "../eck-autocomplete-option/eck-autocomplete-option";
+import { CustomElement } from "../utils/custom-element";
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = html.trim();
 
-export class EckAutocomplete extends HTMLElement {
-
+export class EckAutocomplete extends HTMLElement implements CustomElement {
   /**
    * ID of the input that we are attached to
    */
-  #connectedToId;
+  #connectedToId!: string;
   /**
    * Highlight first option
    */
@@ -18,11 +21,11 @@ export class EckAutocomplete extends HTMLElement {
   /**
    * Reference to the input element we are attached to
    */
-  #connectedInputRef;
+  #connectedInputRef!: HTMLInputElement;
   /**
    * Reference to our slot content
    */
-  #slotRef;
+  #slotRef!: HTMLSlotElement;
   /**
    * Keep track of the amount of options in our slot.
    */
@@ -38,27 +41,29 @@ export class EckAutocomplete extends HTMLElement {
   /**
    * Reference to the currently highlighted option (if present)
    */
-  #highlightedOptionRef;
+  #highlightedOptionRef: EckAutocompleteOption | undefined;
 
   constructor() {
     super();
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: "open" });
   }
 
   static get observedAttributes() {
-    return ['connected-to-id', 'highlight-first-option'];
+    return ["connected-to-id", "highlight-first-option"];
   }
 
   connectedCallback() {
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-    this.#slotRef = this.shadowRoot.querySelector('slot');
-    this.#connectedInputRef = document.querySelector(`#${this.#connectedToId}`);
+    this.shadowRoot!.appendChild(template.content.cloneNode(true));
+    this.#slotRef = this.shadowRoot!.querySelector<HTMLSlotElement>("slot")!;
+    this.#connectedInputRef = document.querySelector<HTMLInputElement>(
+      `#${this.#connectedToId}`
+    )!;
     this.#init();
 
     /**
      * Open panel when input is focused.
      */
-    this.#connectedInputRef.addEventListener('focus', () => {
+    this.#connectedInputRef.addEventListener("focus", () => {
       this.#show();
     });
 
@@ -67,32 +72,32 @@ export class EckAutocomplete extends HTMLElement {
      * This is necessary to reopen the panel after the user selected something
      * and starts typing again without blur and focus in between.
      */
-    this.#connectedInputRef.addEventListener('input', () => {
+    this.#connectedInputRef.addEventListener("input", () => {
       this.#show();
     });
 
     /**
      * Hide panel when input is blurred.
      */
-    this.#connectedInputRef.addEventListener('blur', () => {
+    this.#connectedInputRef.addEventListener("blur", () => {
       this.#hide();
     });
 
     /**
      * Listed to "Enter" key.
      */
-    this.#connectedInputRef.addEventListener('keydown', (e) => {
-      if (e.code === 'Enter') {
+    this.#connectedInputRef.addEventListener("keydown", (e) => {
+      if (e.code === "Enter") {
         this.#handleEnterOnInput(e);
       }
     });
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
-    if (attrName === 'connected-to-id') {
+  attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
+    if (attrName === "connected-to-id") {
       this.#connectedToId = newVal;
-    } else if (attrName === 'highlight-first-option') {
-      this.#shouldHighlightFirstOption = (newVal === 'true');
+    } else if (attrName === "highlight-first-option") {
+      this.#shouldHighlightFirstOption = newVal === "true";
     }
   }
 
@@ -101,17 +106,17 @@ export class EckAutocomplete extends HTMLElement {
      * Panel should have same width as input.
      */
     const inputWidth = this.#connectedInputRef.getBoundingClientRect().width;
-    this.shadowRoot.host.style.width = `${inputWidth}px`;
+    (this.shadowRoot!.host as HTMLElement).style.width = `${inputWidth}px`;
 
     /**
      * Position panel at the bottom of the input.
      */
     const inputLeftX = this.#connectedInputRef.getBoundingClientRect().x;
     const inputBottomY = this.#connectedInputRef.getBoundingClientRect().bottom;
-    this.shadowRoot.host.style.left = `${inputLeftX}px`;
-    this.shadowRoot.host.style.top = `${inputBottomY}px`;
+    (this.shadowRoot!.host as HTMLElement).style.left = `${inputLeftX}px`;
+    (this.shadowRoot!.host as HTMLElement).style.top = `${inputBottomY}px`;
 
-    this.#slotRef.addEventListener('slotchange', () => {
+    this.#slotRef.addEventListener("slotchange", () => {
       this.#numberOfOptions = 0;
       /**
        * Listen to a selected event from each option.
@@ -125,18 +130,20 @@ export class EckAutocomplete extends HTMLElement {
           this.#anyOptionHighlighted = false;
           this.#highlightedOptionRef = undefined;
 
-          node.addEventListener('eck-option-selected', (value) => {
+          node.addEventListener("eck-option-selected", ((
+            value: CustomEvent<EckOptionSelected>
+          ) => {
             this.#connectedInputRef.value = value.detail.label;
-            const optionSelectedEvent = new CustomEvent('optionSelected', {
+            const optionSelectedEvent = new CustomEvent("optionSelected", {
               bubbles: true,
               composed: true,
               detail: {
                 option: value.detail,
               },
             });
-            this.shadowRoot.dispatchEvent(optionSelectedEvent);
+            this.shadowRoot!.dispatchEvent(optionSelectedEvent);
             this.#hide();
-          });
+          }) as EventListener);
         }
       });
       if (this.#shouldHighlightFirstOption) {
@@ -153,9 +160,13 @@ export class EckAutocomplete extends HTMLElement {
        * it again or not.
        */
       if (this.#numberOfOptions === 0) {
-        this.shadowRoot.querySelector('.option-container').classList.remove('has-children');
+        this.shadowRoot!.querySelector(".option-container")!.classList.remove(
+          "has-children"
+        );
       } else {
-        this.shadowRoot.querySelector('.option-container').classList.add('has-children');
+        this.shadowRoot!.querySelector(".option-container")!.classList.add(
+          "has-children"
+        );
       }
     });
   }
@@ -164,12 +175,12 @@ export class EckAutocomplete extends HTMLElement {
     if (this.#shouldHighlightFirstOption) {
       this.#highlightFirstOption();
     }
-    this.shadowRoot.host.style.display = 'block';
+    (this.shadowRoot!.host as HTMLElement).style.display = "block";
     this.#panelHidden = false;
   }
 
   #hide() {
-    this.shadowRoot.host.style.display = 'none';
+    (this.shadowRoot!.host as HTMLElement).style.display = "none";
     this.#panelHidden = true;
   }
 
@@ -179,8 +190,13 @@ export class EckAutocomplete extends HTMLElement {
    * no option is highlighted or no options are present in the slot.
    * Otherwise, we select the currently highlighted option.
    */
-  #handleEnterOnInput(e) {
-    if (this.#panelHidden || !this.#anyOptionHighlighted || this.#numberOfOptions === 0) return;
+  #handleEnterOnInput(e: KeyboardEvent) {
+    if (
+      this.#panelHidden ||
+      !this.#anyOptionHighlighted ||
+      this.#numberOfOptions === 0
+    )
+      return;
 
     e.preventDefault();
     this.#highlightedOptionRef?.fireSelectionEvent();
@@ -190,8 +206,8 @@ export class EckAutocomplete extends HTMLElement {
     const nodes = this.#slotRef.assignedNodes();
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i] instanceof EckAutocompleteOption) {
-        nodes[i].highlight(true);
-        this.#highlightedOptionRef = nodes[i];
+        (nodes[i] as EckAutocompleteOption).highlight(true);
+        this.#highlightedOptionRef = nodes[i] as EckAutocompleteOption;
         this.#anyOptionHighlighted = true;
         break;
       }
@@ -199,4 +215,4 @@ export class EckAutocomplete extends HTMLElement {
   }
 }
 
-customElements.define('eck-autocomplete', EckAutocomplete);
+customElements.define("eck-autocomplete", EckAutocomplete);

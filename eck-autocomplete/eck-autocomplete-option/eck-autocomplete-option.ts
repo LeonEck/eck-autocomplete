@@ -1,86 +1,99 @@
-import html from './eck-autocomplete-option.html'
+import html from "./eck-autocomplete-option.html";
+import { CustomElement } from "../utils/custom-element";
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = html.trim();
 
-export class EckAutocompleteOption extends HTMLElement {
+export interface EckOptionSelected {
+  value: any | undefined;
+  label: string;
+}
 
+export class EckAutocompleteOption
+  extends HTMLElement
+  implements CustomElement
+{
   /**
    * Optional data that is attached to an option.
    */
-  value;
+  value: any | undefined;
   /**
    * Optional string that is used to display the option in contexts
    * that only allow strings (e.g. inputs)
    * If not provided the innerHtml is used.
    */
-  label;
+  label: string | undefined;
 
   /**
    * Remove event listener when its no longer needed.
    * TODO: Is this necessary?
    */
   #clickEventListenerAbortController = new AbortController();
-  #clickEventListenerAbortSignal = this.#clickEventListenerAbortController.signal;
+  #clickEventListenerAbortSignal =
+    this.#clickEventListenerAbortController.signal;
 
   constructor() {
     super();
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: "open" });
   }
 
   static get observedAttributes() {
-    return ['value', 'label'];
+    return ["value", "label"];
   }
 
   connectedCallback() {
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot!.appendChild(template.content.cloneNode(true));
 
     /**
      * https://stackoverflow.com/a/57630197
      * mousedown would normally cause a blur event. But we need to handle the click event first.
      * So we stop the behaviour of mousedown.
      */
-    this.shadowRoot.host.addEventListener('mousedown', (e) => {
+    this.shadowRoot!.host.addEventListener("mousedown", (e) => {
       e.preventDefault();
     });
 
-    this.shadowRoot.host.addEventListener('click', () => {
-      this.fireSelectionEvent();
-    }, {
-      signal: this.#clickEventListenerAbortSignal,
-    });
+    this.shadowRoot!.host.addEventListener(
+      "click",
+      () => {
+        this.fireSelectionEvent();
+      },
+      {
+        signal: this.#clickEventListenerAbortSignal,
+      }
+    );
   }
 
   disconnectedCallback() {
     this.#clickEventListenerAbortController.abort();
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
-    if (attrName === 'value') {
+  attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
+    if (attrName === "value") {
       this.value = newVal;
-    } else if (attrName === 'label') {
+    } else if (attrName === "label") {
       this.label = newVal;
     }
   }
 
-  highlight(highlight) {
+  highlight(highlight: boolean) {
     if (highlight) {
-      this.shadowRoot.host.classList.add('highlighted');
+      this.shadowRoot!.host.classList.add("highlighted");
     } else {
-      this.shadowRoot.host.classList.remove('highlighted');
+      this.shadowRoot!.host.classList.remove("highlighted");
     }
   }
 
   fireSelectionEvent() {
-    const valueEvent = new CustomEvent('eck-option-selected', {
+    const valueEvent = new CustomEvent("eck-option-selected", {
       bubbles: true,
       composed: true,
       detail: {
         value: this.value,
         label: this.#getLabel(),
-      },
+      } as EckOptionSelected,
     });
-    this.shadowRoot.dispatchEvent(valueEvent);
+    this.shadowRoot!.dispatchEvent(valueEvent);
   }
 
   /**
@@ -91,9 +104,9 @@ export class EckAutocompleteOption extends HTMLElement {
     if (this.label !== undefined) {
       return this.label;
     } else {
-      return this.shadowRoot.host.innerHTML;
+      return this.shadowRoot!.host.innerHTML;
     }
   }
 }
 
-customElements.define('eck-autocomplete-option', EckAutocompleteOption);
+customElements.define("eck-autocomplete-option", EckAutocompleteOption);
