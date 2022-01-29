@@ -1,7 +1,7 @@
-import html from "./eck-autocomplete-option.html";
-import { CustomElement } from "../utils/custom-element";
+import html from './eck-autocomplete-option.html';
+import { CustomElement } from '../utils/custom-element';
 
-const template = document.createElement("template");
+const template = document.createElement('template');
 template.innerHTML = html.trim();
 
 export interface EckOptionSelected {
@@ -34,11 +34,11 @@ export class EckAutocompleteOption
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
   }
 
   static get observedAttributes() {
-    return ["value", "label"];
+    return ['value', 'label'];
   }
 
   connectedCallback() {
@@ -49,12 +49,12 @@ export class EckAutocompleteOption
      * mousedown would normally cause a blur event. But we need to handle the click event first.
      * So we stop the behaviour of mousedown.
      */
-    this.shadowRoot!.host.addEventListener("mousedown", (e) => {
+    this.shadowRoot!.host.addEventListener('mousedown', (e) => {
       e.preventDefault();
     });
 
     this.shadowRoot!.host.addEventListener(
-      "click",
+      'click',
       () => {
         this.fireSelectionEvent();
       },
@@ -69,23 +69,23 @@ export class EckAutocompleteOption
   }
 
   attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
-    if (attrName === "value") {
+    if (attrName === 'value') {
       this.value = newVal;
-    } else if (attrName === "label") {
+    } else if (attrName === 'label') {
       this.label = newVal;
     }
   }
 
   highlight(highlight: boolean) {
     if (highlight) {
-      this.shadowRoot!.host.classList.add("highlighted");
+      this.shadowRoot!.host.classList.add('highlighted');
     } else {
-      this.shadowRoot!.host.classList.remove("highlighted");
+      this.shadowRoot!.host.classList.remove('highlighted');
     }
   }
 
   fireSelectionEvent() {
-    const valueEvent = new CustomEvent("eck-option-selected", {
+    const valueEvent = new CustomEvent('eck-option-selected', {
       bubbles: true,
       composed: true,
       detail: {
@@ -109,4 +109,4 @@ export class EckAutocompleteOption
   }
 }
 
-customElements.define("eck-autocomplete-option", EckAutocompleteOption);
+customElements.define('eck-autocomplete-option', EckAutocompleteOption);

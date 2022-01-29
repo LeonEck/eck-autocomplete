@@ -1,11 +1,11 @@
-import html from "./eck-autocomplete.html";
+import html from './eck-autocomplete.html';
 import {
   EckAutocompleteOption,
   EckOptionSelected,
-} from "../eck-autocomplete-option/eck-autocomplete-option";
-import { CustomElement } from "../utils/custom-element";
+} from '../eck-autocomplete-option/eck-autocomplete-option';
+import { CustomElement } from '../utils/custom-element';
 
-const template = document.createElement("template");
+const template = document.createElement('template');
 template.innerHTML = html.trim();
 
 export class EckAutocomplete extends HTMLElement implements CustomElement {
@@ -45,16 +45,16 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
   }
 
   static get observedAttributes() {
-    return ["connected-to-id", "highlight-first-option"];
+    return ['connected-to-id', 'highlight-first-option'];
   }
 
   connectedCallback() {
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
-    this.#slotRef = this.shadowRoot!.querySelector<HTMLSlotElement>("slot")!;
+    this.#slotRef = this.shadowRoot!.querySelector<HTMLSlotElement>('slot')!;
     this.#connectedInputRef = document.querySelector<HTMLInputElement>(
       `#${this.#connectedToId}`
     )!;
@@ -63,7 +63,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     /**
      * Open panel when input is focused.
      */
-    this.#connectedInputRef.addEventListener("focus", () => {
+    this.#connectedInputRef.addEventListener('focus', () => {
       this.#show();
     });
 
@@ -72,32 +72,32 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
      * This is necessary to reopen the panel after the user selected something
      * and starts typing again without blur and focus in between.
      */
-    this.#connectedInputRef.addEventListener("input", () => {
+    this.#connectedInputRef.addEventListener('input', () => {
       this.#show();
     });
 
     /**
      * Hide panel when input is blurred.
      */
-    this.#connectedInputRef.addEventListener("blur", () => {
+    this.#connectedInputRef.addEventListener('blur', () => {
       this.#hide();
     });
 
     /**
      * Listed to "Enter" key.
      */
-    this.#connectedInputRef.addEventListener("keydown", (e) => {
-      if (e.code === "Enter") {
+    this.#connectedInputRef.addEventListener('keydown', (e) => {
+      if (e.code === 'Enter') {
         this.#handleEnterOnInput(e);
       }
     });
   }
 
   attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
-    if (attrName === "connected-to-id") {
+    if (attrName === 'connected-to-id') {
       this.#connectedToId = newVal;
-    } else if (attrName === "highlight-first-option") {
-      this.#shouldHighlightFirstOption = newVal === "true";
+    } else if (attrName === 'highlight-first-option') {
+      this.#shouldHighlightFirstOption = newVal === 'true';
     }
   }
 
@@ -116,7 +116,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     (this.shadowRoot!.host as HTMLElement).style.left = `${inputLeftX}px`;
     (this.shadowRoot!.host as HTMLElement).style.top = `${inputBottomY}px`;
 
-    this.#slotRef.addEventListener("slotchange", () => {
+    this.#slotRef.addEventListener('slotchange', () => {
       this.#numberOfOptions = 0;
       /**
        * Listen to a selected event from each option.
@@ -130,11 +130,11 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
           this.#anyOptionHighlighted = false;
           this.#highlightedOptionRef = undefined;
 
-          node.addEventListener("eck-option-selected", ((
+          node.addEventListener('eck-option-selected', ((
             value: CustomEvent<EckOptionSelected>
           ) => {
             this.#connectedInputRef.value = value.detail.label;
-            const optionSelectedEvent = new CustomEvent("optionSelected", {
+            const optionSelectedEvent = new CustomEvent('optionSelected', {
               bubbles: true,
               composed: true,
               detail: {
@@ -160,12 +160,12 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
        * it again or not.
        */
       if (this.#numberOfOptions === 0) {
-        this.shadowRoot!.querySelector(".option-container")!.classList.remove(
-          "has-children"
+        this.shadowRoot!.querySelector('.option-container')!.classList.remove(
+          'has-children'
         );
       } else {
-        this.shadowRoot!.querySelector(".option-container")!.classList.add(
-          "has-children"
+        this.shadowRoot!.querySelector('.option-container')!.classList.add(
+          'has-children'
         );
       }
     });
@@ -175,12 +175,12 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     if (this.#shouldHighlightFirstOption) {
       this.#highlightFirstOption();
     }
-    (this.shadowRoot!.host as HTMLElement).style.display = "block";
+    (this.shadowRoot!.host as HTMLElement).style.display = 'block';
     this.#panelHidden = false;
   }
 
   #hide() {
-    (this.shadowRoot!.host as HTMLElement).style.display = "none";
+    (this.shadowRoot!.host as HTMLElement).style.display = 'none';
     this.#panelHidden = true;
   }
 
@@ -215,4 +215,4 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 }
 
-customElements.define("eck-autocomplete", EckAutocomplete);
+customElements.define('eck-autocomplete', EckAutocomplete);

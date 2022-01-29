@@ -1,155 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Showcase</title>
-  <style>
-    /**
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Showcase</title>
+    <style>
+      /**
      * Global FOUC (Flash of unstyled content) fix specific for autocomplete
      */
-    eck-autocomplete:not(:defined) {
-      display: none;
-    }
-  </style>
-</head>
-<body>
-<input id="input1" type="text">
-<eck-autocomplete connected-to-id="input1">
-  <eck-autocomplete-option label="One">One <b>test</b></eck-autocomplete-option>
-  <eck-autocomplete-option>Two</eck-autocomplete-option>
-  <eck-autocomplete-option>Three</eck-autocomplete-option>
-</eck-autocomplete>
-<br><br><br><br><br><br><br><br><br><br>
-<input id="input2" type="text" placeholder="Filtered">
-<eck-autocomplete connected-to-id="input2" id="input2options" highlight-first-option="true">
-</eck-autocomplete>
-<br><br><br>
-<button id="spawner">Spawn element</button>
-<br><br><br><br><br>
-<form id="myForm">
-  <input id="inputForm" type="text" placeholder="Form without highlight-first-option">
-  <eck-autocomplete connected-to-id="inputForm">
-    <eck-autocomplete-option label="One">One <b>test</b></eck-autocomplete-option>
-    <eck-autocomplete-option>Two</eck-autocomplete-option>
-    <eck-autocomplete-option>Three</eck-autocomplete-option>
-  </eck-autocomplete>
-</form>
-<br><br><br><br><br><br><br><br><br><br>
-<form id="myForm2">
-  <input id="inputForm2" type="text" placeholder="Form highlight-first-option">
-  <eck-autocomplete connected-to-id="inputForm2" highlight-first-option="true">
-    <eck-autocomplete-option label="One">One <b>test</b></eck-autocomplete-option>
-    <eck-autocomplete-option>Two</eck-autocomplete-option>
-    <eck-autocomplete-option>Three</eck-autocomplete-option>
-  </eck-autocomplete>
-</form>
-<script type="module">
-  import './dist/eck-autocomplete';
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="input1" type="text" />
+    <eck-autocomplete connected-to-id="input1">
+      <eck-autocomplete-option label="One"
+        >One <b>test</b></eck-autocomplete-option
+      >
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <input id="input2" type="text" placeholder="Filtered" />
+    <eck-autocomplete
+      connected-to-id="input2"
+      id="input2options"
+      highlight-first-option="true"
+    >
+    </eck-autocomplete>
+    <br /><br /><br />
+    <button id="spawner">Spawn element</button>
+    <br /><br /><br /><br /><br />
+    <form id="myForm">
+      <input
+        id="inputForm"
+        type="text"
+        placeholder="Form without highlight-first-option"
+      />
+      <eck-autocomplete connected-to-id="inputForm">
+        <eck-autocomplete-option label="One"
+          >One <b>test</b></eck-autocomplete-option
+        >
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+    </form>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <form id="myForm2">
+      <input
+        id="inputForm2"
+        type="text"
+        placeholder="Form highlight-first-option"
+      />
+      <eck-autocomplete
+        connected-to-id="inputForm2"
+        highlight-first-option="true"
+      >
+        <eck-autocomplete-option label="One"
+          >One <b>test</b></eck-autocomplete-option
+        >
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+    </form>
+    <script type="module">
+      import './dist/eck-autocomplete';
 
-  const input2 = document.getElementById('input2');
-  const input2options = document.getElementById('input2options');
+      const input2 = document.getElementById('input2');
+      const input2options = document.getElementById('input2options');
 
-  /**
-   * Render object into second demo
-   * @param options
-   */
-  const renderOptions2 = (options) => {
-    input2options.innerHTML = '';
-    options.forEach((option) => {
-      const optionElement = document.createElement('eck-autocomplete-option');
-      optionElement.value = option.value;
-      optionElement.stringLabel = option.stringLabel;
-      optionElement.innerHTML = option.label;
-      input2options.appendChild(optionElement);
-    });
-  };
+      /**
+       * Render object into second demo
+       * @param options
+       */
+      const renderOptions2 = (options) => {
+        input2options.innerHTML = '';
+        options.forEach((option) => {
+          const optionElement = document.createElement(
+            'eck-autocomplete-option'
+          );
+          optionElement.value = option.value;
+          optionElement.stringLabel = option.stringLabel;
+          optionElement.innerHTML = option.label;
+          input2options.appendChild(optionElement);
+        });
+      };
 
-  const options = [
-    {
-      value: {
-        key: 'One 1'
-      },
-      label: 'One x',
-      stringLabel: '111',
-    },
-    {
-      value: {
-        key: 'Two 2'
-      },
-      label: 'Two',
-      stringLabel: '222',
-    },
-    {
-      value: {
-        key: 'Two 2 two'
-      },
-      label: 'Two two',
-      stringLabel: '222 two',
-    },
-    {
-      value: {
-        key: 'Three 3'
-      },
-      label: 'Three',
-      stringLabel: '333',
-    },
-  ];
-
-  renderOptions2(options);
-
-  /**
-   * When value of second demo changes we filter the objects
-   */
-  input2.addEventListener('input', (e) => {
-    e.preventDefault();
-    const filteredOptions = options.filter((option) => option.label.toLowerCase().includes(input2.value.toLowerCase()));
-    renderOptions2(filteredOptions);
-  });
-
-  /**
-   * When second demo is selected (focused) we filter the objects
-   */
-  input2.addEventListener('focus', (e) => {
-    e.preventDefault();
-    const filteredOptions = options.filter((option) => option.label.toLowerCase().includes(input2.value.toLowerCase()));
-    renderOptions2(filteredOptions);
-  });
-
-  /**
-   * Log selection in second demo
-   */
-  input2options.addEventListener('optionSelected', (event) => {
-    console.log('Selected option', event.detail.option);
-  })
-
-  /**
-   * Add dynamic entry to second demo
-   */
-  document.getElementById('spawner').onclick = () => {
-    setTimeout(() => {
-      options.push({
-        value: {
-          key: 'Four 4'
+      const options = [
+        {
+          value: {
+            key: 'One 1',
+          },
+          label: 'One x',
+          stringLabel: '111',
         },
-        label: 'Four x',
-        stringLabel: '4',
+        {
+          value: {
+            key: 'Two 2',
+          },
+          label: 'Two',
+          stringLabel: '222',
+        },
+        {
+          value: {
+            key: 'Two 2 two',
+          },
+          label: 'Two two',
+          stringLabel: '222 two',
+        },
+        {
+          value: {
+            key: 'Three 3',
+          },
+          label: 'Three',
+          stringLabel: '333',
+        },
+      ];
+
+      renderOptions2(options);
+
+      /**
+       * When value of second demo changes we filter the objects
+       */
+      input2.addEventListener('input', (e) => {
+        e.preventDefault();
+        const filteredOptions = options.filter((option) =>
+          option.label.toLowerCase().includes(input2.value.toLowerCase())
+        );
+        renderOptions2(filteredOptions);
       });
-      const filteredOptions = options.filter((option) => option.label.toLowerCase().includes(input2.value.toLowerCase()));
-      renderOptions2(filteredOptions);
-    }, 5000);
-  };
 
-  document.getElementById('myForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('submit', e);
-  });
+      /**
+       * When second demo is selected (focused) we filter the objects
+       */
+      input2.addEventListener('focus', (e) => {
+        e.preventDefault();
+        const filteredOptions = options.filter((option) =>
+          option.label.toLowerCase().includes(input2.value.toLowerCase())
+        );
+        renderOptions2(filteredOptions);
+      });
 
-  document.getElementById('myForm2').addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('submit2', e);
-  });
+      /**
+       * Log selection in second demo
+       */
+      input2options.addEventListener('optionSelected', (event) => {
+        console.log('Selected option', event.detail.option);
+      });
 
-</script>
-</body>
+      /**
+       * Add dynamic entry to second demo
+       */
+      document.getElementById('spawner').onclick = () => {
+        setTimeout(() => {
+          options.push({
+            value: {
+              key: 'Four 4',
+            },
+            label: 'Four x',
+            stringLabel: '4',
+          });
+          const filteredOptions = options.filter((option) =>
+            option.label.toLowerCase().includes(input2.value.toLowerCase())
+          );
+          renderOptions2(filteredOptions);
+        }, 5000);
+      };
+
+      document.getElementById('myForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('submit', e);
+      });
+
+      document.getElementById('myForm2').addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('submit2', e);
+      });
+    </script>
+  </body>
 </html>

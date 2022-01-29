@@ -8,11 +8,16 @@
     "start": "vite",
     "type-check": "tsc --noEmit",
     "generate-type-declarations": "tsc --emitDeclarationOnly --declaration --outDir dist",
-    "watch": "node scripts/esbuild-watch.mjs"
+    "watch": "node scripts/esbuild-watch.mjs",
+    "prettier": "prettier --ignore-path .gitignore --write .",
+    "prettier-check": "prettier --ignore-path .gitignore --check ."
   },
   "dependencies": {
     "esbuild": "0.14.14",
     "typescript": "4.5.5",
     "vite": "2.7.10"
+  },
+  "devDependencies": {
+    "prettier": "2.5.1"
   }
 }
