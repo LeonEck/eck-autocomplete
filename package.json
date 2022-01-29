@@ -1,0 +1,15 @@
+{
+  "name": "eck-autocomplete",
+  "version": "0.1.0",
+  "description": "Autocomplete web component",
+  "author": "Leon Eck",
+  "license": "MIT",
+  "scripts": {
+    "watch": "node scripts/esbuild-watch.mjs",
+    "start": "vite"
+  },
+  "dependencies": {
+    "esbuild": "0.14.14",
+    "vite": "2.7.10"
+  }
+}
