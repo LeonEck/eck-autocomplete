@@ -5,11 +5,14 @@
   "author": "Leon Eck",
   "license": "MIT",
   "scripts": {
-    "watch": "node scripts/esbuild-watch.mjs",
-    "start": "vite"
+    "start": "vite",
+    "type-check": "tsc --noEmit",
+    "generate-type-declarations": "tsc --emitDeclarationOnly --declaration --outDir dist",
+    "watch": "node scripts/esbuild-watch.mjs"
   },
   "dependencies": {
     "esbuild": "0.14.14",
+    "typescript": "4.5.5",
     "vite": "2.7.10"
   }
 }
