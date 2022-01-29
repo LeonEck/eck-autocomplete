@@ -2,6 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "target": "ESNext",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "eck-autocomplete/**/*.ts",
