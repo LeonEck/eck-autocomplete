@@ -5,7 +5,7 @@ const template = document.createElement('template');
 template.innerHTML = html.trim();
 
 export interface EckOptionSelected {
-  value: any | undefined;
+  value: unknown;
   label: string;
 }
 
@@ -16,7 +16,7 @@ export class EckAutocompleteOption
   /**
    * Optional data that is attached to an option.
    */
-  value: any | undefined;
+  value: unknown;
   /**
    * Optional string that is used to display the option in contexts
    * that only allow strings (e.g. inputs)
@@ -42,18 +42,18 @@ export class EckAutocompleteOption
   }
 
   connectedCallback() {
-    this.shadowRoot!.appendChild(template.content.cloneNode(true));
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
 
     /**
      * https://stackoverflow.com/a/57630197
      * mousedown would normally cause a blur event. But we need to handle the click event first.
      * So we stop the behaviour of mousedown.
      */
-    this.shadowRoot!.host.addEventListener('mousedown', (e) => {
+    this.shadowRoot?.host.addEventListener('mousedown', (e) => {
       e.preventDefault();
     });
 
-    this.shadowRoot!.host.addEventListener(
+    this.shadowRoot?.host.addEventListener(
       'click',
       () => {
         this.fireSelectionEvent();
@@ -78,9 +78,9 @@ export class EckAutocompleteOption
 
   highlight(highlight: boolean) {
     if (highlight) {
-      this.shadowRoot!.host.classList.add('highlighted');
+      this.shadowRoot?.host.classList.add('highlighted');
     } else {
-      this.shadowRoot!.host.classList.remove('highlighted');
+      this.shadowRoot?.host.classList.remove('highlighted');
     }
   }
 
@@ -93,7 +93,7 @@ export class EckAutocompleteOption
         label: this.#getLabel(),
       } as EckOptionSelected,
     });
-    this.shadowRoot!.dispatchEvent(valueEvent);
+    this.shadowRoot?.dispatchEvent(valueEvent);
   }
 
   /**
@@ -104,7 +104,7 @@ export class EckAutocompleteOption
     if (this.label !== undefined) {
       return this.label;
     } else {
-      return this.shadowRoot!.host.innerHTML;
+      return this.shadowRoot?.host.innerHTML;
     }
   }
 }
