@@ -1,9 +1,9 @@
-import html from './eck-autocomplete.html';
-import css from './eck-autocomplete.css';
+import html from './eck-autocomplete-component.html';
+import css from './eck-autocomplete-component.css';
 import {
   EckAutocompleteOption,
   EckOptionSelected,
-} from '../eck-autocomplete-option/eck-autocomplete-option';
+} from '../eck-autocomplete-option-component/eck-autocomplete-option-component';
 import { CustomElement } from '../utils/custom-element';
 
 const template = document.createElement('template');
@@ -220,5 +220,3 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     }
   }
 }
-
-customElements.define('eck-autocomplete', EckAutocomplete);
