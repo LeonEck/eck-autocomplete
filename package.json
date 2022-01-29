@@ -12,12 +12,10 @@
     "prettier": "prettier --ignore-path .gitignore --write .",
     "prettier-check": "prettier --ignore-path .gitignore --check ."
   },
-  "dependencies": {
+  "devDependencies": {
     "esbuild": "0.14.14",
+    "prettier": "2.5.1",
     "typescript": "4.5.5",
     "vite": "2.7.10"
-  },
-  "devDependencies": {
-    "prettier": "2.5.1"
   }
 }
