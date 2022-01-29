@@ -5,7 +5,7 @@
 :host {
   display: none;
   position: absolute;
-  background-color: Canvas;
+  background-color: #fff;
 }
 
 .option-container.has-children {

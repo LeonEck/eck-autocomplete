@@ -9,6 +9,6 @@
 
 :host(:hover),
 :host(.highlighted) {
-  background-color: Highlight;
+  background-color: #b3e5fc;
   cursor: pointer;
 }
