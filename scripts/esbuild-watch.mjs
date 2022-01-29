@@ -2,7 +2,7 @@ import esbuild from 'esbuild'
 
 esbuild
   .build({
-    entryPoints: ['./eck-autocomplete/public_api.js'],
+    entryPoints: ['./eck-autocomplete/public_api.ts'],
     bundle: true,
     loader: {
       ".html": "text"

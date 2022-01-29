@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "ESNext",
+  },
+  "include": [
+    "eck-autocomplete/**/*.ts",
+    "types/html.d.ts"
+  ]
+}
