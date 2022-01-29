@@ -1,4 +1,5 @@
 import html from './eck-autocomplete.html';
+import css from './eck-autocomplete.css';
 import {
   EckAutocompleteOption,
   EckOptionSelected,
@@ -6,7 +7,7 @@ import {
 import { CustomElement } from '../utils/custom-element';
 
 const template = document.createElement('template');
-template.innerHTML = html.trim();
+template.innerHTML = `<style>${css}</style>${html}`;
 
 export class EckAutocomplete extends HTMLElement implements CustomElement {
   /**

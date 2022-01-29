@@ -5,6 +5,7 @@ esbuild.build({
   bundle: true,
   loader: {
     '.html': 'text',
+    '.css': 'text',
   },
   outfile: './dist/eck-autocomplete.js',
   watch: true,

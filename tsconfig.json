@@ -8,5 +8,5 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["eck-autocomplete/**/*.ts", "types/html.d.ts"]
+  "include": ["eck-autocomplete/**/*.ts", "types"]
 }
