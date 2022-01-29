@@ -1,21 +1,7 @@
+import html from './eck-autocomplete-option.html'
+
 const template = document.createElement('template');
-template.innerHTML = `
-<style>
-* {
-  box-sizing: border-box;
-}
-
-:host {
-  display: block;
-  padding: 5px;
-}
-
-:host(:hover), :host(.highlighted) {
-  background-color: Highlight;
-  cursor: pointer;
-}
-</style>
-<slot></slot>`
+template.innerHTML = html.trim();
 
 export class EckAutocompleteOption extends HTMLElement {
 

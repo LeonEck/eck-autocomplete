@@ -1,27 +1,8 @@
-import {EckAutocompleteOption} from "./eck-autocomplete-option";
+import html from './eck-autocomplete.html'
+import {EckAutocompleteOption} from "../eck-autocomplete-option/eck-autocomplete-option";
 
 const template = document.createElement('template');
-template.innerHTML = `
-<style>
-* {
-  box-sizing: border-box;
-}
-
-:host {
-  display: none;
-  position: absolute;
-  background-color: Canvas;
-}
-
-.option-container.has-children {
-  width: 100%;
-  overflow: scroll;
-  border: 1px solid black;
-}
-</style>
-<div class="option-container has-children">
-    <slot></slot>
-</div>`
+template.innerHTML = html.trim();
 
 export class EckAutocomplete extends HTMLElement {
 
