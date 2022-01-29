@@ -10,10 +10,12 @@
     "generate-type-declarations": "tsc --emitDeclarationOnly --declaration --outDir dist",
     "watch": "node scripts/esbuild-watch.mjs",
     "prettier": "prettier --ignore-path .gitignore --write .",
-    "prettier-check": "prettier --ignore-path .gitignore --check ."
+    "prettier-check": "prettier --ignore-path .gitignore --check .",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "esbuild": "0.14.14",
+    "husky": "7.0.4",
     "prettier": "2.5.1",
     "typescript": "4.5.5",
     "vite": "2.7.10"
