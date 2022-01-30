@@ -7,6 +7,9 @@
   "type": "module",
   "main": "eck-autocomplete.js",
   "module": "eck-autocomplete.js",
+  "engines": {
+    "node": ">=16.13.0"
+  },
   "scripts": {
     "start": "concurrently -r npm:watch:*",
     "watch:library": "node scripts/esbuild-library-watch.mjs",
