@@ -100,6 +100,16 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
           e.preventDefault();
           this.#hide();
           break;
+        case 'ArrowUp':
+          if (this.#panelHidden) {
+            this.#show();
+          }
+          break;
+        case 'ArrowDown':
+          if (this.#panelHidden) {
+            this.#show();
+          }
+          break;
       }
     });
   }
