@@ -26,6 +26,11 @@ export class EckAutocompleteOption
   label: string | undefined;
 
   /**
+   * True if the option is highlighted by the keyboard.
+   */
+  hasKeyboardHighlight = false;
+
+  /**
    * Remove event listener when its no longer needed.
    * TODO: Is this necessary?
    */
@@ -82,6 +87,7 @@ export class EckAutocompleteOption
   }
 
   highlight(highlight: boolean) {
+    this.hasKeyboardHighlight = highlight;
     if (highlight) {
       this.shadowRoot?.host.classList.add('highlighted');
     } else {

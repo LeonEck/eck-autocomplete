@@ -36,10 +36,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
    */
   #panelHidden = true;
   /**
-   * True if any of the options in the slot is highlighted.
-   */
-  #anyOptionHighlighted = false;
-  /**
    * Reference to the currently highlighted option (if present)
    */
   #highlightedOptionRef: EckAutocompleteOption | undefined;
@@ -101,13 +97,19 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
           this.#hide();
           break;
         case 'ArrowUp':
+          e.preventDefault();
           if (this.#panelHidden) {
             this.#show();
+          } else {
+            this.#changeHighlight('up');
           }
           break;
         case 'ArrowDown':
+          e.preventDefault();
           if (this.#panelHidden) {
             this.#show();
+          } else {
+            this.#changeHighlight('down');
           }
           break;
       }
@@ -149,7 +151,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
           this.#numberOfOptions++;
           // Reset highlighting
           node.highlight(false);
-          this.#anyOptionHighlighted = false;
           this.#highlightedOptionRef = undefined;
 
           node.addEventListener('eck-option-selected', ((
@@ -196,6 +197,8 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   #show() {
+    this.#highlightedOptionRef?.highlight(false);
+    this.#highlightedOptionRef = undefined;
     if (this.#shouldHighlightFirstOption) {
       this.#highlightFirstOption();
     }
@@ -217,7 +220,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   #handleEnterOnInput(e: KeyboardEvent) {
     if (
       this.#panelHidden ||
-      !this.#anyOptionHighlighted ||
+      this.#highlightedOptionRef === undefined ||
       this.#numberOfOptions === 0
     )
       return;
@@ -233,7 +236,57 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
         if (nodes[i] instanceof EckAutocompleteOption) {
           (nodes[i] as EckAutocompleteOption).highlight(true);
           this.#highlightedOptionRef = nodes[i] as EckAutocompleteOption;
-          this.#anyOptionHighlighted = true;
+          break;
+        }
+      }
+    }
+  }
+
+  #changeHighlight(direction: 'up' | 'down') {
+    let nodes = this.#slotRef?.assignedNodes();
+    if (Array.isArray(nodes)) {
+      nodes = nodes.filter((node) => node instanceof EckAutocompleteOption);
+      if (this.#highlightedOptionRef === undefined) {
+        if (direction === 'up') {
+          // Highlight last option
+          (nodes[nodes.length - 1] as EckAutocompleteOption).highlight(true);
+          this.#highlightedOptionRef = nodes[
+            nodes.length - 1
+          ] as EckAutocompleteOption;
+        } else if (direction === 'down') {
+          // Highlight first option
+          (nodes[0] as EckAutocompleteOption).highlight(true);
+          this.#highlightedOptionRef = nodes[0] as EckAutocompleteOption;
+        }
+        return;
+      }
+      for (let i = 0; i < nodes.length; i++) {
+        const optionNode = nodes[i] as EckAutocompleteOption;
+        if (optionNode.hasKeyboardHighlight) {
+          // Remove highlight from current option
+          optionNode.highlight(false);
+          let indexToHighlight = 0;
+          if (direction === 'up') {
+            if (i > 0) {
+              // Highlight previous option
+              indexToHighlight = i - 1;
+            } else {
+              // Highlight last option
+              indexToHighlight = nodes.length - 1;
+            }
+          } else if (direction === 'down') {
+            if (i < nodes.length - 1) {
+              // Highlight next option
+              indexToHighlight = i + 1;
+            } else {
+              // Highlight first option
+              indexToHighlight = 0;
+            }
+          }
+          (nodes[indexToHighlight] as EckAutocompleteOption).highlight(true);
+          this.#highlightedOptionRef = nodes[
+            indexToHighlight
+          ] as EckAutocompleteOption;
           break;
         }
       }
