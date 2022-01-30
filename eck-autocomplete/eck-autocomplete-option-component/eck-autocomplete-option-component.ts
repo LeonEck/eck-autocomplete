@@ -38,6 +38,10 @@ export class EckAutocompleteOption
     this.attachShadow({ mode: 'open' });
   }
 
+  static get tagName() {
+    return 'eck-autocomplete-option';
+  }
+
   static get observedAttributes() {
     return ['value', 'label'];
   }

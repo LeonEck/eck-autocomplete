@@ -49,6 +49,10 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     this.attachShadow({ mode: 'open' });
   }
 
+  static get tagName() {
+    return 'eck-autocomplete';
+  }
+
   static get observedAttributes() {
     return ['connected-to-id', 'highlight-first-option'];
   }
