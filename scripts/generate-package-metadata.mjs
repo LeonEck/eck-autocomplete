@@ -10,6 +10,7 @@ const packageJson = JSON.parse(
 
 delete packageJson.scripts;
 delete packageJson.devDependencies;
+delete packageJson.engines;
 
 writeFileSync(
   resolve(__dirname, '../dist/package.json'),
