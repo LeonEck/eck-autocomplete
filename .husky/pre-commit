@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run prettier-check && npm run eslint-check && npm run stylelint-check && npm run type-check
+npm run check:types && npm run check:eslint && npm run check:stylelint && npm run check:prettier
