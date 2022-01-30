@@ -89,11 +89,17 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     });
 
     /**
-     * Listed to "Enter" key.
+     * Listed to keyboard events.
      */
     this.#connectedInputRef?.addEventListener('keydown', (e) => {
-      if (e.code === 'Enter') {
-        this.#handleEnterOnInput(e);
+      switch (e.key) {
+        case 'Enter':
+          this.#handleEnterOnInput(e);
+          break;
+        case 'Escape':
+          e.preventDefault();
+          this.#hide();
+          break;
       }
     });
   }
