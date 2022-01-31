@@ -9,5 +9,8 @@
     "ecmaVersion": "latest"
   },
   "plugins": ["@typescript-eslint"],
+  "globals": {
+    "module": true
+  },
   "rules": {}
 }
