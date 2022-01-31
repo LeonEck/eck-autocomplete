@@ -17,3 +17,17 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci --ignore-scripts
       - run: npm run check:eslint
+  check-stylelint:
+    runs-on: ubuntu-latest
+    container: node:16.13.2
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci --ignore-scripts
+      - run: npm run check:stylelint
+  check-prettier:
+    runs-on: ubuntu-latest
+    container: node:16.13.2
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci --ignore-scripts
+      - run: npm run check:prettier
