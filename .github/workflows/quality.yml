@@ -39,3 +39,14 @@ jobs:
           node-version: '16.13.2'
       - run: npm ci --ignore-scripts
       - run: npm run check:prettier
+  check-commit-msg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.2'
+      - run: npm ci --ignore-scripts
+      - run: git log -1 --pretty=format:"%s" | npx --no-install commitlint
