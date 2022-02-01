@@ -14,6 +14,7 @@
     </style>
   </head>
   <body>
+    <h1 id="page-title"></h1>
     <input id="input1" type="text" />
     <eck-autocomplete connected-to-id="input1">
       <eck-autocomplete-option label="One"
@@ -66,7 +67,12 @@
       </eck-autocomplete>
     </form>
     <script type="module">
+      import { version } from './package.json';
       import './dist/eck-autocomplete';
+
+      document.getElementById(
+        'page-title'
+      ).innerHTML = `eck-autocomplete ${version}`;
 
       const input2 = document.getElementById('input2');
       const input2options = document.getElementById('input2options');
