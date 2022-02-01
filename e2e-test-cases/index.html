@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E2E Tests</title>
+    <style>
+      /**
+     * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+     */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    E2E Test
+    <input id="input1" type="text" />
+    <eck-autocomplete connected-to-id="input1">
+      <eck-autocomplete-option label="One"
+        >One <b>test</b></eck-autocomplete-option
+      >
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <script type="module">
+      import '../dist/eck-autocomplete';
+    </script>
+  </body>
+</html>
