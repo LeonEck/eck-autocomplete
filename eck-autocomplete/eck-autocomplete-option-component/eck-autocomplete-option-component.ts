@@ -1,4 +1,4 @@
-import html from './eck-autocomplete-option-component.html';
+import html from './eck-autocomplete-option-component.html?raw';
 import css from './eck-autocomplete-option-component.css';
 import { CustomElement } from '../utils/custom-element';
 

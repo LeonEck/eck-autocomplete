@@ -2,11 +2,14 @@
   "compilerOptions": {
     "baseUrl": "./",
     "target": "ESNext",
+    "moduleResolution": "Node",
+    "allowJs": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["eck-autocomplete/**/*.ts", "types"]
+  "include": ["eck-autocomplete/**/*.ts", "types"],
+  "exclude": ["vitest.config.ts", "eck-autocomplete/**/*.test.ts"]
 }

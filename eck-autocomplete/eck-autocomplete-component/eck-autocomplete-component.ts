@@ -1,4 +1,4 @@
-import html from './eck-autocomplete-component.html';
+import html from './eck-autocomplete-component.html?raw';
 import css from './eck-autocomplete-component.css';
 import {
   EckAutocompleteOption,

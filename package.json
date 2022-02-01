@@ -27,10 +27,12 @@
     "check:stylelint": "stylelint --ignore-path .gitignore **/*.css",
     "check:prettier": "prettier --ignore-path .gitignore --check .",
     "fix:prettier": "prettier --ignore-path .gitignore --write .",
+    "test:e2e": "start-server-and-test start http-get://localhost:3000 test:e2e:cypress:run",
     "test:e2e:cypress:open": "cypress open",
     "test:e2e:cypress:run": "cypress run",
-    "test:e2e": "start-server-and-test start http-get://localhost:3000 test:e2e:cypress:run",
     "test:e2e:ci:cypress:install": "npm ci --ignore-scripts && npm explore cypress -- npm run postinstall",
+    "test:unit": "vitest run",
+    "test:unit:vitest:watch": "vitest",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -42,12 +44,14 @@
     "esbuild": "0.14.14",
     "eslint": "8.8.0",
     "eslint-plugin-cypress": "2.12.1",
+    "happy-dom": "2.31.1",
     "husky": "7.0.4",
     "prettier": "2.5.1",
     "start-server-and-test": "1.14.0",
     "stylelint": "14.3.0",
     "stylelint-config-standard": "24.0.0",
     "typescript": "4.5.5",
-    "vite": "2.7.10"
+    "vite": "2.7.10",
+    "vitest": "0.2.5"
   }
 }
