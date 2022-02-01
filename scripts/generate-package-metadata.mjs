@@ -12,6 +12,8 @@ delete packageJson.scripts;
 delete packageJson.devDependencies;
 delete packageJson.engines;
 
+packageJson.type = 'module';
+
 writeFileSync(
   resolve(__dirname, '../dist/package.json'),
   JSON.stringify(packageJson, null, 2)
