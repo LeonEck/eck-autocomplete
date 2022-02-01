@@ -125,20 +125,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   #init() {
-    /**
-     * Panel should have same width as input.
-     */
-    const inputWidth = this.#connectedInputRef?.getBoundingClientRect().width;
-    (this.shadowRoot?.host as HTMLElement).style.width = `${inputWidth}px`;
-
-    /**
-     * Position panel at the bottom of the input.
-     */
-    const inputLeftX = this.#connectedInputRef?.getBoundingClientRect().x;
-    const inputBottomY =
-      this.#connectedInputRef?.getBoundingClientRect().bottom;
-    (this.shadowRoot?.host as HTMLElement).style.left = `${inputLeftX}px`;
-    (this.shadowRoot?.host as HTMLElement).style.top = `${inputBottomY}px`;
+    this.#positionPanel();
 
     this.#slotRef?.addEventListener('slotchange', () => {
       this.#numberOfOptions = 0;
@@ -197,6 +184,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   #show() {
+    this.#positionPanel();
     this.#highlightedOptionRef?.highlight(false);
     this.#highlightedOptionRef = undefined;
     if (this.#shouldHighlightFirstOption) {
@@ -209,6 +197,23 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   #hide() {
     (this.shadowRoot?.host as HTMLElement).style.display = 'none';
     this.#panelHidden = true;
+  }
+
+  #positionPanel() {
+    /**
+     * Panel should have same width as input.
+     */
+    const inputWidth = this.#connectedInputRef?.getBoundingClientRect().width;
+    (this.shadowRoot?.host as HTMLElement).style.width = `${inputWidth}px`;
+
+    /**
+     * Position panel at the bottom of the input.
+     */
+    const inputLeftX = this.#connectedInputRef?.getBoundingClientRect().x;
+    const inputBottomY =
+      this.#connectedInputRef?.getBoundingClientRect().bottom;
+    (this.shadowRoot?.host as HTMLElement).style.left = `${inputLeftX}px`;
+    (this.shadowRoot?.host as HTMLElement).style.top = `${inputBottomY}px`;
   }
 
   /**
