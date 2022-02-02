@@ -13,7 +13,9 @@ delete packageJson.devDependencies;
 delete packageJson.engines;
 
 packageJson.type = 'module';
+packageJson.main = 'eck-autocomplete.js';
 packageJson.types = 'index.d.ts';
+packageJson.module = 'eck-autocomplete.js';
 
 writeFileSync(
   resolve(__dirname, '../dist/package.json'),
