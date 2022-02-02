@@ -13,6 +13,7 @@ delete packageJson.devDependencies;
 delete packageJson.engines;
 
 packageJson.type = 'module';
+packageJson.types = 'index.d.ts';
 
 writeFileSync(
   resolve(__dirname, '../dist/package.json'),
