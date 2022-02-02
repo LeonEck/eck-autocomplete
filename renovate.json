@@ -14,5 +14,8 @@
   "semanticCommits": "enabled",
   "semanticPrefix": "chore",
   "prHourlyLimit": 2,
-  "prConcurrentLimit": 10
+  "prConcurrentLimit": 10,
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }
