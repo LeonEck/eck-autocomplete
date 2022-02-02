@@ -1,5 +1,18 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["group:monorepos", "group:recommended"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "matchDepTypes": ["engines"],
+      "rangeStrategy": "auto"
+    }
+  ],
+  "dependencyDashboard": true,
+  "semanticCommits": "enabled",
+  "semanticPrefix": "chore",
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 10
 }
