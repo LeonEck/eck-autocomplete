@@ -10,6 +10,6 @@
 
 .option-container.has-children {
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
   border: 1px solid black;
 }
