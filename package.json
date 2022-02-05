@@ -17,7 +17,7 @@
     "watch:library": "node scripts/esbuild-library-watch.mjs",
     "watch:showcase": "vite",
     "build:library": "node scripts/esbuild-library-build.mjs",
-    "build:showcase": "npm run build:library && vite build --outDir www --target esnext --sourcemap",
+    "build:showcase": "npm run build:library && vite build --outDir www --target esnext --sourcemap && node scripts/generate-cloudflare-pages-config.mjs",
     "generate:type-declarations": "tsc --emitDeclarationOnly --declaration --outDir dist",
     "generate:package-metadata": "node scripts/generate-package-metadata.mjs",
     "bundle:library": "npm run build:library && npm run generate:type-declarations && npm run generate:package-metadata",
