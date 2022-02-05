@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm ci --ignore-scripts
-      - run: npm run build:library && npm run build:showcase
+      - run: npm run build:showcase
       - uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
           branch: gh-pages
