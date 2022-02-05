@@ -7,5 +7,4 @@ Publishing takes place on `main` branch.
 3. Commit: `chore: release vX.Y.Z`
 4. Run: `npm run publish:library`
 5. Create a tag: `git tag -a vX.Y.Z -m "vX.Y.Z"`
-6. Push `main` branch and the newly created tag.
-7. On github run the `GH Pages` workflow.
+6. Push `main` branch and the newly created tag. Cloudflare pages will build the showcase automatically.
