@@ -6,7 +6,7 @@
   Autocomplete web component. Suggests options for an input.
 </p>
 
-![npm](https://img.shields.io/npm/v/eck-autocomplete)
+[![npm](https://img.shields.io/npm/v/eck-autocomplete)](https://www.npmjs.com/package/eck-autocomplete)
 
 ## Usage
 
