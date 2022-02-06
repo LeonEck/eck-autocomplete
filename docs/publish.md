@@ -7,4 +7,5 @@ Publishing takes place on `main` branch.
 3. Commit: `chore: release vX.Y.Z`
 4. Run: `npm run publish:library`
 5. Create a tag: `git tag -a vX.Y.Z -m "vX.Y.Z"`
-6. Push `main` branch and the newly created tag. Cloudflare pages will build the showcase automatically.
+6. Push `main` branch and the newly created tag.
+7. Merge `main` to `production` branch and push `production` so that cloudflare builds the showcase based on the contents of the `production` branch.
