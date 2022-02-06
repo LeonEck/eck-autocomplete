@@ -125,8 +125,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   #init() {
-    this.#positionPanel();
-
     this.#slotRef?.addEventListener('slotchange', () => {
       this.#numberOfOptions = 0;
       /**
@@ -209,9 +207,12 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     /**
      * Position panel at the bottom of the input.
      */
-    const inputLeftX = this.#connectedInputRef?.getBoundingClientRect().x;
-    const inputBottomY =
-      this.#connectedInputRef?.getBoundingClientRect().bottom;
+    let inputLeftX = this.#connectedInputRef?.getBoundingClientRect().x;
+    let inputBottomY = this.#connectedInputRef?.getBoundingClientRect().bottom;
+    if (inputLeftX && inputBottomY) {
+      inputLeftX += window.scrollX;
+      inputBottomY += window.scrollY;
+    }
     (this.shadowRoot?.host as HTMLElement).style.left = `${inputLeftX}px`;
     (this.shadowRoot?.host as HTMLElement).style.top = `${inputBottomY}px`;
   }
