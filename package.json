@@ -1,6 +1,6 @@
 {
   "name": "eck-autocomplete",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Autocomplete web component. Suggests options for an input.",
   "author": "Leon Eck",
   "license": "MIT",

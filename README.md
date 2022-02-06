@@ -28,7 +28,7 @@ eck-autocomplete:not(:defined) {
 ```html
 <script
   type="module"
-  src="https://unpkg.com/eck-autocomplete@0.0.5/min/eck-autocomplete.js"
+  src="https://unpkg.com/eck-autocomplete@0.0.6/min/eck-autocomplete.js"
 ></script>
 ```
 
