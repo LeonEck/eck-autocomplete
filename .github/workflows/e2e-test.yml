@@ -5,7 +5,7 @@ on: push
 jobs:
   cypress-chrome:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.0-chrome95-ff94
+    container: cypress/browsers:node16.13.2-chrome97-ff96
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
@@ -17,7 +17,7 @@ jobs:
   cypress-firefox:
     runs-on: ubuntu-latest
     container:
-      image: cypress/browsers:node16.13.0-chrome95-ff94
+      image: cypress/browsers:node16.13.2-chrome97-ff96
       options: --user 1001
     steps:
       - uses: actions/checkout@v2
