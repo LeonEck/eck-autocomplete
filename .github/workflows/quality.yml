@@ -10,8 +10,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version-file: '.nvmrc'
-      - run: npm ci --ignore-scripts
-      - run: npm run check:types
+      - run: npm run check:ci:types
   check-eslint:
     runs-on: ubuntu-latest
     steps:
@@ -37,8 +36,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version-file: '.nvmrc'
-      - run: npm ci --ignore-scripts
-      - run: npm run check:prettier
+      - run: npm run check:ci:prettier
   check-commit-msg:
     runs-on: ubuntu-latest
     steps:
@@ -48,5 +46,5 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version-file: '.nvmrc'
-      - run: npm ci --ignore-scripts
-      - run: git log -1 --pretty=format:"%s" | npx --no-install commitlint
+      - run: commitlint_version=$(grep '"@commitlint/cli"' package.json | tail -n 1 | sed -r 's/.*:.*"(.*)",$/\1/')
+      - run: git log -1 --pretty=format:"%s" | npx commitlint@$commitlint_version
