@@ -1,6 +1,7 @@
 .idea
 node_modules
 dist
+build-artifacts
 www
 cypress/videos
 cypress/screenshots

@@ -1,6 +1,4 @@
 import esbuild from 'esbuild';
-import { esbuildLibraryConfig } from './esbuild-library-config.mjs';
+import { esbuildWatchLibraryConfig } from './esbuild-library-config.mjs';
 
-esbuildLibraryConfig.watch = true;
-
-esbuild.build(esbuildLibraryConfig).then(() => {});
+esbuild.build(esbuildWatchLibraryConfig).then(() => {});
