@@ -1,7 +1,8 @@
 import esbuild from 'esbuild';
-import { rmSync, cpSync } from 'fs';
+import { rmSync, cpSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { minify } from 'html-minifier';
 import {
   esbuildProdLibraryCSSMinifyConfig,
   esbuildProductionLibraryConfig,
@@ -30,6 +31,60 @@ cpSync(libraryDirectory, prodBuildArtifactsDirectory, {
   recursive: true,
   force: true,
 });
+
+/**
+ * Minify HTML
+ */
+const eckAutocompleteComponentHTMLFile = resolve(
+  prodBuildArtifactsDirectory,
+  'eck-autocomplete-component/eck-autocomplete-component.html'
+);
+const eckAutocompleteOptionComponentHTMLFile = resolve(
+  prodBuildArtifactsDirectory,
+  'eck-autocomplete-option-component/eck-autocomplete-option-component.html'
+);
+
+const eckAutocompleteComponentHTML = readFileSync(
+  eckAutocompleteComponentHTMLFile,
+  { encoding: 'utf8' }
+);
+const eckAutocompleteOptionComponentHTML = readFileSync(
+  eckAutocompleteOptionComponentHTMLFile,
+  { encoding: 'utf8' }
+);
+
+const minifyHTMLConfig = {
+  collapseInlineTagWhitespace: true,
+  collapseWhitespace: true,
+  minifyCSS: true,
+  minifyJS: true,
+  removeAttributeQuotes: true,
+  removeComments: true,
+  removeEmptyAttributes: true,
+  removeOptionalTags: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  sortAttributes: true,
+  sortClassName: true,
+};
+const eckAutocompleteComponentHTMLMinified = minify(
+  eckAutocompleteComponentHTML,
+  minifyHTMLConfig
+);
+const eckAutocompleteOptionComponentHTMLMinified = minify(
+  eckAutocompleteOptionComponentHTML,
+  minifyHTMLConfig
+);
+
+writeFileSync(
+  eckAutocompleteComponentHTMLFile,
+  eckAutocompleteComponentHTMLMinified
+);
+writeFileSync(
+  eckAutocompleteOptionComponentHTMLFile,
+  eckAutocompleteOptionComponentHTMLMinified
+);
 
 /**
  * Minify CSS
