@@ -25,5 +25,8 @@
     "enabled": true
   },
   "timezone": "Europe/Berlin",
-  "schedule": ["before 5am on friday"]
+  "schedule": ["before 5am on friday"],
+  "vulnerabilityAlerts": {
+    "enabled": false
+  }
 }
