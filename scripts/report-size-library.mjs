@@ -39,9 +39,10 @@ readStream
     const { size: brotliFileSize } = statSync(brotliSizeReportFile);
     console.log(
       `
-Library size:
-  Minified: ${formatBytes(minFileSize)}
-  Brotli compressed: ${formatBytes(brotliFileSize)}
+| Mode              |    Size |
+|:------------------|--------:|
+| Minified          | ${formatBytes(minFileSize)} |
+| Brotli compressed | ${formatBytes(brotliFileSize)} |
 `.trim()
     );
   });

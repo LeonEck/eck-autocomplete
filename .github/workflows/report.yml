@@ -1,0 +1,44 @@
+name: Report
+
+on: pull_request
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+      - run: npm ci --ignore-scripts
+      - run: npm run build:showcase
+      - run: |
+          SIZE_REPORT_BRANCH=$(npm run report:size:library | tail -n 4)
+          echo "SIZE_REPORT_BRANCH<<EOF" >> $GITHUB_ENV
+          echo "$SIZE_REPORT_BRANCH" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - run: |
+          # include hidden files
+          # https://askubuntu.com/questions/740805/how-can-i-remove-all-files-from-current-directory-using-terminal
+          shopt -s dotglob
+          rm -rf *
+      - uses: actions/checkout@v2
+        with:
+          ref: 'main'
+      - run: npm ci --ignore-scripts
+      - run: npm run build:showcase
+      - run: |
+          SIZE_REPORT_MAIN=$(npm run report:size:library | tail -n 4)
+          echo "SIZE_REPORT_MAIN<<EOF" >> $GITHUB_ENV
+          echo "$SIZE_REPORT_MAIN" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const { SIZE_REPORT_BRANCH, SIZE_REPORT_MAIN } = process.env
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `# 📈 Size Report\n\n## 📦 Library size\n\n### 📍 Current branch\n\n${SIZE_REPORT_BRANCH}\n\n### 🏠 Main branch\n\n${SIZE_REPORT_MAIN}`
+            })
