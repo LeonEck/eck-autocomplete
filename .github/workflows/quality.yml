@@ -1,6 +1,11 @@
 name: Quality
 
-on: push
+on:
+  push:
+    tags-ignore:
+      - '**'
+    branches-ignore:
+      - 'production'
 
 jobs:
   check-types:
