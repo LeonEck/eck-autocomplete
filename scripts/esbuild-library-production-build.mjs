@@ -91,6 +91,41 @@ writeFileSync(
  */
 esbuild.build(esbuildProdLibraryCSSMinifyConfig).then(() => {
   /**
+   * Remove trailing new line from CSS files.
+   * This is a micro optimization to prevent the newline from showing up in the final output.
+   */
+  const eckAutocompleteComponentCSSFile = resolve(
+    prodBuildArtifactsDirectory,
+    'eck-autocomplete-component/eck-autocomplete-component.css'
+  );
+  const eckAutocompleteOptionComponentCSSFile = resolve(
+    prodBuildArtifactsDirectory,
+    'eck-autocomplete-option-component/eck-autocomplete-option-component.css'
+  );
+
+  const eckAutocompleteComponentCSS = readFileSync(
+    eckAutocompleteComponentCSSFile,
+    { encoding: 'utf8' }
+  );
+  const eckAutocompleteOptionComponentCSS = readFileSync(
+    eckAutocompleteOptionComponentCSSFile,
+    { encoding: 'utf8' }
+  );
+
+  const eckAutocompleteComponentCSSTrimmed = eckAutocompleteComponentCSS.trim();
+  const eckAutocompleteOptionComponentCSSTrimmed =
+    eckAutocompleteOptionComponentCSS.trim();
+
+  writeFileSync(
+    eckAutocompleteComponentCSSFile,
+    eckAutocompleteComponentCSSTrimmed
+  );
+  writeFileSync(
+    eckAutocompleteOptionComponentCSSFile,
+    eckAutocompleteOptionComponentCSSTrimmed
+  );
+
+  /**
    * Build bundle
    */
   esbuild.build(esbuildProductionLibraryConfig).then(() => {
