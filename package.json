@@ -37,6 +37,7 @@
     "test:e2e:ci:cypress:install": "npm ci --ignore-scripts && npm explore cypress -- npm run postinstall",
     "test:unit": "vitest run",
     "test:unit:vitest:watch": "vitest",
+    "report:size:library": "node scripts/report-size-library.mjs",
     "prepare": "husky install"
   },
   "devDependencies": {
