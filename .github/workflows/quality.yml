@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
       - run: npm run check:ci:types
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
       - run: npm ci --ignore-scripts
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
       - run: npm ci --ignore-scripts
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
       - run: npm run check:ci:prettier
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
       - run: commitlint_version=$(grep '"@commitlint/cli"' package.json | tail -n 1 | sed -r 's/.*:.*"(.*)",$/\1/')
