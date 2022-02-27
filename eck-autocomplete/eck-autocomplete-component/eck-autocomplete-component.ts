@@ -5,6 +5,7 @@ import type {
   EckOptionSelected,
 } from '../eck-autocomplete-option-component/eck-autocomplete-option-component';
 import type { CustomElement } from '../utils/custom-element';
+import { coerceBoolean } from '../utils/coerceBoolean';
 
 const template = document.createElement('template');
 template.innerHTML = `<style>${css}</style>${html}`;
@@ -116,11 +117,18 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     });
   }
 
-  attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
+  attributeChangedCallback(
+    attrName: string,
+    oldVal: string | null,
+    newVal: string | null
+  ) {
     if (attrName === 'connected-to-id') {
-      this.#connectedToId = newVal;
+      // TODO: There should be error handling in general if the connectedToId isn't provided or removed
+      if (newVal) {
+        this.#connectedToId = newVal;
+      }
     } else if (attrName === 'highlight-first-option') {
-      this.#shouldHighlightFirstOption = newVal === 'true';
+      this.#shouldHighlightFirstOption = coerceBoolean(newVal);
     }
   }
 

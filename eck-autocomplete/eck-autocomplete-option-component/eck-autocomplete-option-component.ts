@@ -78,11 +78,15 @@ export class EckAutocompleteOption
     this.#clickEventListenerAbortController.abort();
   }
 
-  attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
+  attributeChangedCallback(
+    attrName: string,
+    oldVal: string | null,
+    newVal: string | null
+  ) {
     if (attrName === 'value') {
       this.value = newVal;
     } else if (attrName === 'label') {
-      this.label = newVal;
+      this.label = newVal ? newVal : undefined;
     }
   }
 
