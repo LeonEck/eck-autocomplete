@@ -3,6 +3,10 @@ import { defineConfig, configDefaults } from 'vitest/config';
 export default defineConfig({
   test: {
     environment: 'happy-dom',
-    exclude: [...(configDefaults.exclude as string[]), 'build-artifacts/**'],
+    exclude: [
+      ...(configDefaults.exclude as string[]),
+      'build-artifacts/**',
+      'e2e/**',
+    ],
   },
 });
