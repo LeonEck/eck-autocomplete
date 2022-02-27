@@ -1,0 +1,115 @@
+<!--
+ This tests the highlight-first-option attribute on eck-autocomplete.
+ Internally this also covers the coerceBoolean util.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>highlight-first-option</title>
+    <style>
+      /**
+      * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+      */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>highlight-first-option</h1>
+
+    <h2>Attribute not present</h2>
+
+    <input id="input1" type="text" />
+    <eck-autocomplete id="complete1" connected-to-id="input1">
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Attribute set to string null</h2>
+
+    <input id="input2" type="text" />
+    <eck-autocomplete
+      id="complete2"
+      connected-to-id="input2"
+      highlight-first-option="null"
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Attribute set to an empty string</h2>
+
+    <input id="input3" type="text" />
+    <eck-autocomplete
+      id="complete3"
+      connected-to-id="input3"
+      highlight-first-option=""
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Attribute set to string false</h2>
+
+    <input id="input4" type="text" />
+    <eck-autocomplete
+      id="complete4"
+      connected-to-id="input4"
+      highlight-first-option="false"
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Attribute set to string true</h2>
+
+    <input id="input5" type="text" />
+    <eck-autocomplete
+      id="complete5"
+      connected-to-id="input5"
+      highlight-first-option="true"
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Attribute set to an arbitrary string</h2>
+
+    <input id="input6" type="text" />
+    <eck-autocomplete
+      id="complete6"
+      connected-to-id="input6"
+      highlight-first-option="arbitrary string"
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Attribute set as a boolean attribute</h2>
+
+    <input id="input7" type="text" />
+    <eck-autocomplete
+      id="complete7"
+      connected-to-id="input7"
+      highlight-first-option
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <script type="module">
+      import '../../dist/eck-autocomplete';
+    </script>
+  </body>
+</html>
