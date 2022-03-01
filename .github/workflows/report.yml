@@ -13,9 +13,15 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run bundle:library
       - run: |
-          SIZE_REPORT_BRANCH=$(npm run report:size:library | tail -n 7)
-          echo "SIZE_REPORT_BRANCH<<EOF" >> $GITHUB_ENV
-          echo "$SIZE_REPORT_BRANCH" >> $GITHUB_ENV
+          SIZE_REPORT_LIBRARY_BRANCH=$(npm run report:size:library | tail -n 7)
+          echo "SIZE_REPORT_LIBRARY_BRANCH<<EOF" >> $GITHUB_ENV
+          echo "$SIZE_REPORT_LIBRARY_BRANCH" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - run: npm run build:showcase
+      - run: |
+          SIZE_REPORT_SHOWCASE_BRANCH=$(npm run report:size:showcase | tail -n 11)
+          echo "SIZE_REPORT_SHOWCASE_BRANCH<<EOF" >> $GITHUB_ENV
+          echo "$SIZE_REPORT_SHOWCASE_BRANCH" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       - run: |
           # include hidden files
@@ -28,17 +34,23 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run bundle:library
       - run: |
-          SIZE_REPORT_MAIN=$(npm run report:size:library | tail -n 7)
-          echo "SIZE_REPORT_MAIN<<EOF" >> $GITHUB_ENV
-          echo "$SIZE_REPORT_MAIN" >> $GITHUB_ENV
+          SIZE_REPORT_LIBRARY_MAIN=$(npm run report:size:library | tail -n 7)
+          echo "SIZE_REPORT_LIBRARY_MAIN<<EOF" >> $GITHUB_ENV
+          echo "$SIZE_REPORT_LIBRARY_MAIN" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - run: npm run build:showcase
+      - run: |
+          SIZE_REPORT_SHOWCASE_MAIN=$(npm run report:size:showcase | tail -n 11)
+          echo "SIZE_REPORT_SHOWCASE_MAIN<<EOF" >> $GITHUB_ENV
+          echo "$SIZE_REPORT_SHOWCASE_MAIN" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
       - uses: actions/github-script@v6
         with:
           script: |
-            const { SIZE_REPORT_BRANCH, SIZE_REPORT_MAIN } = process.env
+            const { SIZE_REPORT_LIBRARY_BRANCH, SIZE_REPORT_LIBRARY_MAIN, SIZE_REPORT_SHOWCASE_BRANCH, SIZE_REPORT_SHOWCASE_MAIN } = process.env
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `# 📈 Size Report\n\n## 📦 Library size\n\n### 📍 Current branch\n\n${SIZE_REPORT_BRANCH}\n\n### 🏠 Main branch\n\n${SIZE_REPORT_MAIN}`
+              body: `# 📈 Size Report\n\n## 📦 Library size\n\n### 📍 Current branch\n\n${SIZE_REPORT_LIBRARY_BRANCH}\n\n### 🏠 Main branch\n\n${SIZE_REPORT_LIBRARY_MAIN}\n\n## 🎤 Showcase size\n\n### 📍 Current branch\n\n${SIZE_REPORT_SHOWCASE_BRANCH}\n\n### 🏠 Main branch\n\n${SIZE_REPORT_SHOWCASE_MAIN}`
             })

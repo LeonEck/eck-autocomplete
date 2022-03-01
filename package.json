@@ -38,6 +38,7 @@
     "test:unit": "vitest run",
     "test:unit:vitest:watch": "vitest",
     "report:size:library": "node scripts/report-size-library.mjs",
+    "report:size:showcase": "node scripts/report-size-showcase.mjs",
     "prepare": "husky install"
   },
   "devDependencies": {
