@@ -11,9 +11,9 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - run: npm ci --ignore-scripts
-      - run: npm run build:showcase
+      - run: npm run bundle:library
       - run: |
-          SIZE_REPORT_BRANCH=$(npm run report:size:library | tail -n 4)
+          SIZE_REPORT_BRANCH=$(npm run report:size:library | tail -n 7)
           echo "SIZE_REPORT_BRANCH<<EOF" >> $GITHUB_ENV
           echo "$SIZE_REPORT_BRANCH" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -26,9 +26,9 @@ jobs:
         with:
           ref: 'main'
       - run: npm ci --ignore-scripts
-      - run: npm run build:showcase
+      - run: npm run bundle:library
       - run: |
-          SIZE_REPORT_MAIN=$(npm run report:size:library | tail -n 4)
+          SIZE_REPORT_MAIN=$(npm run report:size:library | tail -n 7)
           echo "SIZE_REPORT_MAIN<<EOF" >> $GITHUB_ENV
           echo "$SIZE_REPORT_MAIN" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV

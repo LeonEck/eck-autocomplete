@@ -2,10 +2,11 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { statSync, createReadStream, createWriteStream } from 'fs';
 import { createBrotliCompress } from 'zlib';
+import { walkSync } from './utils/walkSync.mjs';
+import { formatBytes } from './utils/formatBytes.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distFolder = resolve(__dirname, '../dist');
-const wwwFolder = resolve(__dirname, '../www');
 const buildArtifactsFolder = resolve(__dirname, '../build-artifacts');
 const brotliSizeReportFile = resolve(
   buildArtifactsFolder,
@@ -13,18 +14,13 @@ const brotliSizeReportFile = resolve(
 );
 const minFile = resolve(distFolder, 'min/eck-autocomplete.js');
 
-// https://stackoverflow.com/a/18650828
-const formatBytes = (bytes, decimals = 2) => {
-  if (bytes === 0) return '0 Bytes';
+let amountOfFiles = 0;
+let distFolderSize = 0;
 
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-};
+for (const filePath of walkSync(distFolder)) {
+  distFolderSize += statSync(filePath).size;
+  amountOfFiles++;
+}
 
 const readStream = createReadStream(minFile);
 const writeStream = createWriteStream(brotliSizeReportFile);
@@ -43,6 +39,9 @@ readStream
 |:------------------|--------:|
 | Minified          | ${formatBytes(minFileSize)} |
 | Brotli compressed | ${formatBytes(brotliFileSize)} |
+
+Amount of files in dist/: ${amountOfFiles}
+Size of all files in dist/: ${formatBytes(distFolderSize)}
 `.trim()
     );
   });
