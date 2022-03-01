@@ -44,11 +44,11 @@
   "devDependencies": {
     "@commitlint/cli": "16.2.1",
     "@playwright/test": "1.19.2",
-    "@typescript-eslint/eslint-plugin": "5.12.1",
-    "@typescript-eslint/parser": "5.12.1",
+    "@typescript-eslint/eslint-plugin": "5.13.0",
+    "@typescript-eslint/parser": "5.13.0",
     "concurrently": "7.0.0",
     "esbuild": "0.14.23",
-    "eslint": "8.9.0",
+    "eslint": "8.10.0",
     "happy-dom": "2.41.0",
     "html-minifier": "4.0.0",
     "husky": "7.0.4",
@@ -56,8 +56,8 @@
     "start-server-and-test": "1.14.0",
     "stylelint": "14.5.3",
     "stylelint-config-standard": "25.0.0",
-    "typescript": "4.5.5",
-    "vite": "2.8.4",
-    "vitest": "0.5.5"
+    "typescript": "4.6.2",
+    "vite": "2.8.5",
+    "vitest": "0.5.9"
   }
 }
