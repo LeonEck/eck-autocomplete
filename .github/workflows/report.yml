@@ -6,7 +6,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
@@ -28,7 +28,7 @@ jobs:
           # https://askubuntu.com/questions/740805/how-can-i-remove-all-files-from-current-directory-using-terminal
           shopt -s dotglob
           rm -rf *
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: 'main'
       - run: npm ci --ignore-scripts
