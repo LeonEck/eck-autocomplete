@@ -23,6 +23,10 @@
       >
       <eck-autocomplete-option>Two</eck-autocomplete-option>
       <eck-autocomplete-option>Three</eck-autocomplete-option>
+      <eck-autocomplete-option
+        >Very long entry - Very long entry - Very long entry - Very long
+        entry</eck-autocomplete-option
+      >
     </eck-autocomplete>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <input id="input2" type="text" placeholder="Filtered" />
@@ -67,6 +71,19 @@
         <eck-autocomplete-option>Three</eck-autocomplete-option>
       </eck-autocomplete>
     </form>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <input id="input3" type="text" style="width: 500px" />
+    <eck-autocomplete connected-to-id="input3">
+      <eck-autocomplete-option label="One"
+        >One <b>test</b></eck-autocomplete-option
+      >
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+      <eck-autocomplete-option
+        >Very long entry - Very long entry - Very long entry - Very long
+        entry</eck-autocomplete-option
+      >
+    </eck-autocomplete>
     <script type="module">
       import { version } from './package.json';
       import './dist/eck-autocomplete';
