@@ -5,7 +5,7 @@
 }
 
 :host(:hover),
-:host(.highlighted) {
+:host([highlighted]) {
   background-color: #b3e5fc;
   cursor: pointer;
 }

@@ -178,13 +178,9 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
        * it again or not.
        */
       if (this.#numberOfOptions === 0) {
-        this.shadowRoot
-          ?.querySelector('.option-container')
-          ?.classList.remove('has-children');
+        this.shadowRoot?.host.removeAttribute('has-children');
       } else {
-        this.shadowRoot
-          ?.querySelector('.option-container')
-          ?.classList.add('has-children');
+        this.shadowRoot?.host.setAttribute('has-children', '');
       }
     });
   }

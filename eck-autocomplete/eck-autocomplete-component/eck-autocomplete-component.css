@@ -3,11 +3,9 @@
   display: none;
   position: absolute;
   background-color: #fff;
+  overflow: auto;
 }
 
-.option-container.has-children {
-  box-sizing: border-box;
-  width: 100%;
-  overflow: auto;
+:host([has-children]) {
   border: 1px solid black;
 }
