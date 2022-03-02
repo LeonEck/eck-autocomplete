@@ -41,6 +41,7 @@ export class EckAutocompleteOption
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   static get tagName() {
@@ -52,8 +53,6 @@ export class EckAutocompleteOption
   }
 
   connectedCallback() {
-    this.shadowRoot?.appendChild(template.content.cloneNode(true));
-
     /**
      * https://stackoverflow.com/a/57630197
      * mousedown would normally cause a blur event. But we need to handle the click event first.

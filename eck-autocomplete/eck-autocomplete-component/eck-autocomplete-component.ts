@@ -44,6 +44,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   static get tagName() {
@@ -55,7 +56,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   connectedCallback() {
-    this.shadowRoot?.appendChild(template.content.cloneNode(true));
     this.#slotRef = this.shadowRoot?.querySelector<HTMLSlotElement>('slot');
     this.#connectedInputRef = document.querySelector<HTMLInputElement>(
       `#${this.#connectedToId}`
