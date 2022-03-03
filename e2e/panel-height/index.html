@@ -1,0 +1,154 @@
+<!--
+ This test suite includes tests that are concerned with the height of the panel.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>panel-height</title>
+    <style>
+      /**
+      * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+      */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>panel-height</h1>
+
+    <h2>Content smaller than default height</h2>
+
+    <input id="input1" type="text" />
+    <eck-autocomplete id="complete1" connected-to-id="input1">
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Content same height as default height</h2>
+
+    Note: The option needs to be 2px smaller than 256 since we add a border on
+    the panel.
+
+    <input id="input2" type="text" />
+    <eck-autocomplete id="complete2" connected-to-id="input2">
+      <eck-autocomplete-option style="height: 254px"
+        >One</eck-autocomplete-option
+      >
+    </eck-autocomplete>
+
+    <h2>Content larger than default height</h2>
+
+    <input id="input3" type="text" />
+    <eck-autocomplete id="complete3" connected-to-id="input3">
+      <eck-autocomplete-option>Berlin</eck-autocomplete-option>
+      <eck-autocomplete-option>Hamburg</eck-autocomplete-option>
+      <eck-autocomplete-option>München</eck-autocomplete-option>
+      <eck-autocomplete-option>Köln</eck-autocomplete-option>
+      <eck-autocomplete-option>Frankfurt am Main</eck-autocomplete-option>
+      <eck-autocomplete-option>Stuttgart</eck-autocomplete-option>
+      <eck-autocomplete-option>Düsseldorf</eck-autocomplete-option>
+      <eck-autocomplete-option>Leipzig</eck-autocomplete-option>
+      <eck-autocomplete-option>Dortmund</eck-autocomplete-option>
+      <eck-autocomplete-option>Essen</eck-autocomplete-option>
+      <eck-autocomplete-option>Bremen</eck-autocomplete-option>
+      <eck-autocomplete-option>Dresden</eck-autocomplete-option>
+      <eck-autocomplete-option>Hannover</eck-autocomplete-option>
+      <eck-autocomplete-option>Nürnberg</eck-autocomplete-option>
+      <eck-autocomplete-option>Duisburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Bochum</eck-autocomplete-option>
+      <eck-autocomplete-option>Wuppertal</eck-autocomplete-option>
+      <eck-autocomplete-option>Bielefeld</eck-autocomplete-option>
+      <eck-autocomplete-option>Bonn</eck-autocomplete-option>
+      <eck-autocomplete-option>Münster</eck-autocomplete-option>
+      <eck-autocomplete-option>Mannheim</eck-autocomplete-option>
+      <eck-autocomplete-option>Karlsruhe</eck-autocomplete-option>
+      <eck-autocomplete-option>Augsburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Wiesbaden</eck-autocomplete-option>
+      <eck-autocomplete-option>Mönchengladbach</eck-autocomplete-option>
+      <eck-autocomplete-option>Gelsenkirchen</eck-autocomplete-option>
+      <eck-autocomplete-option>Aachen</eck-autocomplete-option>
+      <eck-autocomplete-option>Braunschweig</eck-autocomplete-option>
+      <eck-autocomplete-option>Kiel</eck-autocomplete-option>
+      <eck-autocomplete-option>Chemnitz1</eck-autocomplete-option>
+      <eck-autocomplete-option>Halle (Saale)</eck-autocomplete-option>
+      <eck-autocomplete-option>Magdeburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Freiburg im Breisgau</eck-autocomplete-option>
+      <eck-autocomplete-option>Krefeld</eck-autocomplete-option>
+      <eck-autocomplete-option>Mainz</eck-autocomplete-option>
+      <eck-autocomplete-option>Lübeck</eck-autocomplete-option>
+      <eck-autocomplete-option>Erfurt</eck-autocomplete-option>
+      <eck-autocomplete-option>Oberhausen</eck-autocomplete-option>
+      <eck-autocomplete-option>Rostock</eck-autocomplete-option>
+      <eck-autocomplete-option>Kassel</eck-autocomplete-option>
+      <eck-autocomplete-option>Hagen</eck-autocomplete-option>
+      <eck-autocomplete-option>Potsdam</eck-autocomplete-option>
+      <eck-autocomplete-option>Saarbrücken</eck-autocomplete-option>
+      <eck-autocomplete-option>Hamm</eck-autocomplete-option>
+      <eck-autocomplete-option>Ludwigshafen am Rhein</eck-autocomplete-option>
+      <eck-autocomplete-option>Mülheim an der Ruhr</eck-autocomplete-option>
+      <eck-autocomplete-option>Oldenburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Osnabrück</eck-autocomplete-option>
+      <eck-autocomplete-option>Leverkusen</eck-autocomplete-option>
+      <eck-autocomplete-option>Solingen</eck-autocomplete-option>
+      <eck-autocomplete-option>Darmstadt</eck-autocomplete-option>
+      <eck-autocomplete-option>Heidelberg</eck-autocomplete-option>
+      <eck-autocomplete-option>Herne</eck-autocomplete-option>
+      <eck-autocomplete-option>Neuss</eck-autocomplete-option>
+      <eck-autocomplete-option>Regensburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Paderborn</eck-autocomplete-option>
+      <eck-autocomplete-option>Ingolstadt</eck-autocomplete-option>
+      <eck-autocomplete-option>Offenbach am Main</eck-autocomplete-option>
+      <eck-autocomplete-option>Fürth</eck-autocomplete-option>
+      <eck-autocomplete-option>Würzburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Heilbronn</eck-autocomplete-option>
+      <eck-autocomplete-option>Ulm</eck-autocomplete-option>
+      <eck-autocomplete-option>Pforzheim</eck-autocomplete-option>
+      <eck-autocomplete-option>Wolfsburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Bottrop</eck-autocomplete-option>
+      <eck-autocomplete-option>Göttingen</eck-autocomplete-option>
+      <eck-autocomplete-option>Reutlingen</eck-autocomplete-option>
+      <eck-autocomplete-option>Bremerhaven</eck-autocomplete-option>
+      <eck-autocomplete-option>Koblenz</eck-autocomplete-option>
+      <eck-autocomplete-option>Erlangen</eck-autocomplete-option>
+      <eck-autocomplete-option>Bergisch Gladbach</eck-autocomplete-option>
+      <eck-autocomplete-option>Remscheid</eck-autocomplete-option>
+      <eck-autocomplete-option>Jena</eck-autocomplete-option>
+      <eck-autocomplete-option>Recklinghausen</eck-autocomplete-option>
+      <eck-autocomplete-option>Trier</eck-autocomplete-option>
+      <eck-autocomplete-option>Salzgitter</eck-autocomplete-option>
+      <eck-autocomplete-option>Moers</eck-autocomplete-option>
+      <eck-autocomplete-option>Siegen</eck-autocomplete-option>
+      <eck-autocomplete-option>Hildesheim</eck-autocomplete-option>
+      <eck-autocomplete-option>Gütersloh</eck-autocomplete-option>
+      <eck-autocomplete-option>Kaiserslautern</eck-autocomplete-option>
+      <eck-autocomplete-option>Cottbus</eck-autocomplete-option>
+      <eck-autocomplete-option>Hanau</eck-autocomplete-option>
+      <eck-autocomplete-option>Witten</eck-autocomplete-option>
+      <eck-autocomplete-option>Schwerin</eck-autocomplete-option>
+      <eck-autocomplete-option>Ludwigsburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Esslingen am Neckar</eck-autocomplete-option>
+      <eck-autocomplete-option>Gera</eck-autocomplete-option>
+      <eck-autocomplete-option>Iserlohn</eck-autocomplete-option>
+      <eck-autocomplete-option>Düren</eck-autocomplete-option>
+      <eck-autocomplete-option>Tübingen</eck-autocomplete-option>
+      <eck-autocomplete-option>Gießen</eck-autocomplete-option>
+      <eck-autocomplete-option>Flensburg</eck-autocomplete-option>
+      <eck-autocomplete-option>Zwickau</eck-autocomplete-option>
+      <eck-autocomplete-option>Ratingen</eck-autocomplete-option>
+      <eck-autocomplete-option>Lünen</eck-autocomplete-option>
+      <eck-autocomplete-option>Villingen-Schwenningen3</eck-autocomplete-option>
+      <eck-autocomplete-option>Konstanz</eck-autocomplete-option>
+      <eck-autocomplete-option>Marl</eck-autocomplete-option>
+      <eck-autocomplete-option>Worms</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <script type="module">
+      import '../../dist/eck-autocomplete';
+    </script>
+  </body>
+</html>
