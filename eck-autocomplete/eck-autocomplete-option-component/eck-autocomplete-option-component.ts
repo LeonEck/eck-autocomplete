@@ -33,7 +33,7 @@ export class EckAutocompleteOption
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot?.appendChild(template.content.cloneNode(true));
+    this.shadowRoot!.appendChild(template.content.cloneNode(true));
   }
 
   static get tagName() {
@@ -50,11 +50,11 @@ export class EckAutocompleteOption
      * mousedown would normally cause a blur event. But we need to handle the click event first.
      * So we stop the behaviour of mousedown.
      */
-    this.shadowRoot?.host.addEventListener('mousedown', (e) => {
+    this.shadowRoot!.host.addEventListener('mousedown', (e) => {
       e.preventDefault();
     });
 
-    this.shadowRoot?.host.addEventListener('click', () => {
+    this.shadowRoot!.host.addEventListener('click', () => {
       this.fireSelectionEvent();
     });
   }
@@ -73,7 +73,7 @@ export class EckAutocompleteOption
 
   highlight(highlight: boolean) {
     this.hasKeyboardHighlight = highlight;
-    this.shadowRoot?.host.toggleAttribute('highlighted', highlight);
+    this.shadowRoot!.host.toggleAttribute('highlighted', highlight);
   }
 
   fireSelectionEvent() {
@@ -85,7 +85,7 @@ export class EckAutocompleteOption
         label: this.#getLabel(),
       } as EckOptionSelected,
     });
-    this.shadowRoot?.dispatchEvent(valueEvent);
+    this.shadowRoot!.dispatchEvent(valueEvent);
   }
 
   /**
@@ -96,7 +96,7 @@ export class EckAutocompleteOption
     if (this.label !== undefined) {
       return this.label;
     } else {
-      return this.shadowRoot?.host.innerHTML;
+      return this.shadowRoot!.host.innerHTML;
     }
   }
 }

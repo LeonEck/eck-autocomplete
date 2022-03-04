@@ -1,0 +1,3 @@
+# ESlint exceptions
+
+- `"@typescript-eslint/no-non-null-assertion": ["off"]`: Due to the lifecycle methods of custom elements we can be sure that certain values aren't null. TypeScript doesn't know about the lifecycle logic and therefore would mark way to many values as possibly null. One of the most prominent examples of this is the `shadowRoot` property. That one is initialized by calling `attachShadow` in the constructor. But TypeScript doesn't recognize that call as an initialization and therefore thinks this property could be null everywhere. And since the property is `readonly` we can't even force assign it.
