@@ -40,6 +40,10 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
    * Reference to the currently highlighted option (if present)
    */
   #highlightedOptionRef: EckAutocompleteOption | undefined;
+  /**
+   * CSS position value for panel.
+   */
+  #positionStrategy: 'absolute' | 'fixed' = 'absolute';
 
   constructor() {
     super();
@@ -52,7 +56,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   static get observedAttributes() {
-    return ['connected-to-id', 'highlight-first-option'];
+    return ['connected-to-id', 'highlight-first-option', 'position-strategy'];
   }
 
   connectedCallback() {
@@ -129,6 +133,16 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
       }
     } else if (attrName === 'highlight-first-option') {
       this.#shouldHighlightFirstOption = coerceBoolean(newVal);
+    } else if (attrName === 'position-strategy') {
+      if (this.shadowRoot?.host) {
+        if (newVal === 'fixed') {
+          (this.shadowRoot.host as HTMLElement).style.position = 'fixed';
+          this.#positionStrategy = 'fixed';
+        } else {
+          (this.shadowRoot.host as HTMLElement).style.position = 'absolute';
+          this.#positionStrategy = 'absolute';
+        }
+      }
     }
   }
 
@@ -211,11 +225,35 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     /**
      * Position panel at the bottom of the input.
      */
-    let inputLeftX = this.#connectedInputRef?.getBoundingClientRect().x;
-    let inputBottomY = this.#connectedInputRef?.getBoundingClientRect().bottom;
-    if (inputLeftX && inputBottomY) {
-      inputLeftX += window.scrollX;
-      inputBottomY += window.scrollY;
+    let inputLeftX: number | undefined = 0;
+    let inputBottomY: number | undefined = 0;
+    if (this.#positionStrategy === 'absolute') {
+      inputLeftX = this.#connectedInputRef?.offsetLeft;
+      if (this.#connectedInputRef?.getBoundingClientRect()) {
+        inputBottomY =
+          this.#connectedInputRef?.offsetTop +
+          this.#connectedInputRef?.getBoundingClientRect().height;
+      }
+    } else {
+      if (
+        (this.#connectedInputRef?.offsetParent as HTMLElement).style
+          .position === 'absolute'
+      ) {
+        inputLeftX = this.#connectedInputRef?.offsetLeft;
+        if (this.#connectedInputRef?.offsetParent?.getBoundingClientRect()) {
+          inputBottomY =
+            this.#connectedInputRef?.getBoundingClientRect().top -
+            this.#connectedInputRef?.offsetParent?.getBoundingClientRect().top +
+            this.#connectedInputRef?.getBoundingClientRect().height;
+        }
+      } else {
+        inputLeftX = this.#connectedInputRef?.getBoundingClientRect().x;
+        inputBottomY = this.#connectedInputRef?.getBoundingClientRect().bottom;
+        if (inputLeftX && inputBottomY) {
+          inputLeftX += window.scrollX;
+          inputBottomY += window.scrollY;
+        }
+      }
     }
     (this.shadowRoot?.host as HTMLElement).style.left = `${inputLeftX}px`;
     (this.shadowRoot?.host as HTMLElement).style.top = `${inputBottomY}px`;

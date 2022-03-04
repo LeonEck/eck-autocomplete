@@ -1,0 +1,205 @@
+<!--
+ This test suite includes tests that are concerned with the position of the panel.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>positioning</title>
+    <style>
+      /**
+      * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+      */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>positioning</h1>
+
+    <h2>Input at the top of the page should cause the panel to open bellow</h2>
+
+    <input id="input1" type="text" />
+    <eck-autocomplete id="complete1" connected-to-id="input1">
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <div style="position: absolute; bottom: 50px">
+      <h2>
+        Input near the bottom of the page should cause the panel to open above
+      </h2>
+      <input id="input2" type="text" />
+      <eck-autocomplete id="complete2" connected-to-id="input2">
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+    </div>
+
+    <div style="position: absolute; top: 50px; right: 50px">
+      <h2>Input absolute positioned to the top right should open bellow</h2>
+      <input id="input3" type="text" />
+      <eck-autocomplete id="complete3" connected-to-id="input3">
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+    </div>
+
+    <div style="position: fixed; bottom: 50px; right: 50px">
+      <h2>Input fixed positioned to the bottom right should open above</h2>
+      <input id="input4" type="text" />
+      <eck-autocomplete id="complete4" connected-to-id="input4">
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+    </div>
+
+    <div
+      style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid navy;
+      "
+    >
+      <div id="divAround5" style="height: 80px; overflow: auto">
+        <h2>
+          Absolute centered div where input is at the bottom of an overflow
+        </h2>
+        <input id="input5" type="text" />
+        <eck-autocomplete
+          id="complete5"
+          connected-to-id="input5"
+          position-strategy="fixed"
+        >
+          <eck-autocomplete-option>One</eck-autocomplete-option>
+          <eck-autocomplete-option>Two</eck-autocomplete-option>
+          <eck-autocomplete-option>Three</eck-autocomplete-option>
+        </eck-autocomplete>
+        <br />
+        A bit of text bellow
+      </div>
+    </div>
+
+    <div
+      style="
+        height: 300px;
+        overflow: auto;
+        border: 1px solid mediumvioletred;
+        position: relative;
+      "
+    >
+      <h2>
+        Overflow container with relative position. Panel will not extend outside
+      </h2>
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <input id="input6" type="text" />
+      <eck-autocomplete id="complete6" connected-to-id="input6">
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+      <br /><br /><br />
+      A bit of text bellow
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+    </div>
+
+    <div
+      id="divAround7"
+      style="height: 300px; overflow: auto; border: 1px solid mediumvioletred"
+    >
+      <h2>
+        Overflow container without position. Autocomplete position strategy set
+        to 'fixed'. Panel will extend outside.
+      </h2>
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <input id="input7" type="text" />
+      <eck-autocomplete
+        id="complete7"
+        connected-to-id="input7"
+        position-strategy="fixed"
+      >
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+      <br /><br /><br />
+      A bit of text bellow
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+    </div>
+
+    <div
+      id="divAround8"
+      style="height: 300px; overflow: auto; border: 1px solid mediumvioletred"
+    >
+      <h2>
+        Overflow container without position or extra settings. Panel position
+        will be broken. Known limitation.
+      </h2>
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <input id="input8" type="text" />
+      <eck-autocomplete id="complete8" connected-to-id="input8">
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+      <br /><br /><br />
+      A bit of text bellow
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+      <br /><br /><br />
+      Some text above
+      <br /><br /><br />
+    </div>
+
+    <script type="module">
+      import '../../dist/eck-autocomplete';
+    </script>
+  </body>
+</html>
