@@ -173,9 +173,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
           }) as EventListener);
         }
       });
-      if (this.#shouldHighlightFirstOption) {
-        this.#highlightFirstOption();
-      }
+      this.#highlightFirstOption();
       /**
        * The panel can be in the open state and still have no options.
        * This happens when the list is filtered and nothing matches.
@@ -197,9 +195,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     this.#positionPanel();
     this.#highlightedOptionRef?.highlight(false);
     this.#highlightedOptionRef = undefined;
-    if (this.#shouldHighlightFirstOption) {
-      this.#highlightFirstOption();
-    }
+    this.#highlightFirstOption();
     (this.shadowRoot!.host as HTMLElement).style.display = 'block';
     this.#panelHidden = false;
   }
@@ -266,6 +262,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   #highlightFirstOption() {
+    if (!this.#shouldHighlightFirstOption) return;
     const nodes = this.#slotRef.assignedNodes();
     if (Array.isArray(nodes)) {
       for (let i = 0; i < nodes.length; i++) {
