@@ -30,14 +30,6 @@ export class EckAutocompleteOption
    */
   hasKeyboardHighlight = false;
 
-  /**
-   * Remove event listener when its no longer needed.
-   * TODO: Is this necessary?
-   */
-  #clickEventListenerAbortController = new AbortController();
-  #clickEventListenerAbortSignal =
-    this.#clickEventListenerAbortController.signal;
-
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -62,19 +54,9 @@ export class EckAutocompleteOption
       e.preventDefault();
     });
 
-    this.shadowRoot?.host.addEventListener(
-      'click',
-      () => {
-        this.fireSelectionEvent();
-      },
-      {
-        signal: this.#clickEventListenerAbortSignal,
-      }
-    );
-  }
-
-  disconnectedCallback() {
-    this.#clickEventListenerAbortController.abort();
+    this.shadowRoot?.host.addEventListener('click', () => {
+      this.fireSelectionEvent();
+    });
   }
 
   attributeChangedCallback(
