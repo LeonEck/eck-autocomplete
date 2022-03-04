@@ -73,11 +73,7 @@ export class EckAutocompleteOption
 
   highlight(highlight: boolean) {
     this.hasKeyboardHighlight = highlight;
-    if (highlight) {
-      this.shadowRoot?.host.setAttribute('highlighted', '');
-    } else {
-      this.shadowRoot?.host.removeAttribute('highlighted');
-    }
+    this.shadowRoot?.host.toggleAttribute('highlighted', highlight);
   }
 
   fireSelectionEvent() {
