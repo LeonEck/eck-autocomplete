@@ -185,11 +185,10 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
        * it dynamically changes, and we would have no way of knowing if we should show
        * it again or not.
        */
-      if (this.#numberOfOptions === 0) {
-        this.shadowRoot!.host.removeAttribute('has-children');
-      } else {
-        this.shadowRoot!.host.setAttribute('has-children', '');
-      }
+      this.shadowRoot!.host.toggleAttribute(
+        'has-children',
+        this.#numberOfOptions !== 0
+      );
     });
   }
 
