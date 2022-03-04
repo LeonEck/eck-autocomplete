@@ -77,15 +77,16 @@ export class EckAutocompleteOption
   }
 
   fireSelectionEvent() {
-    const valueEvent = new CustomEvent('eck-option-selected', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        value: this.value,
-        label: this.#getLabel(),
-      } as EckOptionSelected,
-    });
-    this.shadowRoot!.dispatchEvent(valueEvent);
+    this.shadowRoot!.dispatchEvent(
+      new CustomEvent('eck-option-selected', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value,
+          label: this.#getLabel(),
+        } as EckOptionSelected,
+      })
+    );
   }
 
   /**
