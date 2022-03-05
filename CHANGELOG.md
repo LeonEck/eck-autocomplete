@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.10
+
+- perf: replace js private fields with ts private and use mangle_props during build
+- refactor: make all possible properties private
+
 ## 0.0.9
 
 - docs: update homepage link in package.json
