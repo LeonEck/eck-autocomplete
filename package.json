@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/LeonEck/eck-autocomplete.git"
   },
-  "homepage": "https://eck-autocomplete.leoneck.de/",
+  "homepage": "https://eck-autocomplete.leoneck.de",
   "scripts": {
     "start": "concurrently -r npm:watch:*",
     "watch:library": "node scripts/esbuild-library-watch.mjs",
