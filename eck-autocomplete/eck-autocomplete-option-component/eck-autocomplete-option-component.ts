@@ -83,7 +83,7 @@ export class EckAutocompleteOption
         composed: true,
         detail: {
           value: this.value,
-          label: this.#getLabel(),
+          label: this._getLabel(),
         } as EckOptionSelected,
       })
     );
@@ -93,7 +93,7 @@ export class EckAutocompleteOption
    * The label is either provided explicitly or we use the innerHTML
    * @returns {string|*}
    */
-  #getLabel() {
+  private _getLabel() {
     if (this.label !== undefined) {
       return this.label;
     } else {
