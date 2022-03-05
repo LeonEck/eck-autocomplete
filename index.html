@@ -704,8 +704,8 @@
           const optionElement = document.createElement(
             'eck-autocomplete-option'
           );
-          optionElement.value = option.value;
-          optionElement.label = option.label;
+          optionElement.setAttribute('value', option.value);
+          optionElement.setAttribute('label', option.label);
           optionElement.innerHTML = option.html;
           input1autocomplete.appendChild(optionElement);
         });

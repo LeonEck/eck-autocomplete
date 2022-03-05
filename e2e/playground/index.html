@@ -100,7 +100,7 @@
           const optionElement = document.createElement(
             'eck-autocomplete-option'
           );
-          optionElement.value = option.value;
+          optionElement.setAttribute('value', option.value);
           optionElement.innerHTML = option.label;
           input2options.appendChild(optionElement);
         });
