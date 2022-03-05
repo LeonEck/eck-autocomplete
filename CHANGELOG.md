@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.9
+
+- docs: update homepage link in package.json
+
 ## 0.0.8
 
 - perf: remove trailing newline from CSS
