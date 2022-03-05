@@ -17,13 +17,13 @@ export class EckAutocompleteOption
   /**
    * Optional data that is attached to an option.
    */
-  value: unknown;
+  private _value: unknown;
   /**
    * Optional string that is used to display the option in contexts
    * that only allow strings (e.g. inputs)
    * If not provided the innerHtml is used.
    */
-  label: string | undefined;
+  private _label: string | undefined;
 
   /**
    * True if the option is highlighted by the keyboard.
@@ -65,9 +65,9 @@ export class EckAutocompleteOption
     newVal: string | null
   ) {
     if (attrName === 'value') {
-      this.value = newVal;
+      this._value = newVal;
     } else if (attrName === 'label') {
-      this.label = newVal ? newVal : undefined;
+      this._label = newVal ? newVal : undefined;
     }
   }
 
@@ -82,7 +82,7 @@ export class EckAutocompleteOption
         bubbles: true,
         composed: true,
         detail: {
-          value: this.value,
+          value: this._value,
           label: this._getLabel(),
         } as EckOptionSelected,
       })
@@ -94,8 +94,8 @@ export class EckAutocompleteOption
    * @returns {string|*}
    */
   private _getLabel() {
-    if (this.label !== undefined) {
-      return this.label;
+    if (this._label !== undefined) {
+      return this._label;
     } else {
       return this.shadowRoot!.host.innerHTML;
     }
