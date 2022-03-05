@@ -101,7 +101,6 @@
             'eck-autocomplete-option'
           );
           optionElement.value = option.value;
-          optionElement.stringLabel = option.stringLabel;
           optionElement.innerHTML = option.label;
           input2options.appendChild(optionElement);
         });
@@ -113,28 +112,24 @@
             key: 'One 1',
           },
           label: 'One x',
-          stringLabel: '111',
         },
         {
           value: {
             key: 'Two 2',
           },
           label: 'Two',
-          stringLabel: '222',
         },
         {
           value: {
             key: 'Two 2 two',
           },
           label: 'Two two',
-          stringLabel: '222 two',
         },
         {
           value: {
             key: 'Three 3',
           },
           label: 'Three',
-          stringLabel: '333',
         },
       ];
 
@@ -179,7 +174,6 @@
               key: 'Four 4',
             },
             label: 'Four x',
-            stringLabel: '4',
           });
           const filteredOptions = options.filter((option) =>
             option.label.toLowerCase().includes(input2.value.toLowerCase())
