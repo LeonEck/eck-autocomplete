@@ -15,3 +15,10 @@ const headers = `
 `;
 
 writeFileSync(resolve(__dirname, '../www/_headers'), headers.trim());
+
+const robots = `
+User-agent: *
+Allow: /
+`;
+
+writeFileSync(resolve(__dirname, '../www/robots.txt'), robots.trim());
