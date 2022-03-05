@@ -85,5 +85,4 @@ export const esbuildProductionLibraryConfig = {
   outdir: resolve(__dirname, '../dist'),
   format: 'esm',
   sourcemap: true,
-  mangleProps: /^_/,
 };

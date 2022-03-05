@@ -8,4 +8,7 @@ export default defineConfig({
     target: 'esnext',
     sourcemap: true,
   },
+  esbuild: {
+    mangleProps: /^_/,
+  },
 });

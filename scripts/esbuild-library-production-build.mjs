@@ -133,6 +133,7 @@ esbuild.build(esbuildProdLibraryCSSMinifyConfig).then(() => {
      * Run a second build for minified output.
      */
     esbuildProductionLibraryConfig.minify = true;
+    esbuildProductionLibraryConfig.mangleProps = /^_/;
     esbuildProductionLibraryConfig.outdir = resolve(__dirname, '../dist/min');
     esbuild.build(esbuildProductionLibraryConfig).then(() => {});
   });
