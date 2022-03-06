@@ -17,7 +17,7 @@
     "watch:library": "node scripts/esbuild-library-watch.mjs",
     "watch:showcase": "vite --host 0.0.0.0",
     "build:library": "node scripts/esbuild-library-production-build.mjs",
-    "build:showcase": "vite build && node scripts/generate-cloudflare-pages-config.mjs && node scripts/showcase-prod-build-rework.mjs",
+    "build:showcase": "vite build && node scripts/generate-cloudflare-pages-config.mjs && node scripts/showcase-prod-build-rework.mjs && node scripts/copy-e2e-to-www.mjs",
     "build:cloudflare": "npm run build:library && npm run build:showcase",
     "generate:type-declarations": "tsc --emitDeclarationOnly --declaration --outDir dist",
     "generate:package-metadata": "node scripts/generate-package-metadata.mjs",
