@@ -1,0 +1,77 @@
+{
+  "id": "eck-autocomplete",
+  "viewports": [
+    {
+      "label": "iPhone 13 Pro",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "label": "iPad Pro 11",
+      "width": 834,
+      "height": 1194
+    },
+    {
+      "label": "iPad Pro 11 landscape",
+      "width": 1194,
+      "height": 834
+    },
+    {
+      "label": "Desktop",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "onReadyScript": "playwright/onReady.js",
+  "misMatchThreshold": 0,
+  "scenarios": [
+    {
+      "label": "landing-page",
+      "url": "http://localhost:3000/",
+      "referenceUrl": "https://main.eck-autocomplete.pages.dev/",
+      "delay": 1500
+    },
+    {
+      "label": "e2e/highlight-first-option/",
+      "url": "http://localhost:3000/e2e/highlight-first-option/",
+      "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/highlight-first-option/",
+      "delay": 1500
+    },
+    {
+      "label": "e2e/panel-height/",
+      "url": "http://localhost:3000/e2e/panel-height/",
+      "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/panel-height/",
+      "delay": 1500
+    },
+    {
+      "label": "e2e/playground/",
+      "url": "http://localhost:3000/e2e/playground/",
+      "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/playground/",
+      "clickSelector": "#input1",
+      "delay": 1500
+    },
+    {
+      "label": "e2e/positioning/",
+      "url": "http://localhost:3000/e2e/positioning/",
+      "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/positioning/",
+      "delay": 1500
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser", "CI"],
+  "engine": "playwright",
+  "engineOptions": {
+    "browser": "chromium",
+    "args": ["--no-sandbox"]
+  },
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}
