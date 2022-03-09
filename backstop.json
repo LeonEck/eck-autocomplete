@@ -55,6 +55,12 @@
       "url": "http://localhost:3000/e2e/positioning/",
       "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/positioning/",
       "delay": 1500
+    },
+    {
+      "label": "e2e/shadow-dom/",
+      "url": "http://localhost:3000/e2e/shadow-dom/",
+      "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/shadow-dom/",
+      "delay": 1500
     }
   ],
   "paths": {

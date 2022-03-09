@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>shadow-dom</title>
+    <style>
+      /**
+        * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+        */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>shadow-dom</h1>
+
+    <h2>input is inside a shadow-dom</h2>
+
+    <input-shadowed id="input1-wrapper"></input-shadowed>
+    <eck-autocomplete id="complete1">
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <script type="module">
+      import '../../dist/eck-autocomplete.js';
+
+      const template = document.createElement('template');
+      template.innerHTML = `
+        <input
+          id="input1"
+          type="text"
+        />
+        `;
+      class DemoInput extends HTMLElement {
+        constructor() {
+          super();
+          this.attachShadow({ mode: 'open' });
+          this.shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+      }
+
+      customElements.define('input-shadowed', DemoInput);
+
+      const shadowRootInput1 =
+        document.getElementById('input1-wrapper').shadowRoot;
+      const input1 = shadowRootInput1.getElementById('input1');
+      const complete1 = document.getElementById('complete1');
+
+      /**
+       * Manually setup input connection
+       */
+      complete1.setInputRef(input1);
+    </script>
+  </body>
+</html>

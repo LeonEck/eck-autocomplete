@@ -61,52 +61,18 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
 
   connectedCallback() {
     this._slotRef = this.shadowRoot!.querySelector<HTMLSlotElement>('slot')!;
-    this._connectedInputRef = document.querySelector<HTMLInputElement>(
+    const connectToIdRef = document.querySelector<HTMLInputElement>(
       `#${this._connectedToId}`
-    )!;
-    this._init();
-
+    );
     /**
-     * Open panel when input is focused.
+     * If we found the element we should be connected to we start initialization.
+     * If we didn't find it that means the user either provided a wrong id or is
+     * providing a reference manual.
      */
-    this._connectedInputRef.addEventListener('focus', () => {
-      this._show();
-    });
-
-    /**
-     * Open panel when the value of the input is changed.
-     * This is necessary to reopen the panel after the user selected something
-     * and starts typing again without blur and focus in between.
-     */
-    this._connectedInputRef.addEventListener('input', () => {
-      this._show();
-    });
-
-    /**
-     * Hide panel when input is blurred.
-     */
-    this._connectedInputRef.addEventListener('blur', () => {
-      this._hide();
-    });
-
-    /**
-     * Listed to keyboard events.
-     */
-    this._connectedInputRef.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        this._handleEnterOnInput(e);
-      } else if (e.key === 'Escape') {
-        e.preventDefault();
-        this._hide();
-      } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (this._panelHidden) {
-          this._show();
-        } else {
-          this._changeHighlight(e.key);
-        }
-      }
-    });
+    if (connectToIdRef) {
+      this._connectedInputRef = connectToIdRef;
+      this._init();
+    }
   }
 
   attributeChangedCallback(
@@ -115,7 +81,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     newVal: string | null
   ) {
     if (attrName === 'connected-to-id') {
-      // TODO: There should be error handling in general if the connectedToId isn't provided or removed
       this._connectedToId = newVal!;
     } else if (attrName === 'highlight-first-option') {
       this._shouldHighlightFirstOption = coerceBoolean(newVal);
@@ -128,6 +93,11 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
         this._positionStrategy = 'absolute';
       }
     }
+  }
+
+  setInputRef(element: HTMLInputElement) {
+    this._connectedInputRef = element;
+    this._init();
   }
 
   private _init() {
@@ -176,6 +146,48 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
         'has-children',
         this._numberOfOptions !== 0
       );
+    });
+
+    /**
+     * Open panel when input is focused.
+     */
+    this._connectedInputRef.addEventListener('focus', () => {
+      this._show();
+    });
+
+    /**
+     * Open panel when the value of the input is changed.
+     * This is necessary to reopen the panel after the user selected something
+     * and starts typing again without blur and focus in between.
+     */
+    this._connectedInputRef.addEventListener('input', () => {
+      this._show();
+    });
+
+    /**
+     * Hide panel when input is blurred.
+     */
+    this._connectedInputRef.addEventListener('blur', () => {
+      this._hide();
+    });
+
+    /**
+     * Listed to keyboard events.
+     */
+    this._connectedInputRef.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        this._handleEnterOnInput(e);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        this._hide();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (this._panelHidden) {
+          this._show();
+        } else {
+          this._changeHighlight(e.key);
+        }
+      }
     });
   }
 
