@@ -258,8 +258,10 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   private _highlightFirstOption() {
     if (!this._shouldHighlightFirstOption) return;
     const elements = this._slotRef.assignedElements();
-    (elements[0] as EckAutocompleteOption).highlight(true);
-    this._highlightedOptionRef = elements[0] as EckAutocompleteOption;
+    if (elements[0]) {
+      (elements[0] as EckAutocompleteOption).highlight(true);
+      this._highlightedOptionRef = elements[0] as EckAutocompleteOption;
+    }
   }
 
   private _changeHighlight(direction: 'ArrowUp' | 'ArrowDown') {
