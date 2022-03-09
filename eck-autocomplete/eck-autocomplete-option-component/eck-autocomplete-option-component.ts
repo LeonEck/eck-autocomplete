@@ -17,7 +17,7 @@ export class EckAutocompleteOption
   /**
    * Optional data that is attached to an option.
    */
-  private _value: unknown;
+  value: unknown;
   /**
    * Optional string that is used to display the option in contexts
    * that only allow strings (e.g. inputs)
@@ -32,7 +32,7 @@ export class EckAutocompleteOption
   }
 
   static get observedAttributes() {
-    return ['value', 'label'];
+    return ['label'];
   }
 
   connectedCallback() {
@@ -55,9 +55,7 @@ export class EckAutocompleteOption
     oldVal: string | null,
     newVal: string | null
   ) {
-    if (attrName === 'value') {
-      this._value = newVal;
-    } else if (attrName === 'label') {
+    if (attrName === 'label') {
       this._label = newVal ? newVal : undefined;
     }
   }
@@ -72,7 +70,7 @@ export class EckAutocompleteOption
         bubbles: true,
         composed: true,
         detail: {
-          value: this._value,
+          value: this.value,
           label: this._getLabel(),
         } as EckOptionSelected,
       })
