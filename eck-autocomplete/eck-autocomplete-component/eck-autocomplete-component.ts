@@ -284,7 +284,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     }
     for (let i = 0; i < elements.length; i++) {
       const optionNode = elements[i] as EckAutocompleteOption;
-      if (optionNode.hasKeyboardHighlight) {
+      if (optionNode.getAttribute('highlighted') === '') {
         // Remove highlight from current option
         optionNode.highlight(false);
         let indexToHighlight = 0;

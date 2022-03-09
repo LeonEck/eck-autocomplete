@@ -25,11 +25,6 @@ export class EckAutocompleteOption
    */
   private _label: string | undefined;
 
-  /**
-   * True if the option is highlighted by the keyboard.
-   */
-  hasKeyboardHighlight = false;
-
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -68,7 +63,6 @@ export class EckAutocompleteOption
   }
 
   highlight(highlight: boolean) {
-    this.hasKeyboardHighlight = highlight;
     this.shadowRoot!.host.toggleAttribute('highlighted', highlight);
   }
 
