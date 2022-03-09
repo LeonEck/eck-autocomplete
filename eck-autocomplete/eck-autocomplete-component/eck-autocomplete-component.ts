@@ -115,7 +115,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
           this._connectedInputRef.value = value.detail.label;
           this.shadowRoot!.dispatchEvent(
             new CustomEvent('optionSelected', {
-              bubbles: true,
               composed: true,
               detail: {
                 option: value.detail,

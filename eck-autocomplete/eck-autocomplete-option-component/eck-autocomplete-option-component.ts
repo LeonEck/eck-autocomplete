@@ -67,7 +67,6 @@ export class EckAutocompleteOption
   fireSelectionEvent() {
     this.shadowRoot!.dispatchEvent(
       new CustomEvent('eck-option-selected', {
-        bubbles: true,
         composed: true,
         detail: {
           value: this.value,
