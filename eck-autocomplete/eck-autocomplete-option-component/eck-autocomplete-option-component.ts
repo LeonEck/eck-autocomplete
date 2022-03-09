@@ -36,10 +36,6 @@ export class EckAutocompleteOption
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
   }
 
-  static get tagName() {
-    return 'eck-autocomplete-option';
-  }
-
   static get observedAttributes() {
     return ['value', 'label'];
   }

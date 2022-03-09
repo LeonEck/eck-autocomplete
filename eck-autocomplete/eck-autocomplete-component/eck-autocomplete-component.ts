@@ -51,10 +51,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
   }
 
-  static get tagName() {
-    return 'eck-autocomplete';
-  }
-
   static get observedAttributes() {
     return ['connected-to-id', 'highlight-first-option', 'position-strategy'];
   }
