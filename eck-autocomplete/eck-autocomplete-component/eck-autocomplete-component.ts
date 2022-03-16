@@ -6,6 +6,7 @@ import type {
 } from '../eck-autocomplete-option-component/eck-autocomplete-option-component';
 import type { CustomElement } from '../utils/custom-element';
 import { coerceBoolean } from '../utils/coerceBoolean';
+import { computePosition, flip, autoUpdate } from '@floating-ui/dom';
 
 const template = document.createElement('template');
 template.innerHTML = `<style>${css}</style>${html}`;
@@ -44,6 +45,8 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
    * CSS position value for panel.
    */
   private _positionStrategy: 'absolute' | 'fixed' = 'absolute';
+
+  private _positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
   constructor() {
     super();
@@ -89,6 +92,10 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
         this._positionStrategy = 'absolute';
       }
     }
+  }
+
+  disconnectedCallback() {
+    this._stopPositioner();
   }
 
   setInputRef(element: HTMLInputElement) {
@@ -177,7 +184,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   private _show() {
-    this._positionPanel();
+    this._startPositioner();
     this._highlightOption(this._highlightedOptionRef, false);
     this._highlightedOptionRef = undefined;
     this._highlightFirstOption();
@@ -188,6 +195,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   private _hide() {
     (this.shadowRoot!.host as HTMLElement).style.display = 'none';
     this._panelHidden = true;
+    this._stopPositioner();
   }
 
   private _positionPanel() {
@@ -197,35 +205,20 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     const inputWidth = this._connectedInputRef.getBoundingClientRect().width;
     (this.shadowRoot!.host as HTMLElement).style.width = `${inputWidth}px`;
 
-    /**
-     * Position panel at the bottom of the input.
-     */
-    let inputLeftX;
-    let inputBottomY;
-    if (this._positionStrategy === 'absolute') {
-      inputLeftX = this._connectedInputRef.offsetLeft;
-      inputBottomY =
-        this._connectedInputRef.offsetTop +
-        this._connectedInputRef.getBoundingClientRect().height;
-    } else {
-      if (
-        (this._connectedInputRef.offsetParent as HTMLElement).style.position ===
-        'absolute'
-      ) {
-        inputLeftX = this._connectedInputRef.offsetLeft;
-        inputBottomY =
-          this._connectedInputRef.getBoundingClientRect().top -
-          this._connectedInputRef.offsetParent!.getBoundingClientRect().top +
-          this._connectedInputRef.getBoundingClientRect().height;
-      } else {
-        inputLeftX = this._connectedInputRef.getBoundingClientRect().x;
-        inputBottomY = this._connectedInputRef.getBoundingClientRect().bottom;
-        inputLeftX += window.scrollX;
-        inputBottomY += window.scrollY;
+    computePosition(
+      this._connectedInputRef,
+      this.shadowRoot!.host as HTMLElement,
+      {
+        middleware: [flip()],
+        strategy: this._positionStrategy,
       }
-    }
-    (this.shadowRoot!.host as HTMLElement).style.left = `${inputLeftX}px`;
-    (this.shadowRoot!.host as HTMLElement).style.top = `${inputBottomY}px`;
+    ).then(({ x, y }) => {
+      Object.assign((this.shadowRoot!.host as HTMLElement).style, {
+        position: this._positionStrategy,
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+    });
   }
 
   /**
@@ -318,6 +311,23 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
       option?.scrollIntoView({
         block: 'nearest',
       });
+    }
+  }
+
+  private _startPositioner() {
+    this._stopPositioner();
+    this._positionPanel();
+    this._positionerCleanup = autoUpdate(
+      this._connectedInputRef,
+      this.shadowRoot!.host as HTMLElement,
+      this._positionPanel.bind(this)
+    );
+  }
+
+  private _stopPositioner() {
+    if (this._positionerCleanup) {
+      this._positionerCleanup();
+      this._positionerCleanup = undefined;
     }
   }
 }

@@ -54,7 +54,11 @@
     <div style="position: fixed; bottom: 50px; right: 50px">
       <h2>Input fixed positioned to the bottom right should open above</h2>
       <input id="input4" type="text" />
-      <eck-autocomplete id="complete4" connected-to-id="input4">
+      <eck-autocomplete
+        id="complete4"
+        connected-to-id="input4"
+        position-strategy="fixed"
+      >
         <eck-autocomplete-option>One</eck-autocomplete-option>
         <eck-autocomplete-option>Two</eck-autocomplete-option>
         <eck-autocomplete-option>Three</eck-autocomplete-option>
@@ -168,10 +172,7 @@
       id="divAround8"
       style="height: 300px; overflow: auto; border: 1px solid mediumvioletred"
     >
-      <h2>
-        Overflow container without position or extra settings. Panel position
-        will be broken. Known limitation.
-      </h2>
+      <h2>Overflow container without position or extra settings.</h2>
       <br /><br /><br />
       Some text above
       <br /><br /><br />
