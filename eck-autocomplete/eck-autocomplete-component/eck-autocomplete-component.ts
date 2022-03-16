@@ -177,12 +177,12 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   private _show() {
-    this._positionPanel();
     this._highlightOption(this._highlightedOptionRef, false);
     this._highlightedOptionRef = undefined;
     this._highlightFirstOption();
     (this.shadowRoot!.host as HTMLElement).style.display = 'block';
     this._panelHidden = false;
+    this._positionPanel();
   }
 
   private _hide() {
@@ -198,34 +198,49 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     (this.shadowRoot!.host as HTMLElement).style.width = `${inputWidth}px`;
 
     /**
-     * Position panel at the bottom of the input.
+     * Position panel.
+     * Preferable at the bottom. If there is no space flip to the top.
      */
-    let inputLeftX;
-    let inputBottomY;
+    let panelLeft;
+    let panelTop;
+    const inputHeight = this._connectedInputRef.getBoundingClientRect().height;
     if (this._positionStrategy === 'absolute') {
-      inputLeftX = this._connectedInputRef.offsetLeft;
-      inputBottomY =
-        this._connectedInputRef.offsetTop +
-        this._connectedInputRef.getBoundingClientRect().height;
+      panelLeft = this._connectedInputRef.offsetLeft;
+      panelTop = this._connectedInputRef.offsetTop + inputHeight;
     } else {
       if (
         (this._connectedInputRef.offsetParent as HTMLElement).style.position ===
         'absolute'
       ) {
-        inputLeftX = this._connectedInputRef.offsetLeft;
-        inputBottomY =
+        panelLeft = this._connectedInputRef.offsetLeft;
+        panelTop =
           this._connectedInputRef.getBoundingClientRect().top -
           this._connectedInputRef.offsetParent!.getBoundingClientRect().top +
-          this._connectedInputRef.getBoundingClientRect().height;
+          inputHeight;
       } else {
-        inputLeftX = this._connectedInputRef.getBoundingClientRect().x;
-        inputBottomY = this._connectedInputRef.getBoundingClientRect().bottom;
-        inputLeftX += window.scrollX;
-        inputBottomY += window.scrollY;
+        panelLeft = this._connectedInputRef.getBoundingClientRect().x;
+        panelTop = this._connectedInputRef.getBoundingClientRect().bottom;
+        panelLeft += window.scrollX;
+        panelTop += window.scrollY;
       }
     }
-    (this.shadowRoot!.host as HTMLElement).style.left = `${inputLeftX}px`;
-    (this.shadowRoot!.host as HTMLElement).style.top = `${inputBottomY}px`;
+
+    const panelHeight = (
+      this.shadowRoot!.host as HTMLElement
+    ).getBoundingClientRect().height;
+
+    /**
+     * If there is not enough space at the bottom flip to the top.
+     */
+    if (
+      this._connectedInputRef.getBoundingClientRect().bottom + panelHeight >=
+      window.innerHeight
+    ) {
+      panelTop -= inputHeight + panelHeight;
+    }
+
+    (this.shadowRoot!.host as HTMLElement).style.left = `${panelLeft}px`;
+    (this.shadowRoot!.host as HTMLElement).style.top = `${panelTop}px`;
   }
 
   /**

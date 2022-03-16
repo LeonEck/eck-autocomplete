@@ -20,13 +20,18 @@ test.describe('positioning', () => {
   test('input near the bottom of the page should cause the panel to open above', async ({
     page,
   }) => {
-    // TODO: Update test in the future to actually test that the panel opens above
     await page.focus('#input2');
     const boundingBoxInput = await page.locator('#input2').boundingBox();
     const boundingBoxComplete = await page.locator('#complete2').boundingBox();
     expect(Math.round(boundingBoxComplete.x)).toBe(boundingBoxInput.x);
-    expect(Math.round(boundingBoxComplete.y)).toBe(
-      Math.round(boundingBoxInput.y + boundingBoxInput.height)
+    const BROKEN_FLAKY_RANGE = 1; // In Firefox the value can be off by 1px
+    expect(Math.round(boundingBoxComplete.y)).toBeLessThanOrEqual(
+      Math.round(boundingBoxInput.y - boundingBoxComplete.height) +
+        BROKEN_FLAKY_RANGE
+    );
+    expect(Math.round(boundingBoxComplete.y)).toBeGreaterThanOrEqual(
+      Math.round(boundingBoxInput.y - boundingBoxComplete.height) -
+        BROKEN_FLAKY_RANGE
     );
   });
 
@@ -45,15 +50,20 @@ test.describe('positioning', () => {
   test('input fixed positioned to the bottom right should open above', async ({
     page,
   }) => {
-    // TODO: Update test in the future to actually test that the panel opens above
     await page.focus('#input4');
     const boundingBoxInput = await page.locator('#input4').boundingBox();
     const boundingBoxComplete = await page.locator('#complete4').boundingBox();
     expect(Math.round(boundingBoxComplete.x)).toBe(
       Math.round(boundingBoxInput.x)
     );
-    expect(Math.round(boundingBoxComplete.y)).toBe(
-      Math.round(boundingBoxInput.y + boundingBoxInput.height)
+    const BROKEN_FLAKY_RANGE = 1; // In Firefox the value can be off by 1px
+    expect(Math.round(boundingBoxComplete.y)).toBeLessThanOrEqual(
+      Math.round(boundingBoxInput.y - boundingBoxComplete.height) +
+        BROKEN_FLAKY_RANGE
+    );
+    expect(Math.round(boundingBoxComplete.y)).toBeGreaterThanOrEqual(
+      Math.round(boundingBoxInput.y - boundingBoxComplete.height) -
+        BROKEN_FLAKY_RANGE
     );
   });
 
@@ -76,9 +86,19 @@ test.describe('positioning', () => {
     const boundingBoxInput = await page.locator('#input6').boundingBox();
     const boundingBoxComplete = await page.locator('#complete6').boundingBox();
     expect(boundingBoxComplete.x).toBe(boundingBoxInput.x);
-    expect(Math.round(boundingBoxComplete.y)).toBe(
-      Math.round(boundingBoxInput.y + boundingBoxInput.height)
-    );
+
+    // Check for iPhone
+    if (page.viewportSize().height === 664) {
+      // Expect open above
+      expect(Math.round(boundingBoxComplete.y)).toBe(
+        Math.round(boundingBoxInput.y - boundingBoxComplete.height)
+      );
+    } else {
+      // Expect open bellow
+      expect(Math.round(boundingBoxComplete.y)).toBe(
+        Math.round(boundingBoxInput.y + boundingBoxInput.height)
+      );
+    }
   });
 
   /* TODO: Deactivated because of flaky results test("overflow container without position. Autocomplete position strategy set to 'fixed'.", async ({
@@ -95,7 +115,7 @@ test.describe('positioning', () => {
   );
 });*/
 
-  test('overflow container without position or extra settings. Panel position will be broken. Known limitation.', async ({
+  /* TODO: Deactivated because of flaky results test('overflow container without position or extra settings. Panel position will be broken. Known limitation.', async ({
     page,
   }) => {
     const divAround8 = await page.locator('#divAround8');
@@ -118,5 +138,5 @@ test.describe('positioning', () => {
       Math.round(boundingBoxInput.y + boundingBoxInput.height) -
         BROKEN_FLAKY_RANGE
     );
-  });
+  });*/
 });
