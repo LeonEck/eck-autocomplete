@@ -51,7 +51,7 @@
     "@playwright/test": "1.20.0",
     "@typescript-eslint/eslint-plugin": "5.15.0",
     "@typescript-eslint/parser": "5.15.0",
-    "backstopjs": "6.0.4",
+    "backstopjs": "file:backstopjs-6.0.4-playwright.0.tgz",
     "concurrently": "7.0.0",
     "esbuild": "0.14.27",
     "eslint": "8.11.0",
