@@ -48,22 +48,22 @@
   },
   "devDependencies": {
     "@commitlint/cli": "16.2.3",
-    "@playwright/test": "1.20.0",
-    "@typescript-eslint/eslint-plugin": "5.15.0",
-    "@typescript-eslint/parser": "5.15.0",
+    "@playwright/test": "1.20.1",
+    "@typescript-eslint/eslint-plugin": "5.16.0",
+    "@typescript-eslint/parser": "5.16.0",
     "backstopjs": "6.0.4",
     "concurrently": "7.0.0",
-    "esbuild": "0.14.27",
-    "eslint": "8.11.0",
-    "happy-dom": "2.49.2",
+    "esbuild": "0.14.28",
+    "eslint": "8.12.0",
+    "happy-dom": "2.50.0",
     "html-minifier": "4.0.0",
     "husky": "7.0.4",
-    "prettier": "2.6.0",
+    "prettier": "2.6.1",
     "start-server-and-test": "1.14.0",
-    "stylelint": "14.6.0",
+    "stylelint": "14.6.1",
     "stylelint-config-standard": "25.0.0",
-    "typescript": "4.6.2",
+    "typescript": "4.6.3",
     "vite": "2.8.6",
-    "vitest": "0.7.7"
+    "vitest": "0.7.11"
   }
 }
