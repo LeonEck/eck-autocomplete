@@ -4,7 +4,6 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { minify } from 'html-minifier';
 import {
-  esbuildProdLibraryCSSMinifyConfig,
   esbuildProductionLibraryConfig,
   libraryDirectory,
   prodBuildArtifactsDirectory,
@@ -87,55 +86,15 @@ writeFileSync(
 );
 
 /**
- * Minify CSS
+ * Build bundle
  */
-esbuild.build(esbuildProdLibraryCSSMinifyConfig).then(() => {
+esbuild.build(esbuildProductionLibraryConfig).then(() => {
   /**
-   * Remove trailing new line from CSS files.
-   * This is a micro optimization to prevent the newline from showing up in the final output.
+   * Run a second build for minified output.
    */
-  const eckAutocompleteComponentCSSFile = resolve(
-    prodBuildArtifactsDirectory,
-    'eck-autocomplete-component/eck-autocomplete-component.css'
-  );
-  const eckAutocompleteOptionComponentCSSFile = resolve(
-    prodBuildArtifactsDirectory,
-    'eck-autocomplete-option-component/eck-autocomplete-option-component.css'
-  );
-
-  const eckAutocompleteComponentCSS = readFileSync(
-    eckAutocompleteComponentCSSFile,
-    { encoding: 'utf8' }
-  );
-  const eckAutocompleteOptionComponentCSS = readFileSync(
-    eckAutocompleteOptionComponentCSSFile,
-    { encoding: 'utf8' }
-  );
-
-  const eckAutocompleteComponentCSSTrimmed = eckAutocompleteComponentCSS.trim();
-  const eckAutocompleteOptionComponentCSSTrimmed =
-    eckAutocompleteOptionComponentCSS.trim();
-
-  writeFileSync(
-    eckAutocompleteComponentCSSFile,
-    eckAutocompleteComponentCSSTrimmed
-  );
-  writeFileSync(
-    eckAutocompleteOptionComponentCSSFile,
-    eckAutocompleteOptionComponentCSSTrimmed
-  );
-
-  /**
-   * Build bundle
-   */
-  esbuild.build(esbuildProductionLibraryConfig).then(() => {
-    /**
-     * Run a second build for minified output.
-     */
-    esbuildProductionLibraryConfig.minify = true;
-    esbuildProductionLibraryConfig.mangleProps = /^_/;
-    delete esbuildProductionLibraryConfig.external;
-    esbuildProductionLibraryConfig.outdir = resolve(__dirname, '../dist/min');
-    esbuild.build(esbuildProductionLibraryConfig).then(() => {});
-  });
+  esbuildProductionLibraryConfig.minify = true;
+  esbuildProductionLibraryConfig.mangleProps = /^_/;
+  delete esbuildProductionLibraryConfig.external;
+  esbuildProductionLibraryConfig.outdir = resolve(__dirname, '../dist/min');
+  esbuild.build(esbuildProductionLibraryConfig).then(() => {});
 });

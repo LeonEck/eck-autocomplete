@@ -1,9 +1,9 @@
 import html from './eck-autocomplete-option-component.html?raw';
-import css from './eck-autocomplete-option-component.css';
+import scss from './eck-autocomplete-option-component.scss';
 import type { CustomElement } from '../utils/custom-element';
 
 const template = document.createElement('template');
-template.innerHTML = `<style>${css}</style>${html}`;
+template.innerHTML = `<style>${scss}</style>${html}`;
 
 export interface EckOptionSelected {
   value: unknown;

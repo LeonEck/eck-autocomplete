@@ -1,5 +1,6 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { sassPlugin } from 'esbuild-sass-plugin';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -34,32 +35,17 @@ export const esbuildWatchLibraryConfig = {
   bundle: true,
   loader: {
     '.html': 'text',
-    '.css': 'text',
   },
+  plugins: [
+    sassPlugin({
+      type: 'css-text',
+      sourceMap: true,
+    }),
+  ],
   outdir: resolve(__dirname, '../dist'),
   format: 'esm',
   sourcemap: true,
   watch: true,
-};
-
-/**
- * Esbuild config to minify CSS for production builds.
- */
-export const esbuildProdLibraryCSSMinifyConfig = {
-  entryPoints: [
-    resolve(
-      prodBuildArtifactsDirectory,
-      'eck-autocomplete-component/eck-autocomplete-component.css'
-    ),
-    resolve(
-      prodBuildArtifactsDirectory,
-      'eck-autocomplete-option-component/eck-autocomplete-option-component.css'
-    ),
-  ],
-  bundle: true,
-  minify: true,
-  outdir: prodBuildArtifactsDirectory,
-  allowOverwrite: true,
 };
 
 /**
@@ -80,8 +66,14 @@ export const esbuildProductionLibraryConfig = {
   bundle: true,
   loader: {
     '.html': 'text',
-    '.css': 'text',
   },
+  plugins: [
+    sassPlugin({
+      type: 'css-text',
+      style: 'compressed',
+      sourceMap: false,
+    }),
+  ],
   outdir: resolve(__dirname, '../dist'),
   format: 'esm',
   sourcemap: true,
