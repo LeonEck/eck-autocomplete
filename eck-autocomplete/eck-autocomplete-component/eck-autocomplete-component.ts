@@ -47,6 +47,16 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
    */
   private _positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
+  /**
+   * These handlers are later used in addEventListeners.
+   * We need to store them here to reuse the in removeEventListener calls.
+   * Calls to remove need to pass in the exact same function which we achieve
+   * by storing a reference here.
+   */
+  private _showHandler = this._show.bind(this);
+  private _hideHandler = this._hide.bind(this);
+  private _inputKeydownHandler = this._inputKeydown.bind(this);
+
   static get observedAttributes() {
     return ['connected-to-id', 'highlight-first-option'];
   }
@@ -87,6 +97,13 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
 
   disconnectedCallback() {
     this._stopPositioner();
+    this._connectedInputRef.removeEventListener('focus', this._showHandler);
+    this._connectedInputRef.removeEventListener('input', this._showHandler);
+    this._connectedInputRef.removeEventListener('blur', this._hideHandler);
+    this._connectedInputRef.removeEventListener(
+      'keydown',
+      this._inputKeydownHandler
+    );
   }
 
   setInputRef(element: HTMLInputElement) {
@@ -134,44 +151,27 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     /**
      * Open panel when input is focused.
      */
-    this._connectedInputRef.addEventListener('focus', () => {
-      this._show();
-    });
+    this._connectedInputRef.addEventListener('focus', this._showHandler);
 
     /**
      * Open panel when the value of the input is changed.
      * This is necessary to reopen the panel after the user selected something
      * and starts typing again without blur and focus in between.
      */
-    this._connectedInputRef.addEventListener('input', () => {
-      this._show();
-    });
+    this._connectedInputRef.addEventListener('input', this._showHandler);
 
     /**
      * Hide panel when input is blurred.
      */
-    this._connectedInputRef.addEventListener('blur', () => {
-      this._hide();
-    });
+    this._connectedInputRef.addEventListener('blur', this._hideHandler);
 
     /**
      * Listed to keyboard events.
      */
-    this._connectedInputRef.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        this._handleEnterOnInput(e);
-      } else if (e.key === 'Escape') {
-        e.preventDefault();
-        this._hide();
-      } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (this._panelHidden) {
-          this._show();
-        } else {
-          this._changeHighlight(e.key);
-        }
-      }
-    });
+    this._connectedInputRef.addEventListener(
+      'keydown',
+      this._inputKeydownHandler
+    );
   }
 
   private _show() {
@@ -320,6 +320,22 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     if (this._positionerCleanup) {
       this._positionerCleanup();
       this._positionerCleanup = undefined;
+    }
+  }
+
+  private _inputKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this._handleEnterOnInput(event);
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      this._hide();
+    } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (this._panelHidden) {
+        this._show();
+      } else {
+        this._changeHighlight(event.key);
+      }
     }
   }
 }
