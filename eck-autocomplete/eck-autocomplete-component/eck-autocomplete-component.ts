@@ -47,14 +47,26 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
    */
   private _positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
+  static get observedAttributes() {
+    return ['connected-to-id', 'highlight-first-option'];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
   }
 
-  static get observedAttributes() {
-    return ['connected-to-id', 'highlight-first-option'];
+  attributeChangedCallback(
+    attrName: string,
+    oldVal: string | null,
+    newVal: string | null
+  ) {
+    if (attrName === 'connected-to-id') {
+      this._connectedToId = newVal!;
+    } else if (attrName === 'highlight-first-option') {
+      this._shouldHighlightFirstOption = coerceBoolean(newVal);
+    }
   }
 
   connectedCallback() {
@@ -70,18 +82,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     if (connectToIdRef) {
       this._connectedInputRef = connectToIdRef;
       this._init();
-    }
-  }
-
-  attributeChangedCallback(
-    attrName: string,
-    oldVal: string | null,
-    newVal: string | null
-  ) {
-    if (attrName === 'connected-to-id') {
-      this._connectedToId = newVal!;
-    } else if (attrName === 'highlight-first-option') {
-      this._shouldHighlightFirstOption = coerceBoolean(newVal);
     }
   }
 
