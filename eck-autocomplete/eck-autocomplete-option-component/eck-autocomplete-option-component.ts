@@ -25,14 +25,24 @@ export class EckAutocompleteOption
    */
   private _label: string | undefined;
 
+  static get observedAttributes() {
+    return ['label'];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
   }
 
-  static get observedAttributes() {
-    return ['label'];
+  attributeChangedCallback(
+    attrName: string,
+    oldVal: string | null,
+    newVal: string | null
+  ) {
+    if (attrName === 'label') {
+      this._label = newVal ? newVal : undefined;
+    }
   }
 
   connectedCallback() {
@@ -48,16 +58,6 @@ export class EckAutocompleteOption
     this.shadowRoot!.host.addEventListener('click', () => {
       this.fireSelectionEvent();
     });
-  }
-
-  attributeChangedCallback(
-    attrName: string,
-    oldVal: string | null,
-    newVal: string | null
-  ) {
-    if (attrName === 'label') {
-      this._label = newVal ? newVal : undefined;
-    }
   }
 
   highlight(highlight: boolean) {
