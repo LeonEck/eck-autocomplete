@@ -65,6 +65,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
+    this._slotRef = this.shadowRoot!.querySelector<HTMLSlotElement>('slot')!;
   }
 
   attributeChangedCallback(
@@ -80,7 +81,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   connectedCallback() {
-    this._slotRef = this.shadowRoot!.querySelector<HTMLSlotElement>('slot')!;
     const connectToIdRef = document.querySelector<HTMLInputElement>(
       `#${this._connectedToId}`
     );
@@ -113,39 +113,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
 
   private _init() {
     this._slotRef.addEventListener('slotchange', () => {
-      this._numberOfOptions = 0;
-      /**
-       * Listen to a selected event from each option.
-       * When selected: Pass on the selection and hide the panel.
-       */
-      this._slotRef.assignedElements().forEach((element) => {
-        this._numberOfOptions++;
-        // Reset highlighting
-        this._highlightOption(element as EckAutocompleteOption, false);
-        this._highlightedOptionRef = undefined;
-
-        element.addEventListener('eck-option-selected', ((
-          value: CustomEvent<EckOptionSelected>
-        ) => {
-          this._connectedInputRef.value = value.detail.label;
-          this._hide();
-        }) as EventListener);
-      });
-      this._highlightFirstOption();
-      /**
-       * The panel can be in the open state and still have no options.
-       * This happens when the list is filtered and nothing matches.
-       * In cases like this we hide the container styling instead of closing/hiding
-       * the panel, because it is easier to deal with.
-       * The complicated part would be showing the panel again if we would hide it.
-       * We would have to filter out the first time the slot changes but also every time
-       * it dynamically changes, and we would have no way of knowing if we should show
-       * it again or not.
-       */
-      this.shadowRoot!.host.toggleAttribute(
-        'has-children',
-        this._numberOfOptions !== 0
-      );
+      this._slotChange();
     });
 
     /**
@@ -337,5 +305,41 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
         this._changeHighlight(event.key);
       }
     }
+  }
+
+  private _slotChange() {
+    this._numberOfOptions = 0;
+    /**
+     * Listen to a selected event from each option.
+     * When selected: Pass on the selection and hide the panel.
+     */
+    this._slotRef.assignedElements().forEach((element) => {
+      this._numberOfOptions++;
+      // Reset highlighting
+      this._highlightOption(element as EckAutocompleteOption, false);
+      this._highlightedOptionRef = undefined;
+
+      element.addEventListener('eck-option-selected', ((
+        value: CustomEvent<EckOptionSelected>
+      ) => {
+        this._connectedInputRef.value = value.detail.label;
+        this._hide();
+      }) as EventListener);
+    });
+    this._highlightFirstOption();
+    /**
+     * The panel can be in the open state and still have no options.
+     * This happens when the list is filtered and nothing matches.
+     * In cases like this we hide the container styling instead of closing/hiding
+     * the panel, because it is easier to deal with.
+     * The complicated part would be showing the panel again if we would hide it.
+     * We would have to filter out the first time the slot changes but also every time
+     * it dynamically changes, and we would have no way of knowing if we should show
+     * it again or not.
+     */
+    this.shadowRoot!.host.toggleAttribute(
+      'has-children',
+      this._numberOfOptions !== 0
+    );
   }
 }
