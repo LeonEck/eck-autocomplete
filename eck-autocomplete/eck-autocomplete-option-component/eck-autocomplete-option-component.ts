@@ -1,5 +1,6 @@
 import html from './eck-autocomplete-option-component.html?raw';
 import scss from './eck-autocomplete-option-component.scss';
+import { BaseComponent } from '../utils/baseComponent';
 import type { CustomElement } from '../utils/custom-element';
 
 const template = document.createElement('template');
@@ -11,7 +12,7 @@ export interface EckOptionSelected {
 }
 
 export class EckAutocompleteOption
-  extends HTMLElement
+  extends BaseComponent
   implements CustomElement
 {
   /**

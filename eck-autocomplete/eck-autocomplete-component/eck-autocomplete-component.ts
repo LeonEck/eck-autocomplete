@@ -1,5 +1,6 @@
 import html from './eck-autocomplete-component.html?raw';
 import scss from './eck-autocomplete-component.scss';
+import { BaseComponent } from '../utils/baseComponent';
 import type {
   EckAutocompleteOption,
   EckOptionSelected,
@@ -11,7 +12,7 @@ import { autoUpdate, computePosition, flip } from '@floating-ui/dom';
 const template = document.createElement('template');
 template.innerHTML = `<style>${scss}</style>${html}`;
 
-export class EckAutocomplete extends HTMLElement implements CustomElement {
+export class EckAutocomplete extends BaseComponent implements CustomElement {
   /**
    * ID of the input that we are attached to
    */
