@@ -6,7 +6,7 @@ import type {
 } from '../eck-autocomplete-option-component/eck-autocomplete-option-component';
 import type { CustomElement } from '../utils/custom-element';
 import { coerceBoolean } from '../utils/coerceBoolean';
-import { computePosition, flip, autoUpdate } from '@floating-ui/dom';
+import { autoUpdate, computePosition, flip } from '@floating-ui/dom';
 
 const template = document.createElement('template');
 template.innerHTML = `<style>${css}</style>${html}`;
@@ -42,10 +42,9 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
    */
   private _highlightedOptionRef: EckAutocompleteOption | undefined;
   /**
-   * CSS position value for panel.
+   * We get a cleanup method from floating-ui that we need to call when
+   * hiding the panel to stop event listeners that would reposition it.
    */
-  private _positionStrategy: 'absolute' | 'fixed' = 'absolute';
-
   private _positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
 
   constructor() {
@@ -55,7 +54,7 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   static get observedAttributes() {
-    return ['connected-to-id', 'highlight-first-option', 'position-strategy'];
+    return ['connected-to-id', 'highlight-first-option'];
   }
 
   connectedCallback() {
@@ -83,14 +82,6 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
       this._connectedToId = newVal!;
     } else if (attrName === 'highlight-first-option') {
       this._shouldHighlightFirstOption = coerceBoolean(newVal);
-    } else if (attrName === 'position-strategy') {
-      if (newVal === 'fixed') {
-        (this.shadowRoot!.host as HTMLElement).style.position = 'fixed';
-        this._positionStrategy = 'fixed';
-      } else {
-        (this.shadowRoot!.host as HTMLElement).style.position = 'absolute';
-        this._positionStrategy = 'absolute';
-      }
     }
   }
 
@@ -184,12 +175,14 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
   }
 
   private _show() {
-    this._startPositioner();
-    this._highlightOption(this._highlightedOptionRef, false);
-    this._highlightedOptionRef = undefined;
-    this._highlightFirstOption();
-    (this.shadowRoot!.host as HTMLElement).style.display = 'block';
-    this._panelHidden = false;
+    if (this._panelHidden) {
+      this._startPositioner();
+      this._highlightOption(this._highlightedOptionRef, false);
+      this._highlightedOptionRef = undefined;
+      this._highlightFirstOption();
+      (this.shadowRoot!.host as HTMLElement).style.display = 'block';
+      this._panelHidden = false;
+    }
   }
 
   private _hide() {
@@ -210,11 +203,10 @@ export class EckAutocomplete extends HTMLElement implements CustomElement {
       this.shadowRoot!.host as HTMLElement,
       {
         middleware: [flip()],
-        strategy: this._positionStrategy,
+        strategy: 'fixed',
       }
     ).then(({ x, y }) => {
       Object.assign((this.shadowRoot!.host as HTMLElement).style, {
-        position: this._positionStrategy,
         left: `${x}px`,
         top: `${y}px`,
       });
