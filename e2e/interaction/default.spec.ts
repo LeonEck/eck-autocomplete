@@ -88,4 +88,18 @@ test.describe('interaction-default', () => {
     await page.keyboard.type('test');
     await expect(page.locator('#complete1')).toBeVisible();
   });
+
+  test('panel should reopen when the input is clicked while being focused', async ({
+    page,
+  }) => {
+    await page.focus('#input1');
+    await expect(page.locator('#complete1')).toBeVisible();
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#input1')).toHaveValue('One');
+    await expect(page.locator('#complete1')).not.toBeVisible();
+    await expect(page.locator('#input1')).toBeFocused();
+    await page.click('#input1');
+    await expect(page.locator('#complete1')).toBeVisible();
+  });
 });

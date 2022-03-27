@@ -121,6 +121,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   disconnectedCallback() {
     this._stopPositioner();
     this._connectedInputRef.removeEventListener('focus', this._showHandler);
+    this._connectedInputRef.removeEventListener('click', this._showHandler);
     this._connectedInputRef.removeEventListener('input', this._inputHandler);
     this._connectedInputRef.removeEventListener('blur', this._hideHandler);
     this._connectedInputRef.removeEventListener(
@@ -143,6 +144,11 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      * Open panel when input is focused.
      */
     this._connectedInputRef.addEventListener('focus', this._showHandler);
+
+    /**
+     * Open panel when input is clicked.
+     */
+    this._connectedInputRef.addEventListener('click', this._showHandler);
 
     /**
      * Open panel when the value of the input is changed.
