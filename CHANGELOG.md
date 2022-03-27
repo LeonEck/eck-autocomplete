@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0
+
+- docs: improve documentation
+
 ## 0.0.11
 
 - feat: add property method to manually provide an input reference
