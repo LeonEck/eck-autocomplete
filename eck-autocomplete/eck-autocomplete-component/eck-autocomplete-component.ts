@@ -3,7 +3,8 @@ import scss from './eck-autocomplete-component.scss';
 import { BaseComponent } from '../utils/baseComponent';
 import type {
   EckAutocompleteOption,
-  EckOptionEventInformation,
+  EckAutocompleteOptionHighlightEvent,
+  EckAutocompleteOptionSelectEvent,
 } from '../eck-autocomplete-option-component/eck-autocomplete-option-component';
 import type { CustomElement } from '../utils/custom-element';
 import { coerceBoolean } from '../utils/coerceBoolean';
@@ -354,20 +355,20 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       this._highlightOption(element as EckAutocompleteOption, false);
       this._highlightedOptionRef = undefined;
 
-      element.addEventListener('eck-option-selected', ((
-        value: CustomEvent<EckOptionEventInformation>
+      element.addEventListener('eck-autocomplete-option-selected', ((
+        value: CustomEvent<EckAutocompleteOptionSelectEvent>
       ) => {
         this._connectedInputRef.value = value.detail.label;
         this._hide();
       }) as EventListener);
 
-      element.addEventListener('eck-option-highlighted', ((
-        value: CustomEvent<EckOptionEventInformation>
+      element.addEventListener('eck-autocomplete-option-highlighted', ((
+        value: CustomEvent<EckAutocompleteOptionHighlightEvent>
       ) => {
         if (
           !this._panelHidden &&
           this._selectHighlightedOption &&
-          !value.detail['_internal-tbhfo']
+          !value.detail._tbhfo
         ) {
           this._connectedInputRef.value = value.detail.label;
         }

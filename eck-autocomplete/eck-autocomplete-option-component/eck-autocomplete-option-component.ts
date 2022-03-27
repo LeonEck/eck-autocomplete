@@ -6,10 +6,14 @@ import type { CustomElement } from '../utils/custom-element';
 const template = document.createElement('template');
 template.innerHTML = `<style>${scss}</style>${html}`;
 
-export interface EckOptionEventInformation {
+export interface EckAutocompleteOptionSelectEvent {
   value: unknown;
   label: string;
-  '_internal-tbhfo': boolean;
+}
+
+export interface EckAutocompleteOptionHighlightEvent
+  extends EckAutocompleteOptionSelectEvent {
+  _tbhfo: boolean;
 }
 
 export class EckAutocompleteOption
@@ -66,17 +70,28 @@ export class EckAutocompleteOption
     this.shadowRoot!.host.toggleAttribute('highlighted', highlight);
     if (highlight) {
       this.shadowRoot!.dispatchEvent(
-        new CustomEvent(
-          'eck-option-highlighted',
-          this._eventInfo(triggeredByHighlightFirstOption)
-        )
+        new CustomEvent('eck-autocomplete-option-highlighted', {
+          composed: true,
+          detail: {
+            value: this.value,
+            label: this._getLabel(),
+            _tbhfo: triggeredByHighlightFirstOption,
+          } as EckAutocompleteOptionHighlightEvent,
+        })
       );
     }
   }
 
   fireSelectionEvent() {
     this.shadowRoot!.dispatchEvent(
-      new CustomEvent('eck-option-selected', this._eventInfo())
+      new CustomEvent('eck-autocomplete-option-selected', {
+        composed: true,
+        bubbles: true,
+        detail: {
+          value: this.value,
+          label: this._getLabel(),
+        } as EckAutocompleteOptionSelectEvent,
+      })
     );
   }
 
@@ -90,17 +105,5 @@ export class EckAutocompleteOption
     } else {
       return this.shadowRoot!.host.innerHTML;
     }
-  }
-
-  private _eventInfo(triggeredByHighlightFirstOption = false) {
-    return {
-      composed: true,
-      bubbles: true,
-      detail: {
-        value: this.value,
-        label: this._getLabel(),
-        '_internal-tbhfo': triggeredByHighlightFirstOption,
-      } as EckOptionEventInformation,
-    };
   }
 }

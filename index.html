@@ -1631,13 +1631,16 @@
       /**
        * When a selection occurs we filter the objects
        */
-      input1autocomplete.addEventListener('eck-option-selected', (e) => {
-        e.preventDefault();
-        const filteredOptions = options.filter((option) =>
-          option.label.toLowerCase().includes(input1.value.toLowerCase())
-        );
-        renderOptions(filteredOptions);
-      });
+      input1autocomplete.addEventListener(
+        'eck-autocomplete-option-selected',
+        (e) => {
+          e.preventDefault();
+          const filteredOptions = options.filter((option) =>
+            option.label.toLowerCase().includes(input1.value.toLowerCase())
+          );
+          renderOptions(filteredOptions);
+        }
+      );
     </script>
   </body>
 </html>
