@@ -147,21 +147,15 @@
       });
 
       /**
-       * When second demo is selected (focused) we filter the objects
+       * Log selection in second demo and filter again
        */
-      input2.addEventListener('focus', (e) => {
-        e.preventDefault();
+      input2options.addEventListener('eck-option-selected', (event) => {
+        console.log('Selected option', event.detail);
+        event.preventDefault();
         const filteredOptions = options.filter((option) =>
           option.label.toLowerCase().includes(input2.value.toLowerCase())
         );
         renderOptions2(filteredOptions);
-      });
-
-      /**
-       * Log selection in second demo
-       */
-      input2options.addEventListener('eck-option-selected', (event) => {
-        console.log('Selected option', event.detail);
       });
 
       /**

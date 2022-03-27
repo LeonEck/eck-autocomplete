@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>interaction</title>
+    <style>
+      /**
+      * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+      */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      interaction - Tests the interaction with input and autocomplete given
+      different options
+    </h1>
+
+    <h2>default autocomplete with static content</h2>
+
+    <input id="input1" type="text" />
+    <eck-autocomplete id="complete1" connected-to-id="input1">
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>
+      select-highlighted-option deactivated autocomplete with static content
+    </h2>
+
+    <input id="input2" type="text" />
+    <eck-autocomplete
+      id="complete2"
+      connected-to-id="input2"
+      select-highlighted-option="false"
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>highlight-first-option activated autocomplete with static content</h2>
+
+    <input id="input3" type="text" />
+    <eck-autocomplete
+      id="complete3"
+      connected-to-id="input3"
+      highlight-first-option
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>
+      highlight-first-option activated and select-highlighted-option deactivated
+      autocomplete with static content
+    </h2>
+
+    <input id="input4" type="text" />
+    <eck-autocomplete
+      id="complete4"
+      connected-to-id="input4"
+      highlight-first-option
+      select-highlighted-option="false"
+    >
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <script type="module">
+      import '../../dist/eck-autocomplete.js';
+    </script>
+  </body>
+</html>

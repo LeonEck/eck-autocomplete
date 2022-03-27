@@ -3,7 +3,7 @@ import scss from './eck-autocomplete-component.scss';
 import { BaseComponent } from '../utils/baseComponent';
 import type {
   EckAutocompleteOption,
-  EckOptionSelected,
+  EckOptionEventInformation,
 } from '../eck-autocomplete-option-component/eck-autocomplete-option-component';
 import type { CustomElement } from '../utils/custom-element';
 import { coerceBoolean } from '../utils/coerceBoolean';
@@ -18,9 +18,17 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
    */
   private _connectedToId!: string;
   /**
-   * Highlight first option
+   * Highlight first option.
+   * Default: false
    */
   private _shouldHighlightFirstOption = false;
+  /**
+   * Sets the value of the input to the highlighted option.
+   * When pressing ESC the value will be reset. Closing the panel in any other
+   * way will preserve the value.
+   * Default: true
+   */
+  private _selectHighlightedOption = true;
 
   /**
    * Reference to the input element we are attached to
@@ -47,6 +55,12 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
    * hiding the panel to stop event listeners that would reposition it.
    */
   private _positionerCleanup: ReturnType<typeof autoUpdate> | undefined;
+  /**
+   * When the component is set to select highlighted options it needs to be able
+   * to reset the input value if ESC is pressed. Therefore, we store the value
+   * before highlighting.
+   */
+  private _inputValueBeforeHighlight: string | null = null;
 
   /**
    * These handlers are later used in addEventListeners.
@@ -57,9 +71,14 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   private _showHandler = this._show.bind(this);
   private _hideHandler = this._hide.bind(this);
   private _inputKeydownHandler = this._inputKeydown.bind(this);
+  private _inputHandler = this._inputHandle.bind(this);
 
   static get observedAttributes() {
-    return ['connected-to-id', 'highlight-first-option'];
+    return [
+      'connected-to-id',
+      'highlight-first-option',
+      'select-highlighted-option',
+    ];
   }
 
   constructor() {
@@ -78,6 +97,8 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       this._connectedToId = newVal!;
     } else if (attrName === 'highlight-first-option') {
       this._shouldHighlightFirstOption = coerceBoolean(newVal);
+    } else if (attrName === 'select-highlighted-option') {
+      this._selectHighlightedOption = coerceBoolean(newVal);
     }
   }
 
@@ -99,7 +120,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   disconnectedCallback() {
     this._stopPositioner();
     this._connectedInputRef.removeEventListener('focus', this._showHandler);
-    this._connectedInputRef.removeEventListener('input', this._showHandler);
+    this._connectedInputRef.removeEventListener('input', this._inputHandler);
     this._connectedInputRef.removeEventListener('blur', this._hideHandler);
     this._connectedInputRef.removeEventListener(
       'keydown',
@@ -127,7 +148,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      * This is necessary to reopen the panel after the user selected something
      * and starts typing again without blur and focus in between.
      */
-    this._connectedInputRef.addEventListener('input', this._showHandler);
+    this._connectedInputRef.addEventListener('input', this._inputHandler);
 
     /**
      * Hide panel when input is blurred.
@@ -145,12 +166,12 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
 
   private _show() {
     if (this._panelHidden) {
+      this._panelHidden = false;
       this._startPositioner();
       this._highlightOption(this._highlightedOptionRef, false);
       this._highlightedOptionRef = undefined;
       this._highlightFirstOption();
       (this.shadowRoot!.host as HTMLElement).style.display = 'block';
-      this._panelHidden = false;
     }
   }
 
@@ -158,6 +179,12 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
     (this.shadowRoot!.host as HTMLElement).style.display = 'none';
     this._panelHidden = true;
     this._stopPositioner();
+    this._inputValueBeforeHighlight = null;
+  }
+
+  private _inputHandle() {
+    this._inputValueBeforeHighlight = this._connectedInputRef.value;
+    this._show();
   }
 
   private _positionPanel() {
@@ -204,7 +231,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
     if (!this._shouldHighlightFirstOption) return;
     const elements = this._slotRef.assignedElements();
     if (elements[0]) {
-      this._highlightOption(elements[0] as EckAutocompleteOption, true);
+      this._highlightOption(elements[0] as EckAutocompleteOption, true, true);
       this._highlightedOptionRef = elements[0] as EckAutocompleteOption;
     }
   }
@@ -265,9 +292,13 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
 
   private _highlightOption(
     option: EckAutocompleteOption | undefined,
-    value: boolean
+    value: boolean,
+    triggeredByHighlightFirstOption = false
   ) {
-    option?.highlight(value);
+    if (this._inputValueBeforeHighlight === null && value) {
+      this._inputValueBeforeHighlight = this._connectedInputRef.value;
+    }
+    option?.highlight(value, triggeredByHighlightFirstOption);
     if (value) {
       option?.scrollIntoView({
         block: 'nearest',
@@ -297,6 +328,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       this._handleEnterOnInput(event);
     } else if (event.key === 'Escape') {
       event.preventDefault();
+      if (this._inputValueBeforeHighlight !== null) {
+        this._connectedInputRef.value = this._inputValueBeforeHighlight;
+      }
       this._hide();
     } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       event.preventDefault();
@@ -321,10 +355,22 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       this._highlightedOptionRef = undefined;
 
       element.addEventListener('eck-option-selected', ((
-        value: CustomEvent<EckOptionSelected>
+        value: CustomEvent<EckOptionEventInformation>
       ) => {
         this._connectedInputRef.value = value.detail.label;
         this._hide();
+      }) as EventListener);
+
+      element.addEventListener('eck-option-highlighted', ((
+        value: CustomEvent<EckOptionEventInformation>
+      ) => {
+        if (
+          !this._panelHidden &&
+          this._selectHighlightedOption &&
+          !value.detail['_internal-tbhfo']
+        ) {
+          this._connectedInputRef.value = value.detail.label;
+        }
       }) as EventListener);
     });
     this._highlightFirstOption();

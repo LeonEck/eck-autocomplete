@@ -6,9 +6,10 @@ import type { CustomElement } from '../utils/custom-element';
 const template = document.createElement('template');
 template.innerHTML = `<style>${scss}</style>${html}`;
 
-export interface EckOptionSelected {
+export interface EckOptionEventInformation {
   value: unknown;
   label: string;
+  '_internal-tbhfo': boolean;
 }
 
 export class EckAutocompleteOption
@@ -61,20 +62,21 @@ export class EckAutocompleteOption
     });
   }
 
-  highlight(highlight: boolean) {
+  highlight(highlight: boolean, triggeredByHighlightFirstOption: boolean) {
     this.shadowRoot!.host.toggleAttribute('highlighted', highlight);
+    if (highlight) {
+      this.shadowRoot!.dispatchEvent(
+        new CustomEvent(
+          'eck-option-highlighted',
+          this._eventInfo(triggeredByHighlightFirstOption)
+        )
+      );
+    }
   }
 
   fireSelectionEvent() {
     this.shadowRoot!.dispatchEvent(
-      new CustomEvent('eck-option-selected', {
-        composed: true,
-        bubbles: true,
-        detail: {
-          value: this.value,
-          label: this._getLabel(),
-        } as EckOptionSelected,
-      })
+      new CustomEvent('eck-option-selected', this._eventInfo())
     );
   }
 
@@ -88,5 +90,17 @@ export class EckAutocompleteOption
     } else {
       return this.shadowRoot!.host.innerHTML;
     }
+  }
+
+  private _eventInfo(triggeredByHighlightFirstOption = false) {
+    return {
+      composed: true,
+      bubbles: true,
+      detail: {
+        value: this.value,
+        label: this._getLabel(),
+        '_internal-tbhfo': triggeredByHighlightFirstOption,
+      } as EckOptionEventInformation,
+    };
   }
 }
