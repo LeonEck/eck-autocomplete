@@ -13,3 +13,7 @@ Inspiration is taken from these sources:
 - https://github.com/TarekRaafat/autoComplete.js
 - https://github.com/yuku/textcomplete
 - https://github.com/gmerabishvili/angular-ng-autocomplete
+
+Extras for accessibility (w3 links above also hold info on that):
+
+- https://github.com/angular/components/commit/7e9916bc9ea4b4360f099b395891a50ab297e026
