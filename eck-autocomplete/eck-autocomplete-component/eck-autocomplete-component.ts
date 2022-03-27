@@ -9,6 +9,7 @@ import type {
 import type { CustomElement } from '../utils/custom-element';
 import { coerceBoolean } from '../utils/coerceBoolean';
 import { autoUpdate, computePosition, flip } from '@floating-ui/dom';
+import { hasModifierKey } from '../utils/hasModifierKey';
 
 const template = document.createElement('template');
 template.innerHTML = `<style>${scss}</style>${html}`;
@@ -331,6 +332,12 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   }
 
   private _inputKeydown(event: KeyboardEvent) {
+    /**
+     * If the key is pressed along with a modifier like shift we ignore it.
+     * This allows the default behaviour to take place.
+     */
+    if (hasModifierKey(event)) return;
+
     if (event.key === 'Enter') {
       this._handleEnterOnInput(event);
     } else if (event.key === 'Escape') {

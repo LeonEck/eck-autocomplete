@@ -102,4 +102,25 @@ test.describe('interaction-default', () => {
     await page.click('#input1');
     await expect(page.locator('#complete1')).toBeVisible();
   });
+
+  test('should not change highlighting when modifier key is active while pressing arrow down', async ({
+    page,
+    browserName,
+  }) => {
+    await page.focus('#input1');
+    await expect(page.locator('#complete1')).toBeVisible();
+    await page.keyboard.press('Shift+ArrowDown');
+    await expect(page.locator('#input1')).toHaveValue('');
+    await page.keyboard.press('Control+ArrowDown');
+    await expect(page.locator('#input1')).toHaveValue('');
+    await page.keyboard.press('Alt+ArrowDown');
+    await expect(page.locator('#input1')).toHaveValue('');
+    /**
+     * Meta fails for firefox in CI
+     */
+    if (browserName !== 'firefox') {
+      await page.keyboard.press('Meta+ArrowDown');
+      await expect(page.locator('#input1')).toHaveValue('');
+    }
+  });
 });
