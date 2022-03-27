@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.0.11
+
+- feat: add property method to manually provide an input reference
+- fix: only highlight option if it exists
+- refactor: remove hasKeyboardHighlight in favor of attribute
+- refactor: replace value attribute with property
+- feat: scroll highlighted option into view
+- feat: use floating-ui for the overlay panel
+- feat: use 'fixed' positioning all the time
+- perf: remove event listeners from connected input ref
+- feat: allow CSS injection
+- feat: add select-highlighted-option which is active by default
+- refactor: rename and split select and highlight event and don't bubble highlight
+- feat: open panel when clicking on input
+- fix: keyboard input should be ignored when a modifier key is pressed at the same time
+
 ## 0.0.10
 
 - perf: replace js private fields with ts private and use mangle_props during build
