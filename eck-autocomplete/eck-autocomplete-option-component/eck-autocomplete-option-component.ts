@@ -7,7 +7,14 @@ const template = document.createElement('template');
 template.innerHTML = `<style>${scss}</style>${html}`;
 
 export interface EckAutocompleteOptionSelectEvent {
+  /**
+   * Optionally provided by the user via the `value` property.
+   */
   value: unknown;
+  /**
+   * Either the label that the user optionally provided via the `label` attribute
+   * or otherwise the `innerHTML` of this option.
+   */
   label: string;
 }
 

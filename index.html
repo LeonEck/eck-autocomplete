@@ -10,6 +10,10 @@
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Leon Eck" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link
+      href="https://unpkg.com/prismjs@1.27.0/plugins/line-numbers/prism-line-numbers.css"
+      rel="stylesheet"
+    />
     <title>eck-autocomplete</title>
     <style>
       /**
@@ -27,7 +31,10 @@
       }
 
       body {
-        font-family: ui-sans-serif, system-ui, -apple-system;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji', Segoe UI Symbol,
+          'Noto Color Emoji';
         line-height: 1.5;
         margin: 0;
         height: 100%;
@@ -44,6 +51,22 @@
 
       h2 {
         margin: 0;
+      }
+
+      h3 {
+        margin: 15px 0 10px 0;
+        color: #6e9ae7;
+      }
+
+      h4 {
+        margin: 10px 0 5px 0;
+        color: #c0e5c8;
+      }
+
+      h5 {
+        margin: 5px 0 5px 0;
+        color: #c3a0c8;
+        font-size: 1rem;
       }
 
       a {
@@ -162,22 +185,11 @@
         margin-top: 3px;
       }
 
-      .get-started-headline {
+      .get-started-and-api-headline {
         margin-top: 50px;
-        line-height: 1.2;
-        font-size: 20px;
-        background-image: linear-gradient(to bottom, #6ee7b7, #6e9ae7);
-        background-size: 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .roadmap-headline {
-        margin: 50px 0 10px 0;
-        line-height: 1.2;
-        font-size: 20px;
-        background-image: linear-gradient(to bottom, #7c77ff, #ff3c3c);
+        line-height: 25px;
+        font-size: 25px;
+        background-image: linear-gradient(to bottom, #6ee7b7 40%, #6e9ae7);
         background-size: 100%;
         -webkit-background-clip: text;
         background-clip: text;
@@ -185,6 +197,7 @@
       }
 
       .roadmap {
+        margin-top: 50px;
         position: relative;
       }
       .roadmap::before {
@@ -233,9 +246,219 @@
         margin: 0;
         padding-inline-start: 20px;
       }
+
+      /**
+ * prism.js Visual Studio Code Theme
+ * @author Visual Studio Code
+ */
+
+      code[class*='language-'],
+      pre[class*='language-'] {
+        color: #9cdcfe;
+        background: none;
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+        line-height: 1.5;
+
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
+
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+      }
+
+      /* Code blocks */
+      pre[class*='language-'] {
+        padding: 1em;
+        margin: 0.5em 0;
+        overflow: auto;
+      }
+
+      :not(pre) > code[class*='language-'],
+      pre[class*='language-'] {
+        border-radius: 4px;
+        background: #1e1e1e;
+        font-size: 14px;
+      }
+
+      /* Inline code */
+      :not(pre) > code[class*='language-'] {
+        padding: 0.1em;
+        border-radius: 0.3em;
+        white-space: normal;
+      }
+
+      .token.comment,
+      .token.block-comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #6a9955;
+      }
+
+      .token.punctuation {
+        color: #ccc;
+      }
+
+      .token.tag,
+      .token.namespace,
+      .token.deleted {
+        color: #569cd6;
+      }
+
+      .token.attr-name {
+        color: #9cdcfe;
+      }
+
+      .token.function-name {
+        color: #6196cc;
+      }
+
+      .token.boolean {
+        color: #569cd6;
+      }
+
+      .token.number {
+        color: #b5cea8;
+      }
+
+      .token.function {
+        color: #dcdcaa;
+      }
+
+      .token.property,
+      .token.constant,
+      .token.symbol {
+        color: #51b6c4;
+      }
+
+      .token.builtin,
+      .token.class-name {
+        color: #4ec9b0;
+      }
+
+      .token.selector,
+      .token.important,
+      .token.atrule,
+      .token.keyword {
+        color: #c586c0;
+      }
+
+      .token.string,
+      .token.char,
+      .token.attr-value,
+      .token.variable {
+        color: #ce9169;
+      }
+
+      .token.regex {
+        color: #d16969;
+      }
+
+      .token.operator {
+        color: #d4d4d4;
+      }
+
+      .token.entity,
+      .token.url {
+        color: #67cdcc;
+      }
+
+      .token.important,
+      .token.bold {
+        font-weight: bold;
+      }
+
+      .token.italic {
+        font-style: italic;
+      }
+
+      .token.entity {
+        cursor: help;
+      }
+
+      .token.inserted {
+        color: #8fce00;
+      }
+
+      /* Html */
+      .language-html :not(.token) {
+        color: #d4d4d4;
+      }
+
+      .language-html .token.punctuation {
+        color: #808080;
+      }
+
+      /* TypeScript */
+      .language-typescript .language-javascript {
+        color: #9cdcfe;
+      }
+
+      .language-typescript .language-javascript .token.string {
+        color: #ce9169;
+      }
+
+      .language-typescript .language-javascript .token.punctuation {
+        color: #3f9cd6;
+      }
+
+      .language-typescript
+        .language-javascript
+        .script-punctuation
+        + .token.punctuation
+        + .token.punctuation {
+        color: #d4d4d4;
+      }
+
+      .language-typescript
+        .language-javascript
+        .script-punctuation
+        + .token.punctuation
+        + .token.punctuation
+        ~ .token.punctuation {
+        color: #d4d4d4;
+      }
+
+      .language-typescript
+        .language-javascript
+        .script-punctuation
+        + .token.punctuation
+        + .token.punctuation
+        ~ .token.punctuation
+        + .token.punctuation {
+        color: #3f9cd6;
+      }
+
+      .language-typescript .keyword-class,
+      .language-typescript .keyword-const,
+      .language-typescript .keyword-constructor,
+      .language-typescript .keyword-function,
+      .language-typescript .keyword-implements,
+      .language-typescript .keyword-new,
+      .language-typescript .keyword-private,
+      .language-typescript .keyword-public,
+      .language-typescript .keyword-this {
+        color: #569cd6;
+      }
+
+      .language-typescript .keyword-void {
+        color: #4ec9b0;
+      }
+
+      .language-typescript .import-member {
+        color: #9cdcfe;
+      }
     </style>
   </head>
-  <body>
+  <body class="line-numbers">
     <main
       style="
         margin: 12px auto 0;
@@ -276,6 +499,15 @@
             </g>
           </g>
         </svg>
+        <div
+          style="
+            background-color: #0ee9df7d;
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.5rem;
+          "
+        >
+          <b>v0.0.11</b>
+        </div>
         <h1>eck-autocomplete</h1>
         <h2 class="subtitle">
           Autocomplete web component. Suggests options for an input.
@@ -364,14 +596,14 @@
 
       <blockquote
         style="
-          background: #fdba7425;
-          border-left: 4px solid #fdba74;
+          background: rgba(116, 253, 180, 0.15);
+          border-left: 4px solid #74fd9f;
           border-radius: 4px;
           margin: 50px 0 0 0;
           padding: 10px 20px;
         "
       >
-        Currently in Alpha. Versions bellow 1.0.0 do not follow semantic
+        Currently in Beta. Versions bellow 1.0.0 do not follow semantic
         versioning!
         <div style="margin: 1em"></div>
         Features and roadmap may change at any time before the first stable
@@ -555,95 +787,70 @@
         </div>
       </div>
 
-      <h2 id="get-started-section" class="get-started-headline">Get started</h2>
+      <h2 id="get-started-section" class="get-started-and-api-headline">
+        Get started
+      </h2>
 
-      <blockquote
-        style="
-          background: rgba(116, 253, 180, 0.15);
-          border-left: 4px solid #74fd9f;
-          border-radius: 4px;
-          margin: 10px 0 0 0;
-          padding: 10px 20px;
-        "
-      >
-        Usage information will be added here at the end of the Alpha phase.
-        Until then, you can check the
-        <a href="https://github.com/LeonEck/eck-autocomplete#readme">README</a>
-        on GitHub.
-      </blockquote>
+      <h3>Install</h3>
 
-      <h2 class="roadmap-headline">Roadmap</h2>
+      <h4>CDN</h4>
+
+      <pre class="language-markup"><code><!--<script
+  type="module"
+  src="https://unpkg.com/eck-autocomplete@0.0.11/min/eck-autocomplete.js"
+></script>
+--></code></pre>
+
+      <h4>Package and import</h4>
+
+      <pre
+        class="language-undefined"
+      ><code>npm i --save-exact eck-autocomplete</code></pre>
+
+      Importing the entry point will automatically register the custom elements.
+
+      <pre
+        class="language-typescript"
+      ><code>import 'eck-autocomplete';</code></pre>
+
+      <h3>Recommended global CSS</h3>
+
+      The styles of a custom element can only take effect after the JavaScript
+      has been parsed. This leads to initially unstyled components. This is
+      especially bad in a case like this autocomplete where the content is
+      hidden by default. To prevent this so called FOUC (Flash of unstyled
+      content) you can predefine the default styling globally like this:
+
+      <pre class="language-css"><code><!--/**
+  * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+  */
+eck-autocomplete:not(:defined) {
+  display: none;
+}
+--></code></pre>
+
+      <h3>Example HTML</h3>
+
+      <pre class="language-markup"><code><!--<input id="input1" type="text" />
+<eck-autocomplete connected-to-id="input1">
+  <eck-autocomplete-option>One</eck-autocomplete-option>
+  <eck-autocomplete-option>Two</eck-autocomplete-option>
+  <eck-autocomplete-option>Three</eck-autocomplete-option>
+</eck-autocomplete>
+--></code></pre>
+
+      <h2 class="get-started-and-api-headline" style="margin-bottom: 10px">
+        API
+      </h2>
+
+      API documentation can be found in the
+      <a
+        href="https://github.com/LeonEck/eck-autocomplete#api"
+        rel="noopener noreferrer"
+        >README of the repo</a
+      >.
 
       <div class="roadmap">
-        <div class="roadmap-entry">
-          <div class="roadmap-entry-headline" style="color: #fdad74">
-            <div class="roadmap-entry-headline-logo">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path
-                  fill="none"
-                  stroke="#000"
-                  stroke-linecap="round"
-                  stroke-miterlimit="10"
-                  stroke-width="32"
-                  d="M176 48h160M118 304h276M208 48v93.48a64.09 64.09 0 01-9.88 34.18L73.21 373.49C48.4 412.78 76.63 464 123.08 464h265.84c46.45 0 74.68-51.22 49.87-90.51L313.87 175.66a64.09 64.09 0 01-9.87-34.18V48"
-                />
-              </svg>
-            </div>
-            <div>Alpha</div>
-          </div>
-          <div class="roadmap-entry-content">
-            <ul>
-              <li>Feature parity with other autocomplete implementations.</li>
-              <li>
-                <del
-                  >"Fixed" position strategy should be updated when container or
-                  page is scrolled. (Might be shifted to Beta)
-                </del>
-              </li>
-              <li>Basic usage information on this showcase.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="roadmap-entry">
-          <div class="roadmap-entry-headline" style="color: #7ce39c">
-            <div class="roadmap-entry-headline-logo">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path
-                  d="M436.67 184.11a27.17 27.17 0 01-38.3 0l-22.48-22.49a27.15 27.15 0 010-38.29l50.89-50.89a.85.85 0 00-.26-1.38C393.68 57 351.09 64.15 324.05 91c-25.88 25.69-27.35 64.27-17.87 98a27 27 0 01-7.67 27.14l-173 160.76a40.76 40.76 0 1057.57 57.54l162.15-173.3a27 27 0 0126.77-7.7c33.46 8.94 71.49 7.26 97.07-17.94 27.49-27.08 33.42-74.94 20.1-102.33a.85.85 0 00-1.36-.22z"
-                  fill="none"
-                  stroke="#000"
-                  stroke-linecap="round"
-                  stroke-miterlimit="10"
-                  stroke-width="32"
-                />
-                <path
-                  d="M224 284c-17.48-17-25.49-24.91-31-30.29a18.24 18.24 0 01-3.33-21.35 20.76 20.76 0 013.5-4.62l15.68-15.29a18.66 18.66 0 015.63-3.87 18.11 18.11 0 0120 3.62c5.45 5.29 15.43 15 33.41 32.52M317.07 291.3c40.95 38.1 90.62 83.27 110 99.41a13.46 13.46 0 01.94 19.92L394.63 444a14 14 0 01-20.29-.76c-16.53-19.18-61.09-67.11-99.27-107"
-                  fill="none"
-                  stroke="#000"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="32"
-                />
-                <path
-                  d="M17.34 193.5l29.41-28.74a4.71 4.71 0 013.41-1.35 4.85 4.85 0 013.41 1.35h0a9.86 9.86 0 008.19 2.77c3.83-.42 7.92-1.6 10.57-4.12 6-5.8-.94-17.23 4.34-24.54a207 207 0 0119.78-22.6c6-5.88 29.84-28.32 69.9-44.45A107.31 107.31 0 01206.67 64c22.59 0 40 10 46.26 15.67a89.54 89.54 0 0110.28 11.64 78.92 78.92 0 00-9.21-2.77 68.82 68.82 0 00-20-1.26c-13.33 1.09-29.41 7.26-38 14-13.9 11-19.87 25.72-20.81 44.71-.68 14.12 2.72 22.1 36.1 55.49a6.6 6.6 0 01-.34 9.16l-18.22 18a6.88 6.88 0 01-9.54.09c-21.94-21.94-36.65-33.09-45-38.16s-15.07-6.5-18.3-6.85a30.85 30.85 0 00-18.27 3.87 11.39 11.39 0 00-2.64 2 14.14 14.14 0 00.42 20.08l1.71 1.6a4.63 4.63 0 010 6.64L71.73 246.6a4.71 4.71 0 01-3.41 1.4 4.86 4.86 0 01-3.41-1.35l-47.57-46.43a4.88 4.88 0 010-6.72z"
-                  fill="none"
-                  stroke="#000"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="32"
-                />
-              </svg>
-            </div>
-            <div>Beta</div>
-          </div>
-          <div class="roadmap-entry-content">
-            <ul>
-              <li>Theming through custom properties.</li>
-              <li>All behavior covered by E2E and unit tests.</li>
-              <li>Documentation on this showcase.</li>
-            </ul>
-          </div>
-        </div>
         <div class="roadmap-entry">
           <div class="roadmap-entry-headline" style="color: #39c5fd">
             <div class="roadmap-entry-headline-logo">
@@ -673,10 +880,14 @@
                 />
               </svg>
             </div>
-            <div>Stable</div>
+            <div>Roadmap to first stable release</div>
           </div>
           <div class="roadmap-entry-content">
             <ul>
+              <li>Feature parity with other autocomplete implementations.</li>
+              <li>Theming through custom properties.</li>
+              <li>All behavior covered by E2E and unit tests.</li>
+              <li>More documentation and examples on this showcase.</li>
               <li>IDE "IntelliSense" Support.</li>
               <li>Angular facade.</li>
               <li>Accessibility.</li>
@@ -1644,5 +1855,11 @@
         }
       );
     </script>
+    <script src="https://unpkg.com/prismjs@1.27.0/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.27.0/components/prism-markup.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.27.0/components/prism-css.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.27.0/components/prism-typescript.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.27.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.27.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
   </body>
 </html>

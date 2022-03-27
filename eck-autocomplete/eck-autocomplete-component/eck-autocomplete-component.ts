@@ -131,7 +131,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
     );
   }
 
-  setInputRef(element: HTMLInputElement) {
+  setInputRef(element: HTMLInputElement): void {
     this._connectedInputRef = element;
     this._init();
   }

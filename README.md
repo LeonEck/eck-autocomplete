@@ -8,7 +8,30 @@
 
 [![npm](https://img.shields.io/npm/v/eck-autocomplete)](https://www.npmjs.com/package/eck-autocomplete)
 
-## Usage
+## Get started
+
+### Install
+
+#### CDN
+
+```html
+<script
+  type="module"
+  src="https://unpkg.com/eck-autocomplete@0.0.11/min/eck-autocomplete.js"
+></script>
+```
+
+#### Package and import
+
+```
+npm i --save-exact eck-autocomplete
+```
+
+Importing the entry point will automatically register the custom elements.
+
+```
+import 'eck-autocomplete';
+```
 
 ### Recommended global CSS
 
@@ -23,23 +46,84 @@ eck-autocomplete:not(:defined) {
 }
 ```
 
-### CDN
+### Example HTML
 
 ```html
-<script
-  type="module"
-  src="https://unpkg.com/eck-autocomplete@0.0.11/min/eck-autocomplete.js"
-></script>
+<input id="input1" type="text" />
+<eck-autocomplete connected-to-id="input1">
+  <eck-autocomplete-option>One</eck-autocomplete-option>
+  <eck-autocomplete-option>Two</eck-autocomplete-option>
+  <eck-autocomplete-option>Three</eck-autocomplete-option>
+</eck-autocomplete>
 ```
 
-### Package and import
+## API
 
-```
-npm i eck-autocomplete --save-exact
-```
+### `eck-autocomplete`
 
-Import the entry point that will automatically register the custom elements if they aren't already registered.
+#### Attributes
 
-```
-import 'eck-autocomplete';
+| Name                        | Type (coerced) | Description                                                                                                                                                                                   | Default |
+| --------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `connected-to-id`           | `string`       | ID of the HTML input that the autocomplete panel should be attached to. In case you can't provide an ID you can use the method `setInputRef` documented in the methods section of these docs. |         |
+| `highlight-first-option`    | `boolean`      | Whether the first option in the panel should be highlighted when it is opened.                                                                                                                | `false` |
+| `select-highlighted-option` | `boolean`      | Whether an options value should be transfered to the input when highlighted. When pressing ESC the value won't be saved and the input resets to the original value.                           | `true`  |
+
+#### Methods
+
+| Signature                                      | Description                                                                                                                                                                                                                           |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `setInputRef(element: HTMLInputElement): void` | Can be used to programmatically set the reference to an HTML input element to which the autocomplete panel will attach to.                                                                                                            |
+| `injectCSS(css: string): void`                 | The component is encapsulated in a Shadow DOM. To style it you should use the provided custom properties. In case you absolutely have to override some CSS that can't be reached from the outside you can inject it with this method. |
+
+#### Custom Properties
+
+**TBD**
+
+### `eck-autocomplete-option`
+
+#### Attributes
+
+| Name    | Type (coerced) | Description                                                                                                                                        | Default     |
+| ------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `label` | `string`       | **Optional** string that is used to display the option in contexts that only allow strings (e.g. inputs). If not provided the `innerHtml` is used. | `undefined` |
+
+#### Properties
+
+| Name    | Type (coerced) | Description                                      | Default |
+| ------- | -------------- | ------------------------------------------------ | ------- |
+| `value` | `unknown`      | **Optional** data that is attached to an option. |         |
+
+#### Methods
+
+| Signature                      | Description                                                                                                                                                                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `injectCSS(css: string): void` | The component is encapsulated in a Shadow DOM. To style it you should use the provided custom properties. In case you absolutely have to override some CSS that can't be reached from the outside you can inject it with this method. |
+
+#### Custom Properties
+
+**TBS**
+
+#### Events
+
+| Type                               | Bubbles | Interface for `detail` value       |
+| ---------------------------------- | ------- | ---------------------------------- |
+| `eck-autocomplete-option-selected` | `true`  | `EckAutocompleteOptionSelectEvent` |
+
+#### Interfaces
+
+##### `EckAutocompleteOptionSelectEvent`
+
+```typescript
+export interface EckAutocompleteOptionSelectEvent {
+  /**
+   * Optionally provided by the user via the `value` property.
+   */
+  value: unknown;
+  /**
+   * Either the label that the user optionally provided via the `label` attribute
+   * or otherwise the `innerHTML` of this option.
+   */
+  label: string;
+}
 ```
