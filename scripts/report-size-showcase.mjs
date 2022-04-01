@@ -12,10 +12,6 @@ const brotliSizeReportFileIndexJS = resolve(
   buildArtifactsFolder,
   'size-report-brotli-index.js'
 );
-const brotliSizeReportFileVendorJS = resolve(
-  buildArtifactsFolder,
-  'size-report-brotli-vendor.js'
-);
 const brotliSizeReportFileHTML = resolve(
   buildArtifactsFolder,
   'size-report-brotli.html'
@@ -25,11 +21,7 @@ const indexHtmlFile = resolve(wwwFolder, 'index.html');
 const indexJSFileName = readdirSync(assetsFolder).filter(
   (file) => file.startsWith('index.') && file.endsWith('.js')
 )[0];
-const vendorJSFileName = readdirSync(assetsFolder).filter(
-  (file) => file.startsWith('vendor.') && file.endsWith('.js')
-)[0];
 const minIndexJSFile = resolve(assetsFolder, indexJSFileName);
-const minVendorJSFile = resolve(assetsFolder, vendorJSFileName);
 
 let amountOfFiles = 0;
 let wwwFolderSize = 0;
@@ -43,10 +35,6 @@ const readStreamIndexJS = createReadStream(minIndexJSFile);
 const writeStreamIndexJS = createWriteStream(brotliSizeReportFileIndexJS);
 const brotliIndexJS = createBrotliCompress();
 
-const readStreamVendorJS = createReadStream(minVendorJSFile);
-const writeStreamVendorJS = createWriteStream(brotliSizeReportFileVendorJS);
-const brotliVendorJS = createBrotliCompress();
-
 const readStreamHTML = createReadStream(indexHtmlFile);
 const writeStreamHTML = createWriteStream(brotliSizeReportFileHTML);
 const brotliHTML = createBrotliCompress();
@@ -55,49 +43,34 @@ readStreamHTML
   .pipe(brotliHTML)
   .pipe(writeStreamHTML)
   .on('finish', () => {
-    readStreamVendorJS
-      .pipe(brotliVendorJS)
-      .pipe(writeStreamVendorJS)
+    readStreamIndexJS
+      .pipe(brotliIndexJS)
+      .pipe(writeStreamIndexJS)
       .on('finish', () => {
-        readStreamIndexJS
-          .pipe(brotliIndexJS)
-          .pipe(writeStreamIndexJS)
-          .on('finish', () => {
-            const { size: minHTMLFileSize } = statSync(indexHtmlFile);
-            const { size: brotliHTMLFileSize } = statSync(
-              brotliSizeReportFileHTML
-            );
-            const { size: minIndexJSFileSize } = statSync(minIndexJSFile);
-            const { size: minVendorJSFileSize } = statSync(minVendorJSFile);
-            const { size: brotliIndexJSFileSize } = statSync(
-              brotliSizeReportFileIndexJS
-            );
-            const { size: brotliVendorJSFileSize } = statSync(
-              brotliSizeReportFileVendorJS
-            );
-            console.log(
-              `
+        const { size: minHTMLFileSize } = statSync(indexHtmlFile);
+        const { size: brotliHTMLFileSize } = statSync(brotliSizeReportFileHTML);
+        const { size: minIndexJSFileSize } = statSync(minIndexJSFile);
+        const { size: brotliIndexJSFileSize } = statSync(
+          brotliSizeReportFileIndexJS
+        );
+        console.log(
+          `
 | File & Mode                  |    Size |
 |:-----------------------------|--------:|
 | index.html (Minified)        | ${formatBytes(minHTMLFileSize)} |
 | index.js Minified            | ${formatBytes(minIndexJSFileSize)} |
-| vendor.js Minified           | ${formatBytes(minVendorJSFileSize)} |
 | index.html Brotli compressed | ${formatBytes(brotliHTMLFileSize)} |
 | index.js Brotli compressed   | ${formatBytes(brotliIndexJSFileSize)} |
-| vendor.js Brotli compressed  | ${formatBytes(brotliVendorJSFileSize)} |
 | Total Minified               | ${formatBytes(
-                minIndexJSFileSize + minVendorJSFileSize + minHTMLFileSize
-              )} |
+            minIndexJSFileSize + minHTMLFileSize
+          )} |
 | Total Brotli compressed      | ${formatBytes(
-                brotliIndexJSFileSize +
-                  brotliVendorJSFileSize +
-                  brotliHTMLFileSize
-              )} |
+            brotliIndexJSFileSize + brotliHTMLFileSize
+          )} |
 
 Amount of files in www/: ${amountOfFiles}
 Size of all files in www/: ${formatBytes(wwwFolderSize)}
 `.trim()
-            );
-          });
+        );
       });
   });

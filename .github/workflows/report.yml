@@ -19,7 +19,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
       - run: npm run build:showcase
       - run: |
-          SIZE_REPORT_SHOWCASE_BRANCH=$(npm run report:size:showcase | tail -n 13)
+          SIZE_REPORT_SHOWCASE_BRANCH=$(npm run report:size:showcase | tail -n 11)
           echo "SIZE_REPORT_SHOWCASE_BRANCH<<EOF" >> $GITHUB_ENV
           echo "$SIZE_REPORT_SHOWCASE_BRANCH" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -40,7 +40,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
       - run: npm run build:showcase
       - run: |
-          SIZE_REPORT_SHOWCASE_MAIN=$(npm run report:size:showcase | tail -n 13)
+          SIZE_REPORT_SHOWCASE_MAIN=$(npm run report:size:showcase | tail -n 11)
           echo "SIZE_REPORT_SHOWCASE_MAIN<<EOF" >> $GITHUB_ENV
           echo "$SIZE_REPORT_SHOWCASE_MAIN" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
