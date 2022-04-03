@@ -24,6 +24,7 @@
         connected-to-id="input1"
         id="input1autocomplete"
         highlight-first-option
+        style="z-index: 1"
       >
       </eck-autocomplete>
     </div>
