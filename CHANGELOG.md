@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- fix: don't register components if they are already in the registry
+
 ## 0.1.0
 
 - docs: improve documentation

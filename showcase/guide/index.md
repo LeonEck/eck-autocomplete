@@ -9,7 +9,7 @@
 ```html
 <script
   type="module"
-  src="https://unpkg.com/eck-autocomplete@0.1.0/min/eck-autocomplete.js"
+  src="https://unpkg.com/eck-autocomplete@0.1.1/min/eck-autocomplete.js"
 ></script>
 ```
 
