@@ -14,4 +14,3 @@ jobs:
       - run: npm run bundle:library
       - run: npm run build:showcase
       - run: npm run report:size:library
-      - run: npm run report:size:showcase

@@ -17,12 +17,6 @@ jobs:
           echo "SIZE_REPORT_LIBRARY_BRANCH<<EOF" >> $GITHUB_ENV
           echo "$SIZE_REPORT_LIBRARY_BRANCH" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-      - run: npm run build:showcase
-      - run: |
-          SIZE_REPORT_SHOWCASE_BRANCH=$(npm run report:size:showcase | tail -n 11)
-          echo "SIZE_REPORT_SHOWCASE_BRANCH<<EOF" >> $GITHUB_ENV
-          echo "$SIZE_REPORT_SHOWCASE_BRANCH" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
       - run: |
           # include hidden files
           # https://askubuntu.com/questions/740805/how-can-i-remove-all-files-from-current-directory-using-terminal
@@ -38,12 +32,6 @@ jobs:
           echo "SIZE_REPORT_LIBRARY_MAIN<<EOF" >> $GITHUB_ENV
           echo "$SIZE_REPORT_LIBRARY_MAIN" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-      - run: npm run build:showcase
-      - run: |
-          SIZE_REPORT_SHOWCASE_MAIN=$(npm run report:size:showcase | tail -n 11)
-          echo "SIZE_REPORT_SHOWCASE_MAIN<<EOF" >> $GITHUB_ENV
-          echo "$SIZE_REPORT_SHOWCASE_MAIN" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
       - uses: actions/github-script@v6
         with:
           script: |
@@ -52,5 +40,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `# 📈 Size Report\n\n## 📦 Library size\n\n### 📍 Current branch\n\n${SIZE_REPORT_LIBRARY_BRANCH}\n\n### 🏠 Main branch\n\n${SIZE_REPORT_LIBRARY_MAIN}\n\n## 🎤 Showcase size\n\n### 📍 Current branch\n\n${SIZE_REPORT_SHOWCASE_BRANCH}\n\n### 🏠 Main branch\n\n${SIZE_REPORT_SHOWCASE_MAIN}`
+              body: `# 📈 Size Report\n\n## 📦 Library size\n\n### 📍 Current branch\n\n${SIZE_REPORT_LIBRARY_BRANCH}\n\n### 🏠 Main branch\n\n${SIZE_REPORT_LIBRARY_MAIN}`
             })
