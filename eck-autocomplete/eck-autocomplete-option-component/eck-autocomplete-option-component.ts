@@ -6,6 +6,8 @@ import type { CustomElement } from '../utils/custom-element';
 const template = document.createElement('template');
 template.innerHTML = `<style>${scss}</style>${html}`;
 
+export const ECK_AUTOCOMPLETE_OPTION_TAG_NAME = 'eck-autocomplete-option';
+
 export interface EckAutocompleteOptionSelectEvent {
   /**
    * Optionally provided by the user via the `value` property.

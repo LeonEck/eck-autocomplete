@@ -14,6 +14,8 @@ import { hasModifierKey } from '../utils/hasModifierKey';
 const template = document.createElement('template');
 template.innerHTML = `<style>${scss}</style>${html}`;
 
+export const ECK_AUTOCOMPLETE_TAG_NAME = 'eck-autocomplete';
+
 export class EckAutocomplete extends BaseComponent implements CustomElement {
   /**
    * ID of the input that we are attached to
