@@ -31,13 +31,6 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
         href: '/favicon.ico',
       },
     ],
-    [
-      'script',
-      {
-        src: 'https://unpkg.com/eck-autocomplete@0.1.1/min/eck-autocomplete.js',
-      },
-    ],
-    ['style', {}, 'eck-autocomplete:not(:defined) {display: none;}'],
   ],
   theme: '@vuepress/theme-default',
   themeConfig: {
@@ -53,8 +46,12 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
     },
     navbar: [
       {
-        text: 'Guide',
-        link: '/guide/',
+        text: 'Docs',
+        link: '/docs/',
+      },
+      {
+        text: 'Demos',
+        link: 'https://eck-autocomplete.leoneck.de/storybook/',
       },
       {
         text: 'Changelog',
@@ -63,17 +60,6 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
     ],
   },
   bundler: '@vuepress/vite',
-  bundlerConfig: {
-    vuePluginOptions: {
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag: string) => {
-            return tag.startsWith('eck-');
-          },
-        },
-      },
-    },
-  },
   plugins: [
     [
       '@vuepress/plugin-register-components',

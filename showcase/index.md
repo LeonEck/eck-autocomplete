@@ -3,11 +3,11 @@ home: true
 heroImage: /assets/eck-autocomplete.svg
 heroImageDark: /assets/eck-autocomplete-dark.svg
 actions:
-  - text: Get Started
-    link: /guide/
+  - text: Documentation
+    link: /docs/
     type: primary
-  - text: GitHub
-    link: https://github.com/LeonEck/eck-autocomplete
+  - text: Demos
+    link: https://eck-autocomplete.leoneck.de/storybook/
     type: secondary
 features:
   - title: Intuitive
@@ -25,8 +25,6 @@ features:
 footer: Created by <a href="https://leoneck.de" rel="noopener noreferrer">Leon Eck</a>
 footerHtml: true
 ---
-
-<Demo style="margin-bottom: 30px"/>
 
 ::: warning
 Currently in Beta. Versions bellow 1.0.0 do not follow semantic versioning!

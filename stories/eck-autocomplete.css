@@ -1,0 +1,13 @@
+/**
+  * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+  */
+eck-autocomplete:not(:defined) {
+  display: none;
+}
+
+/**
+  * Necessary to show above code snippets
+  */
+eck-autocomplete {
+  z-index: 2;
+}
