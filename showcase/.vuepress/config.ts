@@ -1,6 +1,13 @@
-import { defineUserConfig, ViteBundlerOptions } from 'vuepress';
-import type { DefaultThemeOptions } from 'vuepress';
+import {
+  defineUserConfig,
+  ViteBundlerOptions,
+  defaultTheme,
+  DefaultThemeOptions,
+  viteBundler,
+} from 'vuepress';
 import { path } from '@vuepress/utils';
+import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
+import { shikiPlugin } from '@vuepress/plugin-shiki';
 
 const isProd = process.env['NODE_ENV'] === 'production';
 
@@ -32,8 +39,7 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
       },
     ],
   ],
-  theme: '@vuepress/theme-default',
-  themeConfig: {
+  theme: defaultTheme({
     logo: './assets/eck-autocomplete.svg',
     logoDark: './assets/eck-autocomplete-dark.svg',
     repo: 'LeonEck/eck-autocomplete',
@@ -58,23 +64,13 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
         link: 'https://github.com/LeonEck/eck-autocomplete/blob/main/CHANGELOG.md',
       },
     ],
-  },
-  bundler: '@vuepress/vite',
+  }),
+  bundler: viteBundler(),
   plugins: [
-    [
-      '@vuepress/plugin-register-components',
-      {
-        componentsDir: path.resolve(__dirname, './components'),
-      },
-    ],
+    registerComponentsPlugin({
+      componentsDir: path.resolve(__dirname, './components'),
+    }),
     // only enable shiki plugin in production mode
-    [
-      '@vuepress/plugin-shiki',
-      isProd
-        ? {
-            theme: 'dark-plus',
-          }
-        : false,
-    ],
+    isProd ? shikiPlugin({ theme: 'dark-plus' }) : [],
   ],
 });
