@@ -1,17 +1,11 @@
-import {
-  defineUserConfig,
-  ViteBundlerOptions,
-  defaultTheme,
-  DefaultThemeOptions,
-  viteBundler,
-} from 'vuepress';
+import { defaultTheme, defineUserConfig, viteBundler } from 'vuepress';
 import { path } from '@vuepress/utils';
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
 import { shikiPlugin } from '@vuepress/plugin-shiki';
 
 const isProd = process.env['NODE_ENV'] === 'production';
 
-export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
+export default defineUserConfig({
   title: `eck-autocomplete`,
   description: 'Autocomplete web component. Suggests options for an input.',
   dest: path.resolve(__dirname, '../../www'),
