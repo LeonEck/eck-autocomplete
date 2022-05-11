@@ -23,7 +23,7 @@ export const createAutocompleteWithInput = ({
     attributes.unshift('');
   }
 
-  const str = `
+  return `
     <input id="${inputId}" type="text">
     <eck-autocomplete connected-to-id="${inputId}"${attributes.join(' ')}>
       <eck-autocomplete-option>One</eck-autocomplete-option>
@@ -31,10 +31,6 @@ export const createAutocompleteWithInput = ({
       <eck-autocomplete-option>Three</eck-autocomplete-option>
     </eck-autocomplete>
   `;
-
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(str, 'text/html');
-  return doc.body;
 };
 
 function idGenerator() {
