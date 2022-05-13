@@ -28,6 +28,7 @@ describe('eck-autocomplete', () => {
     ) => {
       expect(value.detail.label).toBe(option.innerText);
     }) as EventListener);
-    option.click();
+    const event = new MouseEvent('mousedown');
+    option.dispatchEvent(event);
   });
 });
