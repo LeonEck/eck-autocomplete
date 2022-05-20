@@ -71,7 +71,7 @@
     "esbuild": "0.14.39",
     "esbuild-sass-plugin": "2.2.6",
     "eslint": "8.15.0",
-    "happy-dom": "3.2.0",
+    "happy-dom": "4.0.0",
     "html-minifier": "4.0.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "8.0.1",
