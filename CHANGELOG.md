@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- fix: only manipulate options and ignore other children
+
 ## 0.1.1
 
 - fix: don't register components if they are already in the registry
