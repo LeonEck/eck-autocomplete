@@ -12,6 +12,17 @@
       eck-autocomplete:not(:defined) {
         display: none;
       }
+
+      .mountain-selection .mountain-range {
+        padding: 5px 5px 0;
+        border-bottom: 1px solid black;
+      }
+
+      .mountain-selection .mountain {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
@@ -28,7 +39,7 @@
         entry</eck-autocomplete-option
       >
     </eck-autocomplete>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br />
     <input id="input2" type="text" placeholder="Filtered" />
     <eck-autocomplete
       connected-to-id="input2"
@@ -36,9 +47,9 @@
       highlight-first-option="true"
     >
     </eck-autocomplete>
-    <br /><br /><br />
+    <br /><br />
     <button id="spawner">Spawn element</button>
-    <br /><br /><br /><br /><br />
+    <br /><br />
     <form id="myForm">
       <input
         id="inputForm"
@@ -53,7 +64,7 @@
         <eck-autocomplete-option>Three</eck-autocomplete-option>
       </eck-autocomplete>
     </form>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br />
     <form id="myForm2">
       <input
         id="inputForm2"
@@ -71,7 +82,7 @@
         <eck-autocomplete-option>Three</eck-autocomplete-option>
       </eck-autocomplete>
     </form>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br />
     <input id="input3" type="text" style="width: 500px" />
     <eck-autocomplete connected-to-id="input3">
       <eck-autocomplete-option label="One"
@@ -83,6 +94,75 @@
         >Very long entry - Very long entry - Very long entry - Very long
         entry</eck-autocomplete-option
       >
+    </eck-autocomplete>
+    <br /><br />
+    <input
+      id="input-mountain"
+      type="text"
+      placeholder="Mountain"
+      style="width: 300px"
+    />
+    <eck-autocomplete
+      connected-to-id="input-mountain"
+      class="mountain-selection"
+    >
+      <div class="mountain-range">Andes</div>
+      <eck-autocomplete-option label="Aconcagua" class="mountain">
+        <div>Aconcagua</div>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Aconcagua2016.jpg/320px-Aconcagua2016.jpg"
+          width="64"
+          height="48"
+          alt="Aconcagua"
+        />
+      </eck-autocomplete-option>
+      <eck-autocomplete-option label="Ojos del Salado" class="mountain">
+        <div>Ojos del Salado</div>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Ojos_del_Salado_looming_big_on_the_horizon.jpg/320px-Ojos_del_Salado_looming_big_on_the_horizon.jpg"
+          width="64"
+          height="48"
+          alt="Ojos del Salado"
+        />
+      </eck-autocomplete-option>
+      <div class="mountain-range">Rocky Mountains</div>
+      <eck-autocomplete-option label="Mount Elbert" class="mountain">
+        <div>Mount Elbert</div>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Mt._Elbert.jpg/320px-Mt._Elbert.jpg"
+          width="64"
+          height="48"
+          alt="Mount Elbert"
+        />
+      </eck-autocomplete-option>
+      <eck-autocomplete-option label="Mount Massive" class="mountain">
+        <div>Mount Massive</div>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Mount_Massive.jpg/320px-Mount_Massive.jpg"
+          width="64"
+          height="48"
+          alt="Mount Massive"
+        />
+      </eck-autocomplete-option>
+      <div class="mountain-range">Alps</div>
+      <eck-autocomplete-option label="Mont Blanc" class="mountain">
+        <div>Mont Blanc</div>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Mont-Blanc_from_Planpraz_station.jpg/320px-Mont-Blanc_from_Planpraz_station.jpg"
+          width="64"
+          height="48"
+          alt="Mont Blanc"
+        />
+      </eck-autocomplete-option>
+      <eck-autocomplete-option label="Monte Rosa" class="mountain">
+        <div>Monte Rosa</div>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Dufourspitze_%28Monte_Rosa%29_and_Monte_Rosa_Glacier_as_seen_from_Gornergrat%2C_Wallis%2C_Switzerland%2C_2012_August.jpg/320px-Dufourspitze_%28Monte_Rosa%29_and_Monte_Rosa_Glacier_as_seen_from_Gornergrat%2C_Wallis%2C_Switzerland%2C_2012_August.jpg"
+          width="64"
+          height="48"
+          alt="Monte Rosa"
+        />
+      </eck-autocomplete-option>
     </eck-autocomplete>
     <script type="module">
       import '../../dist/eck-autocomplete.js';

@@ -239,7 +239,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
 
   private _highlightFirstOption() {
     if (!this._shouldHighlightFirstOption) return;
-    const elements = this._slotRef.assignedElements();
+    const elements = this._slotRef
+      .assignedElements()
+      .filter(this._filterForOptions);
     if (elements[0]) {
       this._highlightOption(elements[0] as EckAutocompleteOption, true, true);
       this._highlightedOptionRef = elements[0] as EckAutocompleteOption;
@@ -247,7 +249,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   }
 
   private _changeHighlight(direction: 'ArrowUp' | 'ArrowDown') {
-    const elements = this._slotRef.assignedElements();
+    const elements = this._slotRef
+      .assignedElements()
+      .filter(this._filterForOptions);
     if (this._highlightedOptionRef === undefined) {
       if (direction === 'ArrowUp') {
         // Highlight last option
@@ -364,31 +368,34 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      * Listen to a selected event from each option.
      * When selected: Pass on the selection and hide the panel.
      */
-    this._slotRef.assignedElements().forEach((element) => {
-      this._numberOfOptions++;
-      // Reset highlighting
-      this._highlightOption(element as EckAutocompleteOption, false);
-      this._highlightedOptionRef = undefined;
+    this._slotRef
+      .assignedElements()
+      .filter(this._filterForOptions)
+      .forEach((element) => {
+        this._numberOfOptions++;
+        // Reset highlighting
+        this._highlightOption(element as EckAutocompleteOption, false);
+        this._highlightedOptionRef = undefined;
 
-      element.addEventListener('eck-autocomplete-option-selected', ((
-        value: CustomEvent<EckAutocompleteOptionSelectEvent>
-      ) => {
-        this._connectedInputRef.value = value.detail.label;
-        this._hide();
-      }) as EventListener);
-
-      element.addEventListener('eck-autocomplete-option-highlighted', ((
-        value: CustomEvent<EckAutocompleteOptionHighlightEvent>
-      ) => {
-        if (
-          !this._panelHidden &&
-          this._selectHighlightedOption &&
-          !value.detail._tbhfo
-        ) {
+        element.addEventListener('eck-autocomplete-option-selected', ((
+          value: CustomEvent<EckAutocompleteOptionSelectEvent>
+        ) => {
           this._connectedInputRef.value = value.detail.label;
-        }
-      }) as EventListener);
-    });
+          this._hide();
+        }) as EventListener);
+
+        element.addEventListener('eck-autocomplete-option-highlighted', ((
+          value: CustomEvent<EckAutocompleteOptionHighlightEvent>
+        ) => {
+          if (
+            !this._panelHidden &&
+            this._selectHighlightedOption &&
+            !value.detail._tbhfo
+          ) {
+            this._connectedInputRef.value = value.detail.label;
+          }
+        }) as EventListener);
+      });
     this._highlightFirstOption();
     /**
      * The panel can be in the open state and still have no options.
@@ -404,5 +411,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       'has-children',
       this._numberOfOptions !== 0
     );
+  }
+
+  private _filterForOptions(element: Element): boolean {
+    return element.constructor.name === 'EckAutocompleteOption';
   }
 }
