@@ -52,15 +52,15 @@
     "@babel/core": "7.18.2",
     "@commitlint/cli": "17.0.1",
     "@playwright/test": "1.22.2",
-    "@storybook/addon-actions": "6.5.5",
-    "@storybook/addon-essentials": "6.5.5",
-    "@storybook/addon-links": "6.5.5",
-    "@storybook/builder-webpack5": "6.5.5",
-    "@storybook/html": "6.5.5",
-    "@storybook/manager-webpack5": "6.5.5",
-    "@typescript-eslint/eslint-plugin": "5.26.0",
-    "@typescript-eslint/parser": "5.26.0",
-    "@vitest/ui": "0.12.9",
+    "@storybook/addon-actions": "6.5.6",
+    "@storybook/addon-essentials": "6.5.6",
+    "@storybook/addon-links": "6.5.6",
+    "@storybook/builder-webpack5": "6.5.6",
+    "@storybook/html": "6.5.6",
+    "@storybook/manager-webpack5": "6.5.6",
+    "@typescript-eslint/eslint-plugin": "5.27.0",
+    "@typescript-eslint/parser": "5.27.0",
+    "@vitest/ui": "0.13.0",
     "@vuepress/client": "2.0.0-beta.46",
     "@vuepress/plugin-register-components": "2.0.0-beta.46",
     "@vuepress/plugin-shiki": "2.0.0-beta.46",
@@ -68,7 +68,7 @@
     "babel-loader": "8.2.5",
     "backstopjs": "6.0.4",
     "concurrently": "7.2.1",
-    "esbuild": "0.14.39",
+    "esbuild": "0.14.42",
     "esbuild-sass-plugin": "2.2.6",
     "eslint": "8.16.0",
     "happy-dom": "4.1.0",
@@ -82,10 +82,10 @@
     "stylelint-config-recommended-scss": "6.0.0",
     "typescript": "4.7.2",
     "vite": "2.9.9",
-    "vitest": "0.12.9",
+    "vitest": "0.13.0",
     "vuepress": "2.0.0-beta.46"
   },
   "dependencies": {
-    "@floating-ui/dom": "0.5.1"
+    "@floating-ui/dom": "0.5.2"
   }
 }
