@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- fix: don't rely on constructor.name since it isn't stable when minified
+
 ## 0.1.2
 
 - fix: only manipulate options and ignore other children
