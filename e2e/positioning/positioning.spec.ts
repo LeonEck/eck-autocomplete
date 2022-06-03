@@ -38,7 +38,11 @@ test.describe('positioning', () => {
       expect(boundingBoxComplete!.x).toBe(boundingBoxInput!.x);
     }
 
-    if (browserName === 'firefox') {
+    if (browserName === 'chromium') {
+      expect(Math.round(boundingBoxComplete!.y)).toBe(
+        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
+      );
+    } else if (browserName === 'firefox') {
       expect(boundingBoxComplete!.y).toBe(
         Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
       );
@@ -89,7 +93,11 @@ test.describe('positioning', () => {
       expect(boundingBoxComplete!.x).toBeCloseTo(boundingBoxInput!.x, 0);
     }
 
-    if (browserName === 'firefox') {
+    if (browserName === 'chromium') {
+      expect(Math.round(boundingBoxComplete!.y)).toBe(
+        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
+      );
+    } else if (browserName === 'firefox') {
       expect(boundingBoxComplete!.y).toBe(
         Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
       );

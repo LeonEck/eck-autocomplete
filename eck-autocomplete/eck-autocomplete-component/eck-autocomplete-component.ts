@@ -414,6 +414,6 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   }
 
   private _filterForOptions(element: Element): boolean {
-    return element.constructor.name === 'EckAutocompleteOption';
+    return (element as EckAutocompleteOption).identity === 'eck-aco';
   }
 }

@@ -30,6 +30,14 @@ export class EckAutocompleteOption
   implements CustomElement
 {
   /**
+   * RESERVED FOR INTERNAL USE ONLY! NOT PART OF THE PUBLIC API!
+   * Used to identify this element.
+   * The name of the tag can be changed on registration.
+   * This id allows us to uniquely identify element of type EckAutocompleteOption no matter the tag name.
+   */
+  readonly identity = 'eck-aco';
+
+  /**
    * Optional data that is attached to an option.
    */
   value: unknown;
