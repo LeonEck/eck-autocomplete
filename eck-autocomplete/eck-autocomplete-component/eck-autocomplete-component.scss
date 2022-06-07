@@ -1,12 +1,21 @@
+// Default theme
+$eck-ac-max-height: 256px;
+$eck-ac-background-color: #fff;
+$eck-ac-border-size: 1px;
+$eck-ac-border-color: black;
+$eck-ac-border-radius: 0;
+
 :host {
   display: none;
   position: fixed;
   box-sizing: border-box;
-  max-height: 256px;
+  max-height: var(--eck-ac-max-height, $eck-ac-max-height);
   overflow: auto;
-  background-color: #fff;
+  background-color: var(--eck-ac-background-color, $eck-ac-background-color);
 }
 
 :host([has-children]) {
-  border: 1px solid black;
+  border: var(--eck-ac-border-size, $eck-ac-border-size) solid
+    var(--eck-ac-border-color, $eck-ac-border-color);
+  border-radius: var(--eck-ac-border-radius, $eck-ac-border-radius);
 }

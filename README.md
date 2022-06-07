@@ -78,7 +78,13 @@ eck-autocomplete:not(:defined) {
 
 #### Custom Properties
 
-**TBD**
+| Name                        | Description                                    | Default |
+| --------------------------- | ---------------------------------------------- | ------- |
+| `--eck-ac-max-height`       | max-height of the overlay panel.               | `256px` |
+| `--eck-ac-background-color` | background-color of the overlay panel.         | `#fff`  |
+| `--eck-ac-border-size`      | size of the border around the overlay panel.   | `1px`   |
+| `--eck-ac-border-color`     | color of the border around the overlay panel.  | `black` |
+| `--eck-ac-border-radius`    | radius of the border around the overlay panel. | `0`     |
 
 ### `eck-autocomplete-option`
 
@@ -102,7 +108,11 @@ eck-autocomplete:not(:defined) {
 
 #### Custom Properties
 
-**TBD**
+| Name                         | Description                                       | Default   |
+| ---------------------------- | ------------------------------------------------- | --------- |
+| `--eck-aco-padding`          | padding of the option element.                    | `5px`     |
+| `--eck-aco-color`            | color of the option element.                      | `black`   |
+| `--eck-aco-background-color` | background-color of a highlighted option element. | `#b3e5fc` |
 
 #### Events
 

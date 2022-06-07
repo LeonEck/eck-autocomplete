@@ -33,14 +33,8 @@
       </div>
       <div class="roadmap-entry-content">
         <ul>
-          <li>Feature parity with other autocomplete implementations.</li>
-          <li>Theming through custom properties.</li>
-          <li>All behavior covered by E2E and unit tests.</li>
-          <li>More documentation and examples on this showcase.</li>
           <li>IDE "IntelliSense" Support.</li>
-          <li>Angular facade.</li>
           <li>Accessibility.</li>
-          <li>Pre-built themes.</li>
         </ul>
       </div>
     </div>

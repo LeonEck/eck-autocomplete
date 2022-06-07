@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>interaction</title>
+    <style>
+      /**
+        * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+        */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+
+      .custom-autocomplete-theme {
+        --eck-ac-max-height: 600px;
+        --eck-ac-border-radius: 0 0 10px 10px;
+        --eck-ac-background-color: lightgrey;
+        --eck-ac-border-color: #0066ff;
+        --eck-ac-border-size: 3px;
+
+        --eck-aco-color: #be0e0e;
+        --eck-aco-background-color: lightgreen;
+        --eck-aco-padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>theming</h1>
+
+    <h2>all properties changed</h2>
+
+    <span class="custom-autocomplete-theme">
+      <input id="input1" type="text" />
+      <eck-autocomplete id="complete1" connected-to-id="input1">
+        <eck-autocomplete-option id="option1">One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+        <eck-autocomplete-option>4</eck-autocomplete-option>
+        <eck-autocomplete-option>5</eck-autocomplete-option>
+        <eck-autocomplete-option>6</eck-autocomplete-option>
+        <eck-autocomplete-option>7</eck-autocomplete-option>
+        <eck-autocomplete-option>8</eck-autocomplete-option>
+        <eck-autocomplete-option>9</eck-autocomplete-option>
+        <eck-autocomplete-option>10</eck-autocomplete-option>
+        <eck-autocomplete-option>11</eck-autocomplete-option>
+        <eck-autocomplete-option>12</eck-autocomplete-option>
+        <eck-autocomplete-option>13</eck-autocomplete-option>
+      </eck-autocomplete>
+    </span>
+
+    <script type="module">
+      import '../../dist/eck-autocomplete.js';
+    </script>
+  </body>
+</html>

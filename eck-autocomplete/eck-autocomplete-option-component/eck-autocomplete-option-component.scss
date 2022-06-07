@@ -1,12 +1,17 @@
+// Default theme
+$eck-aco-padding: 5px;
+$eck-aco-color: black;
+$eck-aco-background-color: #b3e5fc;
+
 :host {
   display: block;
   box-sizing: border-box;
-  padding: 5px;
-  color: black;
+  padding: var(--eck-aco-padding, $eck-aco-padding);
+  color: var(--eck-aco-color, $eck-aco-color);
 }
 
 :host(:hover),
 :host([highlighted]) {
-  background-color: #b3e5fc;
+  background-color: var(--eck-aco-background-color, $eck-aco-background-color);
   cursor: pointer;
 }
