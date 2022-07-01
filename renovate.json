@@ -22,10 +22,11 @@
   "prHourlyLimit": 2,
   "prConcurrentLimit": 10,
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": true,
+    "schedule": ["before 5am on the 15th day of the month"]
   },
   "timezone": "Europe/Berlin",
-  "schedule": ["before 5am on friday"],
+  "schedule": ["before 5am on the first day of the month"],
   "vulnerabilityAlerts": {
     "enabled": false
   }
