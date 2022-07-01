@@ -49,18 +49,18 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@babel/core": "7.18.5",
-    "@commitlint/cli": "17.0.2",
-    "@playwright/test": "1.22.2",
+    "@babel/core": "7.18.6",
+    "@commitlint/cli": "17.0.3",
+    "@playwright/test": "1.23.1",
     "@storybook/addon-actions": "6.5.9",
     "@storybook/addon-essentials": "6.5.9",
     "@storybook/addon-links": "6.5.9",
     "@storybook/builder-webpack5": "6.5.9",
     "@storybook/html": "6.5.9",
     "@storybook/manager-webpack5": "6.5.9",
-    "@typescript-eslint/eslint-plugin": "5.28.0",
-    "@typescript-eslint/parser": "5.28.0",
-    "@vitest/ui": "0.15.1",
+    "@typescript-eslint/eslint-plugin": "5.30.3",
+    "@typescript-eslint/parser": "5.30.3",
+    "@vitest/ui": "0.16.0",
     "@vuepress/client": "2.0.0-beta.48",
     "@vuepress/plugin-register-components": "2.0.0-beta.48",
     "@vuepress/plugin-shiki": "2.0.0-beta.48",
@@ -68,10 +68,10 @@
     "babel-loader": "8.2.5",
     "backstopjs": "6.1.0",
     "concurrently": "7.2.2",
-    "esbuild": "0.14.45",
+    "esbuild": "0.14.48",
     "esbuild-sass-plugin": "2.2.6",
-    "eslint": "8.17.0",
-    "happy-dom": "5.3.1",
+    "eslint": "8.18.0",
+    "happy-dom": "5.4.0",
     "html-minifier": "4.0.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "8.0.1",
@@ -80,12 +80,12 @@
     "stylelint": "14.9.1",
     "stylelint-config-property-sort-order-smacss": "9.0.0",
     "stylelint-config-recommended-scss": "6.0.0",
-    "typescript": "4.7.3",
-    "vite": "2.9.12",
-    "vitest": "0.15.1",
+    "typescript": "4.7.4",
+    "vite": "2.9.13",
+    "vitest": "0.16.0",
     "vuepress": "2.0.0-beta.48"
   },
   "dependencies": {
-    "@floating-ui/dom": "0.5.3"
+    "@floating-ui/dom": "0.5.4"
   }
 }
