@@ -1,6 +1,5 @@
 import { defaultTheme, defineUserConfig, viteBundler } from 'vuepress';
 import { path } from '@vuepress/utils';
-import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
 import { shikiPlugin } from '@vuepress/plugin-shiki';
 
 const isProd = process.env['NODE_ENV'] === 'production';
@@ -50,7 +49,11 @@ export default defineUserConfig({
         link: '/docs/',
       },
       {
-        text: 'Demos',
+        text: 'Stackblitz',
+        link: 'https://stackblitz.com/edit/eck-autocomplete?file=index.html',
+      },
+      {
+        text: 'Storybook',
         link: 'https://eck-autocomplete.leoneck.de/storybook/',
       },
       {
@@ -61,9 +64,6 @@ export default defineUserConfig({
   }),
   bundler: viteBundler(),
   plugins: [
-    registerComponentsPlugin({
-      componentsDir: path.resolve(__dirname, './components'),
-    }),
     // only enable shiki plugin in production mode
     isProd ? shikiPlugin({ theme: 'dark-plus' }) : [],
   ],

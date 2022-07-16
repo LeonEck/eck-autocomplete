@@ -6,8 +6,8 @@ actions:
   - text: Documentation
     link: /docs/
     type: primary
-  - text: Demos
-    link: https://eck-autocomplete.leoneck.de/storybook/
+  - text: Stackblitz
+    link: https://stackblitz.com/edit/eck-autocomplete?file=index.html
     type: secondary
 features:
   - title: Intuitive
@@ -22,13 +22,6 @@ features:
     details: Framework and library agnostic custom elements.
   - title: Keyboard navigation
     details: Fully controllable by keyboard.
-footer: Created by <a href="https://leoneck.de" rel="noopener noreferrer">Leon Eck</a>
+footer: Created by <a href="https://leoneck.de">Leon Eck</a>
 footerHtml: true
 ---
-
-::: warning
-Currently in Beta. Versions bellow 1.0.0 do not follow semantic versioning!
-Features and roadmap may change at any time before the first stable release.
-:::
-
-<Roadmap style="margin: 30px 0"/>
