@@ -14,8 +14,6 @@ features:
     details: Default config mimics the behavior of google search suggestions.
   - title: Theming
     details: Custom properties allow for adoption into any design system.
-  - title: Accessible
-    details: Designed to be usable by anyone.
   - title: Fast
     details: Optimized for bundle size and runtime performance.
   - title: Runs everywhere
