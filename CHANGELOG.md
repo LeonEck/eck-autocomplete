@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0
+
+- feat: add custom properties for theming
+- docs: add stackblitz demo
+
 ## 0.1.3
 
 - fix: don't rely on constructor.name since it isn't stable when minified
