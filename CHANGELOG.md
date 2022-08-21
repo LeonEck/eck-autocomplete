@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- feat: add generic to EckAutocompleteOptionSelectEvent to allow the type of the value to be specified
+- feat: add web-types
+
 ## 1.0.0
 
 - feat: add custom properties for theming
