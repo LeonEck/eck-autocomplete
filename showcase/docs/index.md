@@ -117,11 +117,11 @@ eck-autocomplete:not(:defined) {
 ##### `EckAutocompleteOptionSelectEvent`
 
 ```typescript
-export interface EckAutocompleteOptionSelectEvent {
+export interface EckAutocompleteOptionSelectEvent<T = unknown> {
   /**
    * Optionally provided by the user via the `value` property.
    */
-  value: unknown;
+  value: T;
   /**
    * Either the label that the user optionally provided via the `label` attribute
    * or otherwise the `innerHTML` of this option.
