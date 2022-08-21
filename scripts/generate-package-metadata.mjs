@@ -31,3 +31,8 @@ copyFileSync(
   resolve(__dirname, '../README.md'),
   resolve(__dirname, '../dist/README.md')
 );
+
+copyFileSync(
+  resolve(__dirname, '../web-types.json'),
+  resolve(__dirname, '../dist/web-types.json')
+);
