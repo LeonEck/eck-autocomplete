@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json.schemastore.org/web-types",
+  "name": "eck-autocomplete",
+  "version": "1.0.0",
+  "description-markup": "markdown",
+  "contributions": {
+    "html": {
+      "elements": [
+        {
+          "name": "eck-autocomplete",
+          "doc-url": "https://eck-autocomplete.leoneck.de/docs/#eck-autocomplete",
+          "attributes": [
+            {
+              "name": "connected-to-id",
+              "description": "ID of the HTML input that the autocomplete panel should be attached to. In case you can't provide an ID you can use the method `setInputRef` documented in the methods section of these docs.",
+              "value": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "highlight-first-option",
+              "description": "Whether the first option in the panel should be highlighted when it is opened.",
+              "value": {
+                "default": "false",
+                "type": ["boolean", "string"]
+              }
+            },
+            {
+              "name": "select-highlighted-option",
+              "description": "Whether an options value should be transfered to the input when highlighted. When pressing ESC the value won't be saved and the input resets to the original value.",
+              "value": {
+                "default": "true",
+                "type": ["boolean", "string"]
+              }
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "eck-autocomplete-option-selected"
+              }
+            ]
+          }
+        },
+        {
+          "name": "eck-autocomplete-option",
+          "doc-url": "https://eck-autocomplete.leoneck.de/docs/#eck-autocomplete-option",
+          "attributes": [
+            {
+              "name": "label",
+              "description": "**Optional** string that is used to display the option in contexts that only allow strings (e.g. inputs). If not provided the `innerHtml` is used.",
+              "value": {
+                "default": "undefined",
+                "type": "string"
+              }
+            }
+          ],
+          "js": {
+            "events": [
+              {
+                "name": "eck-autocomplete-option-selected"
+              }
+            ],
+            "properties": [
+              {
+                "name": "value",
+                "description": "**Optional** data that is attached to an option."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
