@@ -1,0 +1,58 @@
+<!--
+ This test suite includes tests that cover a bug with ResizeObserver.
+ When attaching an autocomplete to an input which width is changed through an animation
+ Chrome logs this error multiple times: "ResizeObserver loop limit exceeded"
+ Firefox and WebKit log this error multiple times: "ResizeObserver loop completed with undelivered notifications."
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>animation</title>
+    <style>
+      /**
+        * Global FOUC (Flash of unstyled content) fix specific for autocomplete
+        */
+      eck-autocomplete:not(:defined) {
+        display: none;
+      }
+
+      #input1 {
+        width: 60px;
+        transition: width 300ms ease-in-out;
+      }
+
+      #input1:focus {
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>animation</h1>
+
+    <input id="input1" type="text" />
+    <eck-autocomplete id="complete1" connected-to-id="input1">
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>Errors</h2>
+    <div id="errors"></div>
+
+    <script type="module">
+      import '../../dist/eck-autocomplete.js';
+
+      const errors = document.getElementById('errors');
+
+      window.onerror = (errorMsg) => {
+        const error = document.createElement('div');
+        error.textContent = errorMsg;
+        errors.appendChild(error);
+        return false;
+      };
+    </script>
+  </body>
+</html>
