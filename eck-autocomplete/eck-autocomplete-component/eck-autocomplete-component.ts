@@ -325,7 +325,10 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
     this._positionerCleanup = autoUpdate(
       this._connectedInputRef,
       this.shadowRoot!.host as HTMLElement,
-      this._positionPanel.bind(this)
+      this._positionPanel.bind(this),
+      {
+        animationFrame: true,
+      }
     );
   }
 

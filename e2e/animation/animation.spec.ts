@@ -15,9 +15,9 @@ test.describe('animation', () => {
      * https://stackoverflow.com/a/45853382
      */
     if (browserName === 'webkit') {
-      await expect(page.locator('#errors')).toContainText('Script error');
+      await expect(page.locator('#errors')).not.toContainText('Script error');
     } else {
-      await expect(page.locator('#errors')).toContainText('ResizeObserver');
+      await expect(page.locator('#errors')).not.toContainText('ResizeObserver');
     }
   });
 });
