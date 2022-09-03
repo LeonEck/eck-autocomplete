@@ -322,7 +322,6 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
 
   private _startPositioner() {
     this._stopPositioner();
-    this._positionPanel();
     this._positionerCleanup = autoUpdate(
       this._connectedInputRef,
       this.shadowRoot!.host as HTMLElement,
