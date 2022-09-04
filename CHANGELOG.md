@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1
+
+- fix: update overlay position on animationFrame to not exceed ResizeObserver loop limit
+- perf: remove an unnecessary positioning calculation at initialization
+
 ## 1.1.0
 
 - feat: add generic to EckAutocompleteOptionSelectEvent to allow the type of the value to be specified
