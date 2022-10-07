@@ -61,8 +61,13 @@ test.describe('positioning', () => {
     const boundingBoxInput = await page.locator('#input3').boundingBox();
     const boundingBoxComplete = await page.locator('#complete3').boundingBox();
 
-    if (browserName === 'webkit' || browserName === 'firefox') {
+    if (browserName === 'firefox') {
       expect(Math.round(boundingBoxComplete!.x)).toBe(
+        Math.round(boundingBoxInput!.x)
+      );
+    } else if (browserName === 'webkit') {
+      // Special case for -0 should equal 0
+      expect(+(Math.round(boundingBoxComplete!.x) + '')).toBe(
         Math.round(boundingBoxInput!.x)
       );
     } else {
