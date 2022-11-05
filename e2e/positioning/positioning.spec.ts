@@ -124,9 +124,12 @@ test.describe('positioning', () => {
 
     expect(boundingBoxComplete!.x).toBeCloseTo(boundingBoxInput!.x, 0);
 
-    expect(boundingBoxComplete!.y).toBe(
-      boundingBoxInput!.y + boundingBoxInput!.height
-    );
+    expect(
+      Math.abs(
+        boundingBoxComplete!.y -
+          (boundingBoxInput!.y - boundingBoxComplete!.height)
+      )
+    ).toBeLessThanOrEqual(2);
   });
 
   /* TODO: Deactivated because results are way to different in CI test('overflow container with relative position', async ({
