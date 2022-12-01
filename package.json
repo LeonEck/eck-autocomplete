@@ -35,7 +35,7 @@
     "check:prettier": "prettier --ignore-path .gitignore --check .",
     "check:ci:prettier": "prettier_version=$(grep '\"prettier\"' package.json | tail -n 1 | sed -r 's/.*:.*\"(.*)\",$/\\1/') && npx prettier@$prettier_version --ignore-path .gitignore --check .",
     "fix:prettier": "prettier --ignore-path .gitignore --write .",
-    "test:e2e": "start-server-and-test test:e2e:start http-get://localhost:3000 test:e2e:playwright:test",
+    "test:e2e": "start-server-and-test test:e2e:start http-get://127.0.0.1:3000 test:e2e:playwright:test",
     "test:e2e:start": "npm run build:library && npm run watch:e2e",
     "test:e2e:playwright:test": "playwright test",
     "test:e2e:playwright:install": "playwright install --with-deps chromium chrome msedge firefox webkit",
