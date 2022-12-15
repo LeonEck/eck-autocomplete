@@ -122,11 +122,14 @@ test.describe('positioning', () => {
     const boundingBoxInput = await page.locator('#input5').boundingBox();
     const boundingBoxComplete = await page.locator('#complete5').boundingBox();
 
-    expect(boundingBoxComplete!.x).toBeCloseTo(boundingBoxInput!.x, 0);
+    expect(
+      Math.abs(boundingBoxComplete!.x - boundingBoxInput!.x)
+    ).toBeLessThanOrEqual(1);
 
-    expect(boundingBoxComplete!.y).toBe(
-      boundingBoxInput!.y + boundingBoxInput!.height
-    );
+    const expected = boundingBoxComplete!.y;
+    const toBe = boundingBoxInput!.y + boundingBoxInput!.height;
+    const diff = Math.abs(expected - toBe);
+    expect(diff).toBeLessThanOrEqual(3);
   });
 
   /* TODO: Deactivated because results are way to different in CI test('overflow container with relative position', async ({
