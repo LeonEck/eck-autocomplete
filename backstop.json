@@ -27,39 +27,39 @@
   "scenarios": [
     {
       "label": "e2e/highlight-first-option/",
-      "url": "http://localhost:3000/e2e/highlight-first-option/",
+      "url": "http://localhost:5173/e2e/highlight-first-option/",
       "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/highlight-first-option/",
       "delay": 1500
     },
     {
       "label": "e2e/panel-height/",
-      "url": "http://localhost:3000/e2e/panel-height/",
+      "url": "http://localhost:5173/e2e/panel-height/",
       "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/panel-height/",
       "delay": 1500
     },
     {
       "label": "e2e/playground/",
-      "url": "http://localhost:3000/e2e/playground/",
+      "url": "http://localhost:5173/e2e/playground/",
       "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/playground/",
       "clickSelector": "#input1",
       "delay": 1500
     },
     {
       "label": "e2e/theming/",
-      "url": "http://localhost:3000/e2e/theming/",
+      "url": "http://localhost:5173/e2e/theming/",
       "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/theming/",
       "clickSelector": "#input1",
       "delay": 1500
     },
     {
       "label": "e2e/positioning/",
-      "url": "http://localhost:3000/e2e/positioning/",
+      "url": "http://localhost:5173/e2e/positioning/",
       "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/positioning/",
       "delay": 1500
     },
     {
       "label": "e2e/shadow-dom/",
-      "url": "http://localhost:3000/e2e/shadow-dom/",
+      "url": "http://localhost:5173/e2e/shadow-dom/",
       "referenceUrl": "https://main.eck-autocomplete.pages.dev/e2e/shadow-dom/",
       "delay": 1500
     }
