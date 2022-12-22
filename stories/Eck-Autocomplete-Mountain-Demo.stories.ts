@@ -1,13 +1,21 @@
-import { Meta, Story } from '@storybook/html';
+import type { Meta, StoryObj } from '@storybook/html';
 import { createMountainDemo } from './Eck-Autocomplete-Mountain-Demo';
 
-export default {
+const meta: Meta = {
   title: 'Demos/Mountain selection',
-} as Meta;
-
-const Template: Story = () => {
-  return createMountainDemo();
+  parameters: {
+    docs: {
+      source: {
+        state: 'open',
+      },
+    },
+  },
 };
 
-export const Demo = Template.bind({});
+export default meta;
+type Story = StoryObj;
+
+export const Demo: Story = {
+  render: () => createMountainDemo(),
+};
 Demo.storyName = 'Mountain selection';

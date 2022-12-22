@@ -1,10 +1,11 @@
-import { Story, Meta } from '@storybook/html';
+import type { StoryObj, Meta } from '@storybook/html';
+import { withActions } from '@storybook/addon-actions/decorator';
 import {
   createAutocompleteWithInput,
   EckAutocompleteProps,
 } from './Eck-Autocomplete';
 
-export default {
+const meta: Meta<EckAutocompleteProps> = {
   title: 'eck-autocomplete',
   argTypes: {
     highlightFirstOption: {
@@ -32,23 +33,23 @@ export default {
       handles: ['eck-autocomplete-option-selected'],
     },
   },
-} as Meta;
-
-const Template: Story<EckAutocompleteProps> = (args) => {
-  return createAutocompleteWithInput(args);
+  decorators: [withActions],
 };
+
+export default meta;
+type Story = StoryObj<EckAutocompleteProps>;
 
 const defaultOptions = {
   highlightFirstOption: false,
   selectHighlightedOption: true,
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultOptions,
+export const Default: Story = {
+  render: (args) => createAutocompleteWithInput(args),
+  args: defaultOptions,
 };
 
-export const HighlightFirstOption = Template.bind({});
+export const HighlightFirstOption = { ...Default };
 HighlightFirstOption.args = {
   ...defaultOptions,
   ...{
