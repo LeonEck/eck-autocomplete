@@ -59,19 +59,19 @@
     "@storybook/addon-links": "7.0.0-beta.13",
     "@storybook/html": "7.0.0-beta.13",
     "@storybook/html-webpack5": "7.0.0-beta.13",
-    "@typescript-eslint/eslint-plugin": "5.46.1",
-    "@typescript-eslint/parser": "5.46.1",
-    "@vitest/ui": "0.25.8",
+    "@typescript-eslint/eslint-plugin": "5.47.0",
+    "@typescript-eslint/parser": "5.47.0",
+    "@vitest/ui": "0.26.2",
     "@vuepress/client": "2.0.0-beta.59",
     "@vuepress/plugin-shiki": "2.0.0-beta.59",
     "@vuepress/utils": "2.0.0-beta.59",
     "backstopjs": "6.1.4",
     "concurrently": "7.6.0",
-    "esbuild": "0.16.7",
-    "esbuild-sass-plugin": "2.4.3",
-    "eslint": "8.29.0",
+    "esbuild": "0.16.10",
+    "esbuild-sass-plugin": "2.4.4",
+    "eslint": "8.30.0",
     "eslint-plugin-storybook": "0.6.8",
-    "happy-dom": "8.1.0",
+    "happy-dom": "8.1.1",
     "html-minifier": "4.0.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "8.0.2",
@@ -84,11 +84,11 @@
     "stylelint-config-property-sort-order-smacss": "9.0.0",
     "stylelint-config-recommended-scss": "8.0.0",
     "typescript": "4.9.4",
-    "vite": "4.0.1",
-    "vitest": "0.25.8",
+    "vite": "4.0.3",
+    "vitest": "0.26.2",
     "vuepress": "2.0.0-beta.59"
   },
   "dependencies": {
-    "@floating-ui/dom": "1.0.10"
+    "@floating-ui/dom": "1.0.12"
   }
 }
