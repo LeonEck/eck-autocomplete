@@ -45,7 +45,6 @@ export const esbuildWatchLibraryConfig = {
   outdir: resolve(__dirname, '../dist'),
   format: 'esm',
   sourcemap: true,
-  watch: true,
 };
 
 /**

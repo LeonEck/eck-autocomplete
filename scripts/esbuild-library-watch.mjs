@@ -1,4 +1,5 @@
 import esbuild from 'esbuild';
 import { esbuildWatchLibraryConfig } from './esbuild-library-config.mjs';
 
-esbuild.build(esbuildWatchLibraryConfig).then(() => {});
+const ctx = await esbuild.context(esbuildWatchLibraryConfig);
+await ctx.watch();
