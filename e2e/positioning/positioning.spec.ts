@@ -38,12 +38,8 @@ test.describe('positioning', () => {
       expect(boundingBoxComplete!.x).toBe(boundingBoxInput!.x);
     }
 
-    if (browserName === 'chromium') {
+    if (browserName === 'chromium' || browserName === 'firefox') {
       expect(Math.round(boundingBoxComplete!.y)).toBe(
-        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
-      );
-    } else if (browserName === 'firefox') {
-      expect(boundingBoxComplete!.y).toBe(
         Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
       );
     } else {
@@ -98,12 +94,8 @@ test.describe('positioning', () => {
       expect(boundingBoxComplete!.x).toBeCloseTo(boundingBoxInput!.x, 0);
     }
 
-    if (browserName === 'chromium') {
+    if (browserName === 'chromium' || browserName === 'firefox') {
       expect(Math.round(boundingBoxComplete!.y)).toBe(
-        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
-      );
-    } else if (browserName === 'firefox') {
-      expect(boundingBoxComplete!.y).toBe(
         Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
       );
     } else {
