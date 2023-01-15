@@ -8,10 +8,7 @@ module.exports = {
     name: '@storybook/html-webpack5',
     options: {},
   },
-  /**
-   * https://github.com/storybookjs/storybook/issues/1291#issuecomment-891379856
-   */
   docs: {
-    docsPage: 'automatic',
+    autodocs: true,
   },
 };
