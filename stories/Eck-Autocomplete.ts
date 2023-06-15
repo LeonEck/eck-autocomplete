@@ -24,12 +24,12 @@ export const createAutocompleteWithInput = ({
   }
 
   return `
-    <input id="${inputId}" type="text">
-    <eck-autocomplete connected-to-id="${inputId}"${attributes.join(' ')}>
-      <eck-autocomplete-option>One</eck-autocomplete-option>
-      <eck-autocomplete-option>Two</eck-autocomplete-option>
-      <eck-autocomplete-option>Three</eck-autocomplete-option>
-    </eck-autocomplete>
+<input id="${inputId}" type="text">
+<eck-autocomplete connected-to-id="${inputId}"${attributes.join(' ')}>
+  <eck-autocomplete-option>One</eck-autocomplete-option>
+  <eck-autocomplete-option>Two</eck-autocomplete-option>
+  <eck-autocomplete-option>Three</eck-autocomplete-option>
+</eck-autocomplete>
   `;
 };
 

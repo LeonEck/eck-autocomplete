@@ -5,8 +5,12 @@ const meta: Meta = {
   title: 'Demos/Mountain selection',
   parameters: {
     docs: {
-      source: {
-        state: 'open',
+      canvas: {
+        sourceState: 'shown',
+      },
+      story: {
+        inline: false,
+        iframeHeight: 300,
       },
     },
   },

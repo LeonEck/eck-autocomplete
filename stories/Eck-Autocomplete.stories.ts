@@ -32,6 +32,12 @@ const meta: Meta<EckAutocompleteProps> = {
     actions: {
       handles: ['eck-autocomplete-option-selected'],
     },
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 150,
+      },
+    },
   },
   decorators: [withActions],
 };
