@@ -38,6 +38,7 @@
     "test:e2e": "start-server-and-test test:e2e:start http-get://127.0.0.1:5173 test:e2e:playwright:test",
     "test:e2e:start": "npm run build:library && npm run watch:e2e",
     "test:e2e:playwright:test": "playwright test",
+    "test:e2e:playwright:test:ui": "playwright test --ui",
     "test:e2e:playwright:install": "playwright install --with-deps chromium chrome msedge firefox webkit",
     "test:unit": "vitest run",
     "test:unit:vitest:watch": "vitest --ui",
