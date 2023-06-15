@@ -6,7 +6,7 @@
   "license": "MIT",
   "web-types": "./web-types.json",
   "engines": {
-    "node": "^16.13.0"
+    "node": "^18.12.0"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "test:e2e:playwright:install": "playwright install --with-deps chromium chrome msedge firefox webkit",
     "test:unit": "vitest run",
     "test:unit:vitest:watch": "vitest --ui",
-    "test:backstop": "start-server-and-test test:e2e:start http-get://localhost:5173 test:backstop:test",
+    "test:backstop": "start-server-and-test test:e2e:start http-get://127.0.0.1:5173 test:backstop:test",
     "test:backstop:test": "backstop reference && backstop test",
     "test:backstop:install:chromium": "playwright install --with-deps chromium",
     "test:backstop:install:firefox": "playwright install --with-deps firefox",
