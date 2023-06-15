@@ -46,8 +46,7 @@
     "test:backstop:install:chromium": "playwright install --with-deps chromium",
     "test:backstop:install:firefox": "playwright install --with-deps firefox",
     "test:backstop:install:webkit": "playwright install --with-deps webkit",
-    "report:size:library": "node scripts/report-size-library.mjs",
-    "prepare": "husky install"
+    "report:size:library": "node scripts/report-size-library.mjs"
   },
   "devDependencies": {
     "@babel/preset-env": "7.22.5",
@@ -74,7 +73,6 @@
     "happy-dom": "9.20.3",
     "html-minifier": "4.0.0",
     "html-webpack-plugin": "5.5.3",
-    "husky": "8.0.3",
     "prettier": "2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
