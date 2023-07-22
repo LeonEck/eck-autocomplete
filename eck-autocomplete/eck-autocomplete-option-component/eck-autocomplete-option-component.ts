@@ -61,7 +61,7 @@ export class EckAutocompleteOption
   attributeChangedCallback(
     attrName: string,
     oldVal: string | null,
-    newVal: string | null
+    newVal: string | null,
   ) {
     if (attrName === 'label') {
       this._label = newVal ? newVal : undefined;
@@ -94,7 +94,7 @@ export class EckAutocompleteOption
             label: this._getLabel(),
             _tbhfo: triggeredByHighlightFirstOption,
           } as EckAutocompleteOptionHighlightEvent,
-        })
+        }),
       );
     }
   }
@@ -108,7 +108,7 @@ export class EckAutocompleteOption
           value: this.value,
           label: this._getLabel(),
         } as EckAutocompleteOptionSelectEvent,
-      })
+      }),
     );
   }
 

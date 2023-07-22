@@ -95,7 +95,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   attributeChangedCallback(
     attrName: string,
     oldVal: string | null,
-    newVal: string | null
+    newVal: string | null,
   ) {
     if (attrName === 'connected-to-id') {
       this._connectedToId = newVal!;
@@ -108,7 +108,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
 
   connectedCallback() {
     const connectToIdRef = document.querySelector<HTMLInputElement>(
-      `#${this._connectedToId}`
+      `#${this._connectedToId}`,
     );
     /**
      * If we found the element we should be connected to we start initialization.
@@ -129,7 +129,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
     this._connectedInputRef.removeEventListener('blur', this._hideHandler);
     this._connectedInputRef.removeEventListener(
       'keydown',
-      this._inputKeydownHandler
+      this._inputKeydownHandler,
     );
   }
 
@@ -170,7 +170,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      */
     this._connectedInputRef.addEventListener(
       'keydown',
-      this._inputKeydownHandler
+      this._inputKeydownHandler,
     );
   }
 
@@ -210,7 +210,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       {
         middleware: [flip()],
         strategy: 'fixed',
-      }
+      },
     ).then(({ x, y }) => {
       Object.assign((this.shadowRoot!.host as HTMLElement).style, {
         left: `${x}px`,
@@ -257,7 +257,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
         // Highlight last option
         this._highlightOption(
           elements[elements.length - 1] as EckAutocompleteOption,
-          true
+          true,
         );
         this._highlightedOptionRef = elements[
           elements.length - 1
@@ -294,7 +294,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
         }
         this._highlightOption(
           elements[indexToHighlight] as EckAutocompleteOption,
-          true
+          true,
         );
         this._highlightedOptionRef = elements[
           indexToHighlight
@@ -307,7 +307,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   private _highlightOption(
     option: EckAutocompleteOption | undefined,
     value: boolean,
-    triggeredByHighlightFirstOption = false
+    triggeredByHighlightFirstOption = false,
   ) {
     if (this._inputValueBeforeHighlight === null && value) {
       this._inputValueBeforeHighlight = this._connectedInputRef.value;
@@ -328,7 +328,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       this._positionPanel.bind(this),
       {
         animationFrame: true,
-      }
+      },
     );
   }
 
@@ -380,14 +380,14 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
         this._highlightedOptionRef = undefined;
 
         element.addEventListener('eck-autocomplete-option-selected', ((
-          value: CustomEvent<EckAutocompleteOptionSelectEvent>
+          value: CustomEvent<EckAutocompleteOptionSelectEvent>,
         ) => {
           this._connectedInputRef.value = value.detail.label;
           this._hide();
         }) as EventListener);
 
         element.addEventListener('eck-autocomplete-option-highlighted', ((
-          value: CustomEvent<EckAutocompleteOptionHighlightEvent>
+          value: CustomEvent<EckAutocompleteOptionHighlightEvent>,
         ) => {
           if (
             !this._panelHidden &&
@@ -411,7 +411,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      */
     this.shadowRoot!.host.toggleAttribute(
       'has-children',
-      this._numberOfOptions !== 0
+      this._numberOfOptions !== 0,
     );
   }
 

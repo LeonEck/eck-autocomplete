@@ -20,7 +20,7 @@ test.describe('positioning', () => {
     }
 
     expect(boundingBoxComplete!.y).toBe(
-      boundingBoxInput!.y + boundingBoxInput!.height
+      boundingBoxInput!.y + boundingBoxInput!.height,
     );
   });
 
@@ -40,11 +40,11 @@ test.describe('positioning', () => {
 
     if (browserName === 'chromium' || browserName === 'firefox') {
       expect(Math.round(boundingBoxComplete!.y)).toBe(
-        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
+        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height),
       );
     } else {
       expect(boundingBoxComplete!.y).toBe(
-        boundingBoxInput!.y - boundingBoxComplete!.height
+        boundingBoxInput!.y - boundingBoxComplete!.height,
       );
     }
   });
@@ -59,19 +59,19 @@ test.describe('positioning', () => {
 
     if (browserName === 'firefox') {
       expect(Math.round(boundingBoxComplete!.x)).toBe(
-        Math.round(boundingBoxInput!.x)
+        Math.round(boundingBoxInput!.x),
       );
     } else if (browserName === 'webkit') {
       // Special case for -0 should equal 0
       expect(+(Math.round(boundingBoxComplete!.x) + '')).toBe(
-        Math.round(boundingBoxInput!.x)
+        Math.round(boundingBoxInput!.x),
       );
     } else {
       expect(boundingBoxComplete!.x).toBe(boundingBoxInput!.x);
     }
 
     expect(boundingBoxComplete!.y).toBeCloseTo(
-      boundingBoxInput!.y + boundingBoxInput!.height
+      boundingBoxInput!.y + boundingBoxInput!.height,
     );
   });
 
@@ -85,10 +85,10 @@ test.describe('positioning', () => {
 
     if (browserName === 'webkit') {
       expect(Math.round(boundingBoxComplete!.x) + 1).toBeGreaterThanOrEqual(
-        Math.round(boundingBoxInput!.x)
+        Math.round(boundingBoxInput!.x),
       );
       expect(Math.round(boundingBoxComplete!.x)).toBeLessThanOrEqual(
-        Math.round(boundingBoxInput!.x)
+        Math.round(boundingBoxInput!.x),
       );
     } else {
       expect(boundingBoxComplete!.x).toBeCloseTo(boundingBoxInput!.x, 0);
@@ -96,11 +96,11 @@ test.describe('positioning', () => {
 
     if (browserName === 'chromium' || browserName === 'firefox') {
       expect(Math.round(boundingBoxComplete!.y)).toBe(
-        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height)
+        Math.round(boundingBoxInput!.y - boundingBoxComplete!.height),
       );
     } else {
       expect(boundingBoxComplete!.y).toBe(
-        boundingBoxInput!.y - boundingBoxComplete!.height
+        boundingBoxInput!.y - boundingBoxComplete!.height,
       );
     }
   });
@@ -115,7 +115,7 @@ test.describe('positioning', () => {
     const boundingBoxComplete = await page.locator('#complete5').boundingBox();
 
     expect(
-      Math.abs(boundingBoxComplete!.x - boundingBoxInput!.x)
+      Math.abs(boundingBoxComplete!.x - boundingBoxInput!.x),
     ).toBeLessThanOrEqual(1);
 
     const expected = boundingBoxComplete!.y;
@@ -175,11 +175,11 @@ test.describe('positioning', () => {
       page.viewportSize()!.width === 390
     ) {
       expect(boundingBoxComplete!.y).toBe(
-        boundingBoxInput!.y - boundingBoxComplete!.height
+        boundingBoxInput!.y - boundingBoxComplete!.height,
       );
     } else {
       expect(boundingBoxComplete!.y).toBe(
-        boundingBoxInput!.y + boundingBoxInput!.height
+        boundingBoxInput!.y + boundingBoxInput!.height,
       );
     }
   });

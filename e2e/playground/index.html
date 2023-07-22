@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -121,7 +121,7 @@
         input2options.innerHTML = '';
         options.forEach((option) => {
           const optionElement = document.createElement(
-            'eck-autocomplete-option'
+            'eck-autocomplete-option',
           );
           optionElement.value = option.value;
           optionElement.innerHTML = option.label;
@@ -164,7 +164,7 @@
       input2.addEventListener('input', (e) => {
         e.preventDefault();
         const filteredOptions = options.filter((option) =>
-          option.label.toLowerCase().includes(input2.value.toLowerCase())
+          option.label.toLowerCase().includes(input2.value.toLowerCase()),
         );
         renderOptions2(filteredOptions);
       });
@@ -178,10 +178,10 @@
           console.log('Selected option', event.detail);
           event.preventDefault();
           const filteredOptions = options.filter((option) =>
-            option.label.toLowerCase().includes(input2.value.toLowerCase())
+            option.label.toLowerCase().includes(input2.value.toLowerCase()),
           );
           renderOptions2(filteredOptions);
-        }
+        },
       );
 
       /**
@@ -196,7 +196,7 @@
             label: 'Four x',
           });
           const filteredOptions = options.filter((option) =>
-            option.label.toLowerCase().includes(input2.value.toLowerCase())
+            option.label.toLowerCase().includes(input2.value.toLowerCase()),
           );
           renderOptions2(filteredOptions);
         }, 5000);
@@ -246,7 +246,7 @@
           autocomplete.appendChild(rangeElement);
           for (const mountain in mountains[mountainRange]) {
             const mountainOptionElement = document.createElement(
-              'eck-autocomplete-option'
+              'eck-autocomplete-option',
             );
             mountainOptionElement.setAttribute('label', mountain);
             mountainOptionElement.className = 'mountain';

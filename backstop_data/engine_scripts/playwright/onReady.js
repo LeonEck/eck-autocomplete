@@ -5,7 +5,7 @@ module.exports = async (
   scenario,
   viewport,
   isReference,
-  browserContext
+  browserContext,
 ) => {
   console.log('SCENARIO > ' + scenario.label);
   await require('./clickAndHoverHelper')(page, scenario);

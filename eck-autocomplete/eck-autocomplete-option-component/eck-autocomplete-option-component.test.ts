@@ -10,7 +10,7 @@ describe('eck-autocomplete', () => {
     if (customElements.get(ECK_AUTOCOMPLETE_OPTION_TAG_NAME) === undefined) {
       customElements.define(
         ECK_AUTOCOMPLETE_OPTION_TAG_NAME,
-        EckAutocompleteOption
+        EckAutocompleteOption,
       );
     }
   });
@@ -24,7 +24,7 @@ describe('eck-autocomplete', () => {
     option.innerText = 'Label Text';
     document.body.appendChild(option);
     option.addEventListener('eck-autocomplete-option-selected', ((
-      value: CustomEvent<EckAutocompleteOptionSelectEvent>
+      value: CustomEvent<EckAutocompleteOptionSelectEvent>,
     ) => {
       expect(value.detail.label).toBe(option.innerText);
     }) as EventListener);

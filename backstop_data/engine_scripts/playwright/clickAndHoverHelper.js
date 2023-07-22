@@ -13,7 +13,7 @@ module.exports = async (page, scenario) => {
       await page.waitForSelector(keyPressSelectorItem.selector);
       await page.type(
         keyPressSelectorItem.selector,
-        keyPressSelectorItem.keyPress
+        keyPressSelectorItem.keyPress,
       );
     }
   }

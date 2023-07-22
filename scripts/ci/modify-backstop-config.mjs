@@ -15,7 +15,7 @@ if (cliArguments.length !== 1) {
 const backstopJson = JSON.parse(
   await readFile(backstopJsonFile, {
     encoding: 'utf8',
-  })
+  }),
 );
 
 backstopJson['engineOptions']['browser'] = cliArguments[0];

@@ -14,7 +14,7 @@ export const libraryDirectory = resolve(__dirname, '../eck-autocomplete');
  */
 export const prodBuildArtifactsDirectory = resolve(
   __dirname,
-  '../build-artifacts'
+  '../build-artifacts',
 );
 
 /**
@@ -25,11 +25,11 @@ export const esbuildWatchLibraryConfig = {
     resolve(libraryDirectory, 'eck-autocomplete.ts'),
     resolve(
       libraryDirectory,
-      'eck-autocomplete-component/eck-autocomplete-component.ts'
+      'eck-autocomplete-component/eck-autocomplete-component.ts',
     ),
     resolve(
       libraryDirectory,
-      'eck-autocomplete-option-component/eck-autocomplete-option-component.ts'
+      'eck-autocomplete-option-component/eck-autocomplete-option-component.ts',
     ),
   ],
   bundle: true,
@@ -55,11 +55,11 @@ export const esbuildProductionLibraryConfig = {
     resolve(prodBuildArtifactsDirectory, 'eck-autocomplete.ts'),
     resolve(
       prodBuildArtifactsDirectory,
-      'eck-autocomplete-component/eck-autocomplete-component.ts'
+      'eck-autocomplete-component/eck-autocomplete-component.ts',
     ),
     resolve(
       prodBuildArtifactsDirectory,
-      'eck-autocomplete-option-component/eck-autocomplete-option-component.ts'
+      'eck-autocomplete-option-component/eck-autocomplete-option-component.ts',
     ),
   ],
   bundle: true,

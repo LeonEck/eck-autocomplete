@@ -10,7 +10,7 @@ import {
 if (customElements.get(ECK_AUTOCOMPLETE_OPTION_TAG_NAME) === undefined) {
   customElements.define(
     ECK_AUTOCOMPLETE_OPTION_TAG_NAME,
-    EckAutocompleteOption
+    EckAutocompleteOption,
   );
 }
 if (customElements.get(ECK_AUTOCOMPLETE_TAG_NAME) === undefined) {

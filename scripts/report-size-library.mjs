@@ -10,7 +10,7 @@ const distFolder = resolve(__dirname, '../dist');
 const buildArtifactsFolder = resolve(__dirname, '../build-artifacts');
 const brotliSizeReportFile = resolve(
   buildArtifactsFolder,
-  'size-report-brotli.js'
+  'size-report-brotli.js',
 );
 const minFile = resolve(distFolder, 'min/eck-autocomplete.js');
 
@@ -42,6 +42,6 @@ readStream
 
 Amount of files in dist/: ${amountOfFiles}
 Size of all files in dist/: ${formatBytes(distFolderSize)}
-`.trim()
+`.trim(),
     );
   });

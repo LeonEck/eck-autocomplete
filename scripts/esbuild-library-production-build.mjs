@@ -36,20 +36,20 @@ cpSync(libraryDirectory, prodBuildArtifactsDirectory, {
  */
 const eckAutocompleteComponentHTMLFile = resolve(
   prodBuildArtifactsDirectory,
-  'eck-autocomplete-component/eck-autocomplete-component.html'
+  'eck-autocomplete-component/eck-autocomplete-component.html',
 );
 const eckAutocompleteOptionComponentHTMLFile = resolve(
   prodBuildArtifactsDirectory,
-  'eck-autocomplete-option-component/eck-autocomplete-option-component.html'
+  'eck-autocomplete-option-component/eck-autocomplete-option-component.html',
 );
 
 const eckAutocompleteComponentHTML = readFileSync(
   eckAutocompleteComponentHTMLFile,
-  { encoding: 'utf8' }
+  { encoding: 'utf8' },
 );
 const eckAutocompleteOptionComponentHTML = readFileSync(
   eckAutocompleteOptionComponentHTMLFile,
-  { encoding: 'utf8' }
+  { encoding: 'utf8' },
 );
 
 const minifyHTMLConfig = {
@@ -69,20 +69,20 @@ const minifyHTMLConfig = {
 };
 const eckAutocompleteComponentHTMLMinified = minify(
   eckAutocompleteComponentHTML,
-  minifyHTMLConfig
+  minifyHTMLConfig,
 );
 const eckAutocompleteOptionComponentHTMLMinified = minify(
   eckAutocompleteOptionComponentHTML,
-  minifyHTMLConfig
+  minifyHTMLConfig,
 );
 
 writeFileSync(
   eckAutocompleteComponentHTMLFile,
-  eckAutocompleteComponentHTMLMinified
+  eckAutocompleteComponentHTMLMinified,
 );
 writeFileSync(
   eckAutocompleteOptionComponentHTMLFile,
-  eckAutocompleteOptionComponentHTMLMinified
+  eckAutocompleteOptionComponentHTMLMinified,
 );
 
 /**
