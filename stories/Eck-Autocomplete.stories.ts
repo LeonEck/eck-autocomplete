@@ -34,8 +34,7 @@ const meta: Meta<EckAutocompleteProps> = {
     },
     docs: {
       story: {
-        inline: false,
-        iframeHeight: 150,
+        height: '120px',
       },
     },
   },
@@ -55,11 +54,11 @@ export const Default: Story = {
   args: defaultOptions,
 };
 
-export const HighlightFirstOption = { ...Default };
-HighlightFirstOption.args = {
-  ...defaultOptions,
-  ...{
+export const HighlightFirstOption: Story = {
+  render: (args) => createAutocompleteWithInput(args),
+  args: {
+    ...defaultOptions,
     highlightFirstOption: true,
   },
+  name: 'First option highlighted',
 };
-HighlightFirstOption.storyName = 'First option highlighted';
