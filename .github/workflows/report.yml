@@ -32,7 +32,7 @@ jobs:
           echo "SIZE_REPORT_LIBRARY_MAIN<<EOF" >> $GITHUB_ENV
           echo "$SIZE_REPORT_LIBRARY_MAIN" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         with:
           script: |
             const { SIZE_REPORT_LIBRARY_BRANCH, SIZE_REPORT_LIBRARY_MAIN, SIZE_REPORT_SHOWCASE_BRANCH, SIZE_REPORT_SHOWCASE_MAIN } = process.env
