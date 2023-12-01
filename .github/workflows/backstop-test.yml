@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "icon=🚨" >> $GITHUB_ENV
           echo "text=failed" >> $GITHUB_ENV
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         with:
           script: |
             const { icon, text } = process.env
