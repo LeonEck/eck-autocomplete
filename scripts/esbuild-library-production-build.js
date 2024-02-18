@@ -7,7 +7,7 @@ import {
   esbuildProductionLibraryConfig,
   libraryDirectory,
   prodBuildArtifactsDirectory,
-} from './esbuild-library-config.mjs';
+} from './esbuild-library-config.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

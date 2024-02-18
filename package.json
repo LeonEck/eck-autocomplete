@@ -16,16 +16,16 @@
   "homepage": "https://eck-autocomplete.leoneck.de",
   "scripts": {
     "start": "concurrently -r npm:watch:*",
-    "watch:library": "node scripts/esbuild-library-watch.mjs",
+    "watch:library": "node scripts/esbuild-library-watch.js",
     "watch:e2e": "vite --host 0.0.0.0",
     "dev:showcase": "vuepress dev showcase",
     "dev:storybook": "storybook dev -p 6006",
-    "build:library": "node scripts/esbuild-library-production-build.mjs",
-    "build:showcase": "vuepress build showcase && node scripts/copy-e2e-to-www.mjs",
+    "build:library": "node scripts/esbuild-library-production-build.js",
+    "build:showcase": "vuepress build showcase && node scripts/copy-e2e-to-www.js",
     "build:storybook": "storybook build -o www/storybook",
     "build:cloudflare": "npm run build:library && npm run build:showcase && npm run build:storybook",
     "generate:type-declarations": "tsc --emitDeclarationOnly --declaration --outDir dist",
-    "generate:package-metadata": "node scripts/generate-package-metadata.mjs",
+    "generate:package-metadata": "node scripts/generate-package-metadata.js",
     "bundle:library": "npm run build:library && npm run generate:type-declarations && npm run generate:package-metadata",
     "pack:library": "cd dist && npm pack",
     "publish:library": "npm run bundle:library && cd dist && npm publish",
@@ -48,7 +48,7 @@
     "test:backstop:install:chromium": "playwright install --with-deps chromium",
     "test:backstop:install:firefox": "playwright install --with-deps firefox",
     "test:backstop:install:webkit": "playwright install --with-deps webkit",
-    "report:size:library": "node scripts/report-size-library.mjs"
+    "report:size:library": "node scripts/report-size-library.js"
   },
   "devDependencies": {
     "@babel/preset-env": "7.23.9",

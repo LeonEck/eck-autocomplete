@@ -20,7 +20,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - run: npm ci --ignore-scripts
-      - run: node scripts/ci/modify-backstop-config.mjs ${{ matrix.browser }}
+      - run: node scripts/ci/modify-backstop-config.js ${{ matrix.browser }}
       - run: npm run test:backstop:install:${{ matrix.browser }}
       - run: npm run test:backstop || echo "outcome=failure" >> $GITHUB_ENV ; exit 0
       - uses: actions/upload-artifact@v3

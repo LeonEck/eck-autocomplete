@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   rules: {
     'body-leading-blank': [2, 'always'],
     'body-max-line-length': [2, 'always', 100],

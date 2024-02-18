@@ -2,8 +2,8 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { statSync, createReadStream, createWriteStream } from 'fs';
 import { createBrotliCompress } from 'zlib';
-import { walkSync } from './utils/walkSync.mjs';
-import { formatBytes } from './utils/formatBytes.mjs';
+import { walkSync } from './utils/walkSync.js';
+import { formatBytes } from './utils/formatBytes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distFolder = resolve(__dirname, '../dist');

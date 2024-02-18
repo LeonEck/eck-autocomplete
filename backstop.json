@@ -22,7 +22,7 @@
       "height": 1080
     }
   ],
-  "onReadyScript": "playwright/onReady.js",
+  "onReadyScript": "playwright/onReady.cjs",
   "misMatchThreshold": 0,
   "scenarios": [
     {

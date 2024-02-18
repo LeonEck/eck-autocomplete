@@ -8,7 +8,7 @@ module.exports = async (
   browserContext,
 ) => {
   console.log('SCENARIO > ' + scenario.label);
-  await require('./clickAndHoverHelper')(page, scenario);
+  await require('./clickAndHoverHelper.cjs')(page, scenario);
 
   // add more ready handlers here...
 };
