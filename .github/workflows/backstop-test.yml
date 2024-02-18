@@ -23,7 +23,7 @@ jobs:
       - run: node scripts/ci/modify-backstop-config.js ${{ matrix.browser }}
       - run: npm run test:backstop:install:${{ matrix.browser }}
       - run: npm run test:backstop || echo "outcome=failure" >> $GITHUB_ENV ; exit 0
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: backstop-report-${{ matrix.os }}_${{ matrix.browser }}
