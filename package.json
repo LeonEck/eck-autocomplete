@@ -68,7 +68,7 @@
     "@vuepress/utils": "2.0.0-rc.7",
     "backstopjs": "6.3.3",
     "concurrently": "8.2.2",
-    "esbuild": "0.19.12",
+    "esbuild": "0.20.0",
     "esbuild-sass-plugin": "2.16.1",
     "eslint": "8.56.0",
     "eslint-plugin-storybook": "0.8.0",
