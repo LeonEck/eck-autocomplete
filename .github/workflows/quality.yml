@@ -11,8 +11,8 @@ jobs:
   check-types:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - run: npm ci --ignore-scripts
@@ -20,8 +20,8 @@ jobs:
   check-eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - run: npm ci --ignore-scripts
@@ -29,8 +29,8 @@ jobs:
   check-stylelint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - run: npm ci --ignore-scripts
@@ -38,18 +38,18 @@ jobs:
   check-prettier:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - run: npm run check:ci:prettier
   check-commit-msg:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - run: commitlint_version=$(grep '"@commitlint/cli"' package.json | tail -n 1 | sed -r 's/.*:.*"(.*)",$/\1/')

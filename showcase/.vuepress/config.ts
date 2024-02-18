@@ -1,5 +1,7 @@
-import { defaultTheme, defineUserConfig, viteBundler } from 'vuepress';
+import { defineUserConfig } from 'vuepress';
 import { path } from '@vuepress/utils';
+import { defaultTheme } from '@vuepress/theme-default';
+import { viteBundler } from '@vuepress/bundler-vite';
 import { shikiPlugin } from '@vuepress/plugin-shiki';
 
 const isProd = process.env['NODE_ENV'] === 'production';
