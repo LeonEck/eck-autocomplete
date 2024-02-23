@@ -10,8 +10,22 @@ describe('eck-autocomplete', () => {
   });
 
   it('should be able to be added to the DOM', () => {
+    // prepare input
+    const input = document.createElement('input');
+    input.id = 'input-id';
+    document.body.appendChild(input);
+
+    // create autocomplete
     const eckAutocomplete = document.createElement(ECK_AUTOCOMPLETE_TAG_NAME);
+    eckAutocomplete.setAttribute('connected-to-id', 'input-id');
+
+    // add autocomplete to DOM
     document.body.appendChild(eckAutocomplete);
-    expect(true).toBeTruthy();
+
+    // select autocomplete
+    const autocompleteInDOM = document.querySelector(ECK_AUTOCOMPLETE_TAG_NAME);
+    expect(autocompleteInDOM?.tagName.toLowerCase()).toBe(
+      ECK_AUTOCOMPLETE_TAG_NAME,
+    );
   });
 });
