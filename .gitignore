@@ -3,14 +3,16 @@ node_modules
 dist
 build-artifacts
 www
+
 # BackstopJS
 backstop_data/html_report/
 backstop_data/ci_report/
 backstop_data/bitmaps_test/
 backstop_data/bitmaps_reference/
-# Vuepress
-showcase/.vuepress/.cache
-showcase/.vuepress/.temp
+
+# Vitepress
+showcase/.vitepress/cache
+
 # Playwright
 playwright-report
 test-results
