@@ -1,5 +1,9 @@
 # Changelog
 
+## next
+
+- fix: unpin @floating-ui/dom dependency to support all versions of the current major release
+
 ## 1.1.1
 
 - fix: update overlay position on animationFrame to not exceed ResizeObserver loop limit
