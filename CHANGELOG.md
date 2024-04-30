@@ -1,8 +1,10 @@
 # Changelog
 
-## 1.1.2
+## 1.1.3
 
 - fix: unpin @floating-ui/dom dependency to support all versions of the current major release
+
+Note: 1.1.2 was skipped due to a mistake in the release process.
 
 ## 1.1.1
 
