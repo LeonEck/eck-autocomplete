@@ -1,5 +1,10 @@
-export const parameters = {
-  controls: {
-    expanded: true,
+/** @type { import('@storybook/html').Preview } */
+const preview = {
+  parameters: {
+    controls: {
+      expanded: true,
+    },
   },
 };
+
+export default preview;

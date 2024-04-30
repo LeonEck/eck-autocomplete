@@ -3,6 +3,8 @@ import { createMountainDemo } from './Eck-Autocomplete-Mountain-Demo';
 
 const meta: Meta = {
   title: 'Demos/Mountain selection',
+  render: () => createMountainDemo(),
+  tags: ['autodocs'],
   parameters: {
     docs: {
       canvas: {
@@ -20,6 +22,5 @@ export default meta;
 type Story = StoryObj;
 
 export const Demo: Story = {
-  render: () => createMountainDemo(),
+  name: 'Mountain selection',
 };
-Demo.storyName = 'Mountain selection';

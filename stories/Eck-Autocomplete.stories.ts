@@ -7,6 +7,7 @@ import {
 
 const meta: Meta<EckAutocompleteProps> = {
   title: 'eck-autocomplete',
+  render: (args) => createAutocompleteWithInput(args),
   argTypes: {
     highlightFirstOption: {
       control: 'boolean',
@@ -50,12 +51,10 @@ const defaultOptions = {
 };
 
 export const Default: Story = {
-  render: (args) => createAutocompleteWithInput(args),
   args: defaultOptions,
 };
 
 export const HighlightFirstOption: Story = {
-  render: (args) => createAutocompleteWithInput(args),
   args: {
     ...defaultOptions,
     highlightFirstOption: true,
