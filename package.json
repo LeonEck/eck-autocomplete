@@ -29,7 +29,6 @@
     "generate:package-metadata": "node scripts/generate-package-metadata.js",
     "bundle:library": "npm run build:library && npm run generate:type-declarations && npm run generate:package-metadata",
     "pack:library": "cd dist && npm pack",
-    "publish:library": "npm run bundle:library && cd dist && npm publish",
     "check:types": "tsc --noEmit",
     "check:ci:types": "typescript_version=$(grep '\"typescript\"' package.json | tail -n 1 | sed -r 's/.*:.*\"(.*)\",$/\\1/') && npx -p typescript@$typescript_version tsc --noEmit",
     "check:eslint": "eslint --max-warnings 0 .",

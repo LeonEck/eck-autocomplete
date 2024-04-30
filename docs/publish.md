@@ -8,7 +8,7 @@ Publishing takes place on `main` branch.
 4. Sync any README changes manually to the `/showcase/docs/index.md` file.
 5. Update `CHANGELOG.md` file.
 6. Commit: `chore: release vX.Y.Z`
-7. Run: `npm run publish:library`
-8. Create a tag: `git tag -a vX.Y.Z -m "vX.Y.Z"`
-9. Push `main` branch and the newly created tag.
+7. Create a tag: `git tag -a vX.Y.Z -m "vX.Y.Z"`
+8. Push `main` branch and the newly created tag.
+9. An action will run that creates a new release. Afterward another action will run that publishes to npmjs.
 10. Merge `main` to `production` branch and push `production` so that cloudflare builds the showcase based on the contents of the `production` branch.
