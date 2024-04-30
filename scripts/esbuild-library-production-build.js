@@ -2,7 +2,7 @@ import esbuild from 'esbuild';
 import { rmSync, cpSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { minify } from 'html-minifier';
+import { minify } from 'html-minifier-terser';
 import {
   esbuildProductionLibraryConfig,
   libraryDirectory,
@@ -67,11 +67,11 @@ const minifyHTMLConfig = {
   sortAttributes: true,
   sortClassName: true,
 };
-const eckAutocompleteComponentHTMLMinified = minify(
+const eckAutocompleteComponentHTMLMinified = await minify(
   eckAutocompleteComponentHTML,
   minifyHTMLConfig,
 );
-const eckAutocompleteOptionComponentHTMLMinified = minify(
+const eckAutocompleteOptionComponentHTMLMinified = await minify(
   eckAutocompleteOptionComponentHTML,
   minifyHTMLConfig,
 );
