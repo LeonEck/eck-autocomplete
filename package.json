@@ -24,6 +24,7 @@
     "build:showcase": "vitepress build showcase && node scripts/copy-e2e-to-www.js",
     "build:storybook": "storybook build -o www/storybook",
     "build:cloudflare": "npm run build:library && npm run build:showcase && npm run build:storybook",
+    "preview:storybook:prod": "npx http-server www -o /storybook/",
     "generate:type-declarations": "tsc --emitDeclarationOnly --declaration --outDir dist",
     "generate:package-metadata": "node scripts/generate-package-metadata.js",
     "bundle:library": "npm run build:library && npm run generate:type-declarations && npm run generate:package-metadata",
