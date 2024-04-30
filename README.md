@@ -15,7 +15,7 @@
 #### CDN
 
 ```html
-<script type="module" src="https://unpkg.com/eck-autocomplete@1.1.1/min/eck-autocomplete.js"></script>
+<script type="module" src="https://unpkg.com/eck-autocomplete@1.1.2/min/eck-autocomplete.js"></script>
 ```
 
 #### Package and import
