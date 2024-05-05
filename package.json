@@ -59,7 +59,7 @@
     "@storybook/addon-webpack5-compiler-swc": "1.0.2",
     "@storybook/html": "8.0.9",
     "@storybook/html-webpack5": "8.0.9",
-    "@vitest/ui": "1.5.3",
+    "@vitest/ui": "1.6.0",
     "backstopjs": "6.3.23",
     "concurrently": "8.2.2",
     "esbuild": "0.20.2",
@@ -80,7 +80,7 @@
     "typescript-eslint": "7.8.0",
     "vite": "5.2.11",
     "vitepress": "1.1.4",
-    "vitest": "1.5.3"
+    "vitest": "1.6.0"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.4"
