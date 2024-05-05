@@ -6,7 +6,16 @@
   Autocomplete web component. Suggests options for an input.
 </p>
 
-[![npm](https://img.shields.io/npm/v/eck-autocomplete)](https://www.npmjs.com/package/eck-autocomplete)
+<p align="center">
+  <a href="https://www.npmjs.com/package/eck-autocomplete">
+    <img src="https://img.shields.io/npm/v/eck-autocomplete" alt="npmjs" /></a>&nbsp;&nbsp;
+  <a href="https://eck-autocomplete.leoneck.de/storybook/">
+    <img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg" alt="storybook" /></a>&nbsp;&nbsp;
+  <a href="https://stackblitz.com/edit/eck-autocomplete?file=index.html">
+    <img src="https://developer.stackblitz.com/img/open_in_stackblitz_small.svg" alt="stackblitz" /></a>&nbsp;&nbsp;
+  <a href="https://bundlejs.com/?bundle&q=eck-autocomplete&treeshake=[*]&config={%22compression%22:%22brotli%22,%22analysis%22:%22treemap%22}">
+    <img src="https://deno.bundlejs.com/badge?q=eck-autocomplete&treeshake=[*]&config={%22compression%22:%22brotli%22,%22analysis%22:%22treemap%22}" alt="bundlejs" /></a>
+</p>
 
 ## Get started
 
