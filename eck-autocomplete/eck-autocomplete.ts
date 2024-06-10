@@ -16,3 +16,6 @@ if (customElements.get(ECK_AUTOCOMPLETE_OPTION_TAG_NAME) === undefined) {
 if (customElements.get(ECK_AUTOCOMPLETE_TAG_NAME) === undefined) {
   customElements.define(ECK_AUTOCOMPLETE_TAG_NAME, EckAutocomplete);
 }
+
+export * from './eck-autocomplete-component/eck-autocomplete-component';
+export * from './eck-autocomplete-option-component/eck-autocomplete-option-component';
