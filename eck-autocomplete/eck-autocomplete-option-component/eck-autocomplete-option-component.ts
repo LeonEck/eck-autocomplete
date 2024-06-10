@@ -48,6 +48,7 @@ export class EckAutocompleteOption
    */
   private _label: string | undefined;
 
+  // noinspection JSUnusedGlobalSymbols
   static get observedAttributes() {
     return ['label'];
   }
@@ -55,12 +56,12 @@ export class EckAutocompleteOption
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot!.appendChild(template.content.cloneNode(true));
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   attributeChangedCallback(
     attrName: string,
-    oldVal: string | null,
+    _oldVal: string | null,
     newVal: string | null,
   ) {
     if (attrName === 'label') {
@@ -74,19 +75,19 @@ export class EckAutocompleteOption
      * mousedown would normally cause a blur event. But we need to handle the click event first.
      * So we stop the behaviour of mousedown.
      */
-    this.shadowRoot!.host.addEventListener('mousedown', (e) => {
+    this.shadowRoot?.host.addEventListener('mousedown', (e) => {
       e.preventDefault();
     });
 
-    this.shadowRoot!.host.addEventListener('click', () => {
+    this.shadowRoot?.host.addEventListener('click', () => {
       this.fireSelectionEvent();
     });
   }
 
   highlight(highlight: boolean, triggeredByHighlightFirstOption: boolean) {
-    this.shadowRoot!.host.toggleAttribute('highlighted', highlight);
+    this.shadowRoot?.host.toggleAttribute('highlighted', highlight);
     if (highlight) {
-      this.shadowRoot!.dispatchEvent(
+      this.shadowRoot?.dispatchEvent(
         new CustomEvent('eck-autocomplete-option-highlighted', {
           composed: true,
           detail: {
@@ -100,7 +101,7 @@ export class EckAutocompleteOption
   }
 
   fireSelectionEvent() {
-    this.shadowRoot!.dispatchEvent(
+    this.shadowRoot?.dispatchEvent(
       new CustomEvent('eck-autocomplete-option-selected', {
         composed: true,
         bubbles: true,
@@ -114,13 +115,13 @@ export class EckAutocompleteOption
 
   /**
    * The label is either provided explicitly or we use the innerHTML
-   * @returns {string|*}
+   * @returns {string}
    */
-  private _getLabel() {
+  private _getLabel(): string {
     if (this._label !== undefined) {
       return this._label;
     } else {
-      return this.shadowRoot!.host.innerHTML;
+      return this.shadowRoot?.host.innerHTML ?? '';
     }
   }
 }

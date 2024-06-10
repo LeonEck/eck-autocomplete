@@ -1,5 +1,9 @@
 # Changelog
 
+## next
+
+- fix: don't try to remove event listeners on disconnect if no input was connected
+
 ## 1.1.3
 
 - fix: unpin @floating-ui/dom dependency to support all versions of the current major release

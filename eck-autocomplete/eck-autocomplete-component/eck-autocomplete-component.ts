@@ -20,7 +20,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   /**
    * ID of the input that we are attached to
    */
-  private _connectedToId!: string;
+  private _connectedToId: string | undefined;
   /**
    * Highlight first option.
    * Default: false
@@ -37,11 +37,11 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   /**
    * Reference to the input element we are attached to
    */
-  private _connectedInputRef!: HTMLInputElement;
+  private _connectedInputRef: HTMLInputElement | undefined;
   /**
    * Reference to our slot content
    */
-  private _slotRef!: HTMLSlotElement;
+  private _slotRef: HTMLSlotElement | null | undefined;
   /**
    * Keep track of the amount of options in our slot.
    */
@@ -77,6 +77,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   private _inputKeydownHandler = this._inputKeydown.bind(this);
   private _inputHandler = this._inputHandle.bind(this);
 
+  // noinspection JSUnusedGlobalSymbols
   static get observedAttributes() {
     return [
       'connected-to-id',
@@ -88,17 +89,17 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot!.appendChild(template.content.cloneNode(true));
-    this._slotRef = this.shadowRoot!.querySelector<HTMLSlotElement>('slot')!;
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
+    this._slotRef = this.shadowRoot?.querySelector<HTMLSlotElement>('slot');
   }
 
   attributeChangedCallback(
     attrName: string,
-    oldVal: string | null,
+    _oldVal: string | null,
     newVal: string | null,
   ) {
     if (attrName === 'connected-to-id') {
-      this._connectedToId = newVal!;
+      this._connectedToId = newVal ?? undefined;
     } else if (attrName === 'highlight-first-option') {
       this._shouldHighlightFirstOption = coerceBoolean(newVal);
     } else if (attrName === 'select-highlighted-option') {
@@ -123,11 +124,11 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
 
   disconnectedCallback() {
     this._stopPositioner();
-    this._connectedInputRef.removeEventListener('focus', this._showHandler);
-    this._connectedInputRef.removeEventListener('click', this._showHandler);
-    this._connectedInputRef.removeEventListener('input', this._inputHandler);
-    this._connectedInputRef.removeEventListener('blur', this._hideHandler);
-    this._connectedInputRef.removeEventListener(
+    this._connectedInputRef?.removeEventListener('focus', this._showHandler);
+    this._connectedInputRef?.removeEventListener('click', this._showHandler);
+    this._connectedInputRef?.removeEventListener('input', this._inputHandler);
+    this._connectedInputRef?.removeEventListener('blur', this._hideHandler);
+    this._connectedInputRef?.removeEventListener(
       'keydown',
       this._inputKeydownHandler,
     );
@@ -139,36 +140,36 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   }
 
   private _init() {
-    this._slotRef.addEventListener('slotchange', () => {
+    this._slotRef?.addEventListener('slotchange', () => {
       this._slotChange();
     });
 
     /**
      * Open panel when input is focused.
      */
-    this._connectedInputRef.addEventListener('focus', this._showHandler);
+    this._connectedInputRef?.addEventListener('focus', this._showHandler);
 
     /**
      * Open panel when input is clicked.
      */
-    this._connectedInputRef.addEventListener('click', this._showHandler);
+    this._connectedInputRef?.addEventListener('click', this._showHandler);
 
     /**
      * Open panel when the value of the input is changed.
      * This is necessary to reopen the panel after the user selected something
      * and starts typing again without blur and focus in between.
      */
-    this._connectedInputRef.addEventListener('input', this._inputHandler);
+    this._connectedInputRef?.addEventListener('input', this._inputHandler);
 
     /**
      * Hide panel when input is blurred.
      */
-    this._connectedInputRef.addEventListener('blur', this._hideHandler);
+    this._connectedInputRef?.addEventListener('blur', this._hideHandler);
 
     /**
      * Listed to keyboard events.
      */
-    this._connectedInputRef.addEventListener(
+    this._connectedInputRef?.addEventListener(
       'keydown',
       this._inputKeydownHandler,
     );
@@ -181,38 +182,40 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       this._highlightOption(this._highlightedOptionRef, false);
       this._highlightedOptionRef = undefined;
       this._highlightFirstOption();
-      (this.shadowRoot!.host as HTMLElement).style.display = 'block';
+      (this.shadowRoot?.host as HTMLElement).style.display = 'block';
     }
   }
 
   private _hide() {
-    (this.shadowRoot!.host as HTMLElement).style.display = 'none';
+    (this.shadowRoot?.host as HTMLElement).style.display = 'none';
     this._panelHidden = true;
     this._stopPositioner();
     this._inputValueBeforeHighlight = null;
   }
 
   private _inputHandle() {
-    this._inputValueBeforeHighlight = this._connectedInputRef.value;
+    this._inputValueBeforeHighlight = this._connectedInputRef?.value ?? null;
     this._show();
   }
 
   private _positionPanel() {
+    if (!this._connectedInputRef || !this.shadowRoot) return;
+
     /**
      * Panel should have same width as input.
      */
     const inputWidth = this._connectedInputRef.getBoundingClientRect().width;
-    (this.shadowRoot!.host as HTMLElement).style.width = `${inputWidth}px`;
+    (this.shadowRoot?.host as HTMLElement).style.width = `${inputWidth}px`;
 
     computePosition(
       this._connectedInputRef,
-      this.shadowRoot!.host as HTMLElement,
+      this.shadowRoot.host as HTMLElement,
       {
         middleware: [flip()],
         strategy: 'fixed',
       },
     ).then(({ x, y }) => {
-      Object.assign((this.shadowRoot!.host as HTMLElement).style, {
+      Object.assign((this.shadowRoot?.host as HTMLElement).style, {
         left: `${x}px`,
         top: `${y}px`,
       });
@@ -240,9 +243,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   private _highlightFirstOption() {
     if (!this._shouldHighlightFirstOption) return;
     const elements = this._slotRef
-      .assignedElements()
+      ?.assignedElements()
       .filter(this._filterForOptions);
-    if (elements[0]) {
+    if (elements && elements[0]) {
       this._highlightOption(elements[0] as EckAutocompleteOption, true, true);
       this._highlightedOptionRef = elements[0] as EckAutocompleteOption;
     }
@@ -250,8 +253,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
 
   private _changeHighlight(direction: 'ArrowUp' | 'ArrowDown') {
     const elements = this._slotRef
-      .assignedElements()
+      ?.assignedElements()
       .filter(this._filterForOptions);
+    if (!elements) return;
     if (this._highlightedOptionRef === undefined) {
       if (direction === 'ArrowUp') {
         // Highlight last option
@@ -310,7 +314,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
     triggeredByHighlightFirstOption = false,
   ) {
     if (this._inputValueBeforeHighlight === null && value) {
-      this._inputValueBeforeHighlight = this._connectedInputRef.value;
+      this._inputValueBeforeHighlight = this._connectedInputRef?.value ?? null;
     }
     option?.highlight(value, triggeredByHighlightFirstOption);
     if (value) {
@@ -321,10 +325,11 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   }
 
   private _startPositioner() {
+    if (!this._connectedInputRef || !this.shadowRoot) return;
     this._stopPositioner();
     this._positionerCleanup = autoUpdate(
       this._connectedInputRef,
-      this.shadowRoot!.host as HTMLElement,
+      this.shadowRoot.host as HTMLElement,
       this._positionPanel.bind(this),
       {
         animationFrame: true,
@@ -350,7 +355,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
       this._handleEnterOnInput(event);
     } else if (event.key === 'Escape') {
       event.preventDefault();
-      if (this._inputValueBeforeHighlight !== null) {
+      if (this._inputValueBeforeHighlight !== null && this._connectedInputRef) {
         this._connectedInputRef.value = this._inputValueBeforeHighlight;
       }
       this._hide();
@@ -371,7 +376,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      * When selected: Pass on the selection and hide the panel.
      */
     this._slotRef
-      .assignedElements()
+      ?.assignedElements()
       .filter(this._filterForOptions)
       .forEach((element) => {
         this._numberOfOptions++;
@@ -382,7 +387,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
         element.addEventListener('eck-autocomplete-option-selected', ((
           value: CustomEvent<EckAutocompleteOptionSelectEvent>,
         ) => {
-          this._connectedInputRef.value = value.detail.label;
+          if (this._connectedInputRef) {
+            this._connectedInputRef.value = value.detail.label;
+          }
           this._hide();
         }) as EventListener);
 
@@ -394,7 +401,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
             this._selectHighlightedOption &&
             !value.detail._tbhfo
           ) {
-            this._connectedInputRef.value = value.detail.label;
+            if (this._connectedInputRef) {
+              this._connectedInputRef.value = value.detail.label;
+            }
           }
         }) as EventListener);
       });
@@ -409,7 +418,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      * it dynamically changes, and we would have no way of knowing if we should show
      * it again or not.
      */
-    this.shadowRoot!.host.toggleAttribute(
+    this.shadowRoot?.host.toggleAttribute(
       'has-children',
       this._numberOfOptions !== 0,
     );

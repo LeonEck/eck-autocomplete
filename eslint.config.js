@@ -37,6 +37,7 @@ export default [
       ...eslint.configs.recommended.rules,
       ...tseslint.configs.recommended[1].rules,
       ...tseslint.configs.recommended[2].rules,
+      '@typescript-eslint/no-non-null-assertion': ['error'],
     },
   },
 ];

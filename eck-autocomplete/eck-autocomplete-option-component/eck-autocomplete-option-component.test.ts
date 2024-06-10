@@ -5,7 +5,7 @@ import {
   EckAutocompleteOptionSelectEvent,
 } from './eck-autocomplete-option-component';
 
-describe('eck-autocomplete', () => {
+describe('eck-autocomplete-option', () => {
   beforeEach(() => {
     if (customElements.get(ECK_AUTOCOMPLETE_OPTION_TAG_NAME) === undefined) {
       customElements.define(
