@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.2.0
 
 - feat: new optional attribute `anchored-to-id` to specify where the panel should attach to
   - By default, when no anchor is specified, the panel will continue to be attached to the connected input.
