@@ -4,12 +4,25 @@ import globals from 'globals';
 
 export default [
   {
+    ignores: [
+      '.github/',
+      '.husky/',
+      '.run/',
+      '.storybook/',
+      'backstop_data/',
+      'coverage/',
+      'build-artifacts/',
+      'dist/',
+      'docs/',
+      'showcase/.vitepress/',
+    ],
+  },
+  {
     files: ['eck-autocomplete/**/*.{js,mjs,ts}'],
-    ignores: ['**/*.test.ts'],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: true,
+        projectService: true,
       },
       ecmaVersion: 2022,
       globals: {
