@@ -199,6 +199,50 @@
       <br /><br /><br />
     </div>
 
+    <div
+      id="divAround9"
+      style="height: 300px; overflow: auto; border: 1px solid mediumvioletred"
+    >
+      <h2>Separate Anchor Elements</h2>
+      <div
+        id="anchor9"
+        style="width: 300px; padding: 20px; border: 1px solid black"
+      >
+        <input id="input9" type="text" />
+      </div>
+      <eck-autocomplete
+        id="complete9"
+        connected-to-id="input9"
+        anchored-to-id="anchor9"
+      >
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+
+      <input id="input10" type="text" />
+      <div
+        id="anchor10"
+        style="
+          width: 100px;
+          height: 20px;
+          border: 1px solid black;
+          display: inline-block;
+        "
+      >
+        Anchor
+      </div>
+      <eck-autocomplete
+        id="complete10"
+        connected-to-id="input10"
+        anchored-to-id="anchor10"
+      >
+        <eck-autocomplete-option>One</eck-autocomplete-option>
+        <eck-autocomplete-option>Two</eck-autocomplete-option>
+        <eck-autocomplete-option>Three</eck-autocomplete-option>
+      </eck-autocomplete>
+    </div>
+
     <script type="module">
       import '../../dist/eck-autocomplete.js';
     </script>

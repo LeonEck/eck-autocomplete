@@ -22,6 +22,10 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
    */
   private _connectedToId: string | undefined;
   /**
+   * ID of the element that the panel should be anchored to.
+   */
+  private _anchoredToId: string | undefined;
+  /**
    * Highlight first option.
    * Default: false
    */
@@ -38,6 +42,10 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
    * Reference to the input element we are attached to
    */
   private _connectedInputRef: HTMLInputElement | undefined;
+  /**
+   * Reference to the element we are anchored to
+   */
+  private _anchorRef: HTMLElement | null | undefined;
   /**
    * Reference to our slot content
    */
@@ -81,6 +89,7 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   static get observedAttributes() {
     return [
       'connected-to-id',
+      'anchored-to-id',
       'highlight-first-option',
       'select-highlighted-option',
     ];
@@ -100,6 +109,8 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   ) {
     if (attrName === 'connected-to-id') {
       this._connectedToId = newVal ?? undefined;
+    } else if (attrName === 'anchored-to-id') {
+      this._anchoredToId = newVal ?? undefined;
     } else if (attrName === 'highlight-first-option') {
       this._shouldHighlightFirstOption = coerceBoolean(newVal);
     } else if (attrName === 'select-highlighted-option') {
@@ -118,6 +129,12 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
      */
     if (connectToIdRef) {
       this._connectedInputRef = connectToIdRef;
+      if (this._anchoredToId) {
+        this._anchorRef = document.querySelector<HTMLElement>(
+          `#${this._anchoredToId}`,
+        );
+      }
+
       this._init();
     }
   }
@@ -134,8 +151,14 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
     );
   }
 
-  setInputRef(element: HTMLInputElement): void {
-    this._connectedInputRef = element;
+  setInputRef(
+    inputElement: HTMLInputElement,
+    anchorElement?: HTMLElement,
+  ): void {
+    this._connectedInputRef = inputElement;
+    if (anchorElement) {
+      this._anchorRef = anchorElement;
+    }
     this._init();
   }
 
@@ -201,20 +224,20 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   private _positionPanel() {
     if (!this._connectedInputRef || !this.shadowRoot) return;
 
-    /**
-     * Panel should have same width as input.
-     */
-    const inputWidth = this._connectedInputRef.getBoundingClientRect().width;
-    (this.shadowRoot?.host as HTMLElement).style.width = `${inputWidth}px`;
+    const referenceElement = this._anchorRef ?? this._connectedInputRef;
 
-    computePosition(
-      this._connectedInputRef,
-      this.shadowRoot.host as HTMLElement,
-      {
-        middleware: [flip()],
-        strategy: 'fixed',
-      },
-    ).then(({ x, y }) => {
+    /**
+     * Panel should have same width as the reference element.
+     */
+    const referenceElementWidth =
+      referenceElement.getBoundingClientRect().width;
+    (this.shadowRoot?.host as HTMLElement).style.width =
+      `${referenceElementWidth}px`;
+
+    computePosition(referenceElement, this.shadowRoot.host as HTMLElement, {
+      middleware: [flip()],
+      strategy: 'fixed',
+    }).then(({ x, y }) => {
       Object.assign((this.shadowRoot?.host as HTMLElement).style, {
         left: `${x}px`,
         top: `${y}px`,
@@ -327,8 +350,9 @@ export class EckAutocomplete extends BaseComponent implements CustomElement {
   private _startPositioner() {
     if (!this._connectedInputRef || !this.shadowRoot) return;
     this._stopPositioner();
+    const referenceElement = this._anchorRef ?? this._connectedInputRef;
     this._positionerCleanup = autoUpdate(
-      this._connectedInputRef,
+      referenceElement,
       this.shadowRoot.host as HTMLElement,
       this._positionPanel.bind(this),
       {

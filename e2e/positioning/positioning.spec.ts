@@ -184,6 +184,24 @@ test.describe('positioning', () => {
     }
   });
 
+  test('input with surrounding anchor', async ({ page }, testInfo) => {
+    await page.focus('#input9');
+    const boundingBoxAnchor = await page.locator('#anchor9').boundingBox();
+    const boundingBoxComplete = await page.locator('#complete9').boundingBox();
+
+    expect(boundingBoxComplete!.x).toBe(boundingBoxAnchor!.x);
+    expect(boundingBoxComplete!.width).toBe(boundingBoxAnchor!.width);
+  });
+
+  test('input with aside anchor', async ({ page }, testInfo) => {
+    await page.focus('#input10');
+    const boundingBoxAnchor = await page.locator('#anchor10').boundingBox();
+    const boundingBoxComplete = await page.locator('#complete10').boundingBox();
+
+    expect(boundingBoxComplete!.x).toBe(boundingBoxAnchor!.x);
+    expect(boundingBoxComplete!.width).toBe(boundingBoxAnchor!.width);
+  });
+
   /* TODO: Deactivated because results are way to different in CI test('overflow container without position or extra settings.', async ({
     page,
     browserName,

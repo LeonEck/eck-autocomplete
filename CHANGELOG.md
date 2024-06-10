@@ -2,6 +2,9 @@
 
 ## next
 
+- feat: new optional attribute `anchored-to-id` to specify where the panel should attach to
+  - By default, when no anchor is specified, the panel will continue to be attached to the connected input.
+  - The anchor element can also be passed in programmatically when calling `setInputRef` as an optional second parameter.
 - fix: don't try to remove event listeners on disconnect if no input was connected
 
 ## 1.1.3

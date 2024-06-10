@@ -19,8 +19,17 @@
 
     <h2>input is inside a shadow-dom</h2>
 
-    <input-shadowed id="input1-wrapper"></input-shadowed>
+    <input-shadowed-one id="input1-wrapper"></input-shadowed-one>
     <eck-autocomplete id="complete1">
+      <eck-autocomplete-option>One</eck-autocomplete-option>
+      <eck-autocomplete-option>Two</eck-autocomplete-option>
+      <eck-autocomplete-option>Three</eck-autocomplete-option>
+    </eck-autocomplete>
+
+    <h2>input and anchor are inside a shadow-dom</h2>
+
+    <input-shadowed-two id="input2-wrapper"></input-shadowed-two>
+    <eck-autocomplete id="complete2">
       <eck-autocomplete-option>One</eck-autocomplete-option>
       <eck-autocomplete-option>Two</eck-autocomplete-option>
       <eck-autocomplete-option>Three</eck-autocomplete-option>
@@ -29,22 +38,17 @@
     <script type="module">
       import '../../dist/eck-autocomplete.js';
 
-      const template = document.createElement('template');
-      template.innerHTML = `
-        <input
-          id="input1"
-          type="text"
-        />
-        `;
-      class DemoInput extends HTMLElement {
+      const template1 = document.createElement('template');
+      template1.innerHTML = /* HTML */ ` <input id="input1" type="text" /> `;
+      class DemoInput1 extends HTMLElement {
         constructor() {
           super();
           this.attachShadow({ mode: 'open' });
-          this.shadowRoot.appendChild(template.content.cloneNode(true));
+          this.shadowRoot.appendChild(template1.content.cloneNode(true));
         }
       }
 
-      customElements.define('input-shadowed', DemoInput);
+      customElements.define('input-shadowed-one', DemoInput1);
 
       const shadowRootInput1 =
         document.getElementById('input1-wrapper').shadowRoot;
@@ -55,6 +59,38 @@
        * Manually setup input connection
        */
       complete1.setInputRef(input1);
+
+      // =======================================================================
+
+      const template2 = document.createElement('template');
+      template2.innerHTML = /* HTML */ `
+        <div
+          id="anchor2"
+          style="width: 300px; padding: 20px; border: 1px solid black;"
+        >
+          <input id="input2" type="text" />
+        </div>
+      `;
+      class DemoInput2 extends HTMLElement {
+        constructor() {
+          super();
+          this.attachShadow({ mode: 'open' });
+          this.shadowRoot.appendChild(template2.content.cloneNode(true));
+        }
+      }
+
+      customElements.define('input-shadowed-two', DemoInput2);
+
+      const shadowRootInput2 =
+        document.getElementById('input2-wrapper').shadowRoot;
+      const input2 = shadowRootInput2.getElementById('input2');
+      const anchor2 = shadowRootInput2.getElementById('anchor2');
+      const complete2 = document.getElementById('complete2');
+
+      /**
+       * Manually setup input connection
+       */
+      complete2.setInputRef(input2, anchor2);
     </script>
   </body>
 </html>
