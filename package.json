@@ -81,7 +81,7 @@
     "storybook": "8.1.6",
     "stylelint": "16.6.1",
     "stylelint-config-property-sort-order-smacss": "10.0.0",
-    "stylelint-config-recommended-scss": "14.0.0",
+    "stylelint-config-recommended-scss": "15.0.1",
     "typescript": "5.4.5",
     "typescript-eslint": "8.0.0-alpha.29",
     "vite": "5.2.13",
