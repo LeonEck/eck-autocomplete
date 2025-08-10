@@ -84,7 +84,7 @@
     "stylelint-config-recommended-scss": "14.0.0",
     "typescript": "5.4.5",
     "typescript-eslint": "8.0.0-alpha.29",
-    "vite": "5.2.13",
+    "vite": "7.1.1",
     "vitepress": "1.2.3",
     "vitest": "1.6.0"
   },
